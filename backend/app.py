@@ -1,14 +1,9 @@
 from flask import Flask
-import os
-import psychopg2
-from dotenv import load_dotenv
-
-# # Load environment variables from .env file
-load_dotenv()
+from db import db_setup
 
 app = Flask(__name__)
-url = os.getenv("DATABASE_URL")
-conneciton = psychopg2.connect(url)
+
+db_setup.setup_db()
 
 @app.get('/')
 def home():
