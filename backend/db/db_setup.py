@@ -16,3 +16,5 @@ def setup_db():
         with conneciton.cursor() as cursor:
             cursor.execute(Instance.create_table)
             cursor.execute(Instance.index_table)
+
+    return conneciton
