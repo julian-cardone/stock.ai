@@ -6,7 +6,34 @@ app = Flask(__name__)
 
 db = db_setup.setup_db()
 
-@app.route('/api/create', methods=['POST'])
+@app.before_request
+def before_request():
+    # Apply the authorization middleware to all routes except "/start_session"
+    if request.endpoint != 'start_session':
+        authorize_request()
+
+
+def authorize_request():
+    # Extract the session token from the request headers
+    token = request.headers.get("Authorization")
+
+    # Ensure that the token exists and starts with "Bearer "
+    if not token or not token.startswith("Bearer "):
+        return jsonify({"message": "Unauthorized"}), 401
+
+    # Extract the actual token value (removing the "Bearer " prefix)
+    session_token = token.split(" ")[1]
+
+    # Validate the session token (implement your own validation logic here)
+    with db, db.cursor() as cursor:
+            query = "SELECT token_id FROM Instance WHERE token_id = %s;"
+            cursor.execute(query, (session_token,))
+            existing_token = cursor.fetchone()
+            if not existing_token:  # Token does not exist in the database
+                return jsonify({"message": "Unauthorized"}), 401
+
+
+@app.route('/start_session', methods=['POST'])
 def create_instance():
     user_instance = Instance()
 
@@ -23,8 +50,4 @@ def create_instance():
         cursor.execute(query, (session_key,))
         token_id = cursor.fetchone()[0]
 
-    response = make_response('Session Created')
-    response.set_cookie('session_key', session_key)  # Set the session key as the cookie value
-
-    return response
-
+    return jsonify({"message": "Instance Created", "session_token": token_id})
