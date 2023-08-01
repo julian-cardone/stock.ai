@@ -9,12 +9,12 @@ def setup_db():
     load_dotenv()
 
     url = os.getenv("DATABASE_URL")
-    conneciton = psycopg2.connect(url)
+    connection = psycopg2.connect(url)
 
     # setup instance table
-    with conneciton:
-        with conneciton.cursor() as cursor:
+    with connection:
+        with connection.cursor() as cursor:
             cursor.execute(Instance.create_table)
             cursor.execute(Instance.index_table)
 
-    return conneciton
+    return connection
