@@ -32,7 +32,7 @@ function BusinessPage() {
         </h2>
         <form onSubmit={handleSubimt}>
           <div className="row d-flex justify-content-center">
-            <div className="col-sm-3 col-lg-3 justify-content-center">
+            <div className="col-sm-2 col-lg-2 justify-content-center">
               <input
                 className="form-control"
                 type="text"
@@ -41,7 +41,7 @@ function BusinessPage() {
                 placeholder="stock symbol"
               />
             </div>
-            <div className="col-sm-3 col-lg-3 justify-content-center">
+            <div className="col-sm-4 col-lg-4 justify-content-center">
               <select
                 value={selectedOption}
                 onChange={handleOptionChange}
