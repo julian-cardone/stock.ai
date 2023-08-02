@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useStorageKey } from "./hooks/useStorageKey";
 import MainPage from "./components/MainPage";
+import BusinessPage from "./components/BusinessPage";
 
 function App() {
   const { data: storageKey, ...storageKeyUtils } = useStorageKey();
@@ -9,9 +10,12 @@ function App() {
   return (
     <>
       {storageKey == null && (
-        <MainPage createSession={storageKeyUtils.createSession} loading={storageKeyUtils.loading}/>
+        <MainPage
+          createSession={storageKeyUtils.createSession}
+          loading={storageKeyUtils.loading}
+        />
       )}
-      {storageKey != null && <div>there is a storage key</div>}
+      {storageKey != null && <BusinessPage></BusinessPage>}
       {}
     </>
   );
