@@ -6,7 +6,7 @@ export function useStorageKey(){
   const { loading, wrappedRequest } = useWrappedRequest();
 
   const createSession = useCallback(async () => {
-    if (storageKey){
+    if (!storageKey){
       wrappedRequest(async () =>{
         const res = await fetch('/start_session', {
           method: "POST",
@@ -24,6 +24,6 @@ export function useStorageKey(){
     setStorageKey(null)
   },[])
 
-  return { data: loading, createSession, invalidateSession }
+  return { data: storageKey ,loading, createSession, invalidateSession }
 
 }
