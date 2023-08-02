@@ -18,9 +18,10 @@ function BusinessPage() {
     event.preventDefault();
     const res = await sessionFetch(`${selectedOption}`, {
       method: "POST",
-      body: `${inputValue}`,
+      body: JSON.stringify({ inputValue: inputValue }),
     });
-    console.log(res);
+    const data = await res.json();
+    console.log(data);
   };
 
   return (
@@ -49,7 +50,7 @@ function BusinessPage() {
                 <option value="" disabled>
                   model
                 </option>
-                <option value="HistoricalOperatingAssumptions">
+                <option value="/historical_operating_assumptions">
                   Historical Operating Assumptions
                 </option>
               </select>
@@ -58,7 +59,11 @@ function BusinessPage() {
           <div className="row d-flex justify-content-center mt-4">
             <div className="col-sm-4 col-lg-6 justify-content-center">
               <button
-                disabled={loading || inputValue.length === 0 || selectedOption.value === ''}
+                disabled={
+                  loading ||
+                  inputValue.length === 0 ||
+                  selectedOption.value === ""
+                }
                 type="submit"
                 className="btn btn-outline-success"
               >

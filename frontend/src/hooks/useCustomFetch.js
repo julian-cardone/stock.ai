@@ -6,7 +6,6 @@ export function useCustomFetch() {
 
   const sessionFetch = useCallback(
     async (url, options = {}) => wrappedRequest(async() => {
-      
       // set options.method to 'GET' if there is no method
       options.method = options.method || "GET";
       // set options.headers to an empty object if there is no headers

@@ -51,3 +51,20 @@ def create_instance():
         token_id = cursor.fetchone()[0]
 
     return jsonify({"message": "Instance Created", "session_token": token_id})
+
+
+@app.route('/historical_operating_assumptions', methods=["POST"])
+def create_hoa_model():
+    try:
+        # Get JSON data from the request body
+        json_data = request.get_json()
+
+        # Access the inputValue from the JSON data
+        inputValue = json_data.get('inputValue', '') #symbol
+
+        # Process the inputValue or perform any other operations
+        print("inputValue:", inputValue)
+
+        return jsonify({"message": "endpoint reached", "body": json_data})
+    except:
+        return jsonify({"error": "there was an error"})
