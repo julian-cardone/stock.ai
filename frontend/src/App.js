@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Switch } from "react-router-dom";
 import { useStorageKey } from "./hooks/useStorageKey";
+import MainPage from "./components/MainPage";
 
 function App() {
 
@@ -10,7 +11,7 @@ function App() {
 
   return (
     <Switch>
-
+      <MainPage></MainPage>
     </Switch>
   );
 }
