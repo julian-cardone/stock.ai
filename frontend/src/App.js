@@ -5,7 +5,6 @@ import BusinessPage from "./components/BusinessPage";
 
 function App() {
   const { data: storageKey, ...storageKeyUtils } = useStorageKey();
-  // const [isLoading, setIsLoading] = useState();
 
   return (
     <>
@@ -15,7 +14,7 @@ function App() {
           loading={storageKeyUtils.loading}
         />
       )}
-      {storageKey != null && <BusinessPage loading={false}></BusinessPage>}
+      {storageKey != null && <BusinessPage></BusinessPage>}
       {}
     </>
   );

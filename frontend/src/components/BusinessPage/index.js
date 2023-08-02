@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useCustomFetch } from "../../hooks/useCustomFetch";
 
-function BusinessPage({ loading }) {
+function BusinessPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const { loading, sessionFetch } = useCustomFetch();
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -12,9 +14,13 @@ function BusinessPage({ loading }) {
     setInputValue(event.target.value);
   };
 
-  const handleSubimt = (event) => {
+  const handleSubimt = async (event) => {
     event.preventDefault();
-    console.log(inputValue, selectedOption);
+    const res = await sessionFetch(`${selectedOption}`, {
+      method: "POST",
+      body: `${inputValue}`,
+    });
+    console.log(res);
   };
 
   return (
@@ -51,7 +57,11 @@ function BusinessPage({ loading }) {
           </div>
           <div className="row d-flex justify-content-center mt-4">
             <div className="col-sm-4 col-lg-6 justify-content-center">
-              <button disabled={loading}type="submit" className="btn btn-outline-success">
+              <button
+                disabled={loading || inputValue.length === 0 || selectedOption.value === ''}
+                type="submit"
+                className="btn btn-outline-success"
+              >
                 GENERATE
               </button>
             </div>
