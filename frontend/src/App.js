@@ -1,14 +1,17 @@
-import React from "react";
-import { useStorageKey } from "./hooks/useSotrageKey";
+import React, { useState } from "react";
+import { Switch } from "react-router-dom";
+import { useStorageKey } from "./hooks/useStorageKey";
 
 function App() {
 
   const { data: storageKey, ...storageKeyUtils } = useStorageKey();
+  const [isLoading, setIsLoading] = useState();
+
 
   return (
-    <div className="App">
-      <button onClick={() => storageKeyUtils.createSession()}>begin session</button>
-    </div>
+    <Switch>
+
+    </Switch>
   );
 }
 
