@@ -15,7 +15,7 @@ function App() {
           loading={storageKeyUtils.loading}
         />
       )}
-      {storageKey != null && <BusinessPage></BusinessPage>}
+      {storageKey != null && <BusinessPage loading={false}></BusinessPage>}
       {}
     </>
   );
