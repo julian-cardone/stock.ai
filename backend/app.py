@@ -53,7 +53,7 @@ def create_instance():
     return jsonify({"message": "Instance Created", "session_token": token_id})
 
 
-@app.route('/historical_operating_assumptions', methods=["POST"])
+@app.route('/operating_assumptions', methods=["POST"])
 def create_hoa_model():
     try:
         # Get JSON data from the request body

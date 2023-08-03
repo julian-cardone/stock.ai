@@ -50,7 +50,7 @@ function BusinessPage() {
                 <option value="" disabled>
                   model
                 </option>
-                <option value="/historical_operating_assumptions">
+                <option value="/operating_assumptions">
                   Historical Operating Assumptions
                 </option>
               </select>
