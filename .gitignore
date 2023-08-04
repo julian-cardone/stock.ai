@@ -29,3 +29,5 @@ backend/static/build/
 # Ignore package lock files
 package-lock.json
 yarn.lock
+
+cacert.pam
