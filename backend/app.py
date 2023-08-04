@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, session, make_response
-from db import db_setup
-from db.models.instance import Instance
+from backend.db import db_setup
+from backend.db.models.instance import Instance
 
 app = Flask(__name__)
 

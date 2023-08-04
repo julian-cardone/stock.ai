@@ -1,4 +1,5 @@
 import yfinance as yf
+from model.sheet.sheet import Sheet
 
 class StockModel:
 
@@ -12,6 +13,11 @@ class StockModel:
             print(f"An error occurred: {e}")
             self.symbol = None
             raise RuntimeError("Instance creation aborted")
+
+    def create_model(self):
+        self.model = sheet.Sheet(self)
+
+StockModel('aapl').create_model()
 
 # {   '52WeekChange': 0.15615356,
 #     'SandP52WeekChange': 0.08605158,
