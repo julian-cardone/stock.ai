@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/jcar/dev/projects/stock.ai/stock.ai"
+VIRTUAL_ENV="/home/jcar/dev/projects/stock.ai/backend/stock.ai"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

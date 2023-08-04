@@ -1,5 +1,5 @@
 import yfinance as yf
-from backend.model.sheet.sheet import Sheet
+from backend.model.sheet.sheet_class import Sheet
 
 class StockModel:
 
@@ -15,7 +15,7 @@ class StockModel:
             raise RuntimeError("Instance creation aborted")
 
     def create_model(self):
-        self.model = sheet.Sheet(self)
+        self.model = Sheet(self)
 
 StockModel('aapl').create_model()
 
