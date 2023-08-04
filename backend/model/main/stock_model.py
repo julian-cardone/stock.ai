@@ -1,5 +1,5 @@
 import yfinance as yf
-from backend.model.sheet.sheet_class import Sheet
+from sheet_class import Sheet
 
 class StockModel:
 
