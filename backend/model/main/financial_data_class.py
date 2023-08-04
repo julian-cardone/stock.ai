@@ -28,17 +28,54 @@ class FinancialData:
 
         return historic_revenue
 
-    def get_historic_cogs(self):
+    def get_historic_cor(self):
         
-        historic_cogs = []
+        historic_cor = []
 
         for i in range(3):
             try:
-                historic_cogs.append(int(self.income_statement_annuals[i]['costofGoodsAndServicesSold']))
+                historic_cor.append(int(self.income_statement_annuals[i]['costOfRevenue']))
             except ValueError:
                 print("Invalid number format")
 
-        return historic_cogs
+        return historic_cor
+
+    def get_historic_depreciation(self):
+        
+        historic_depreciation = []
+
+        for i in range(3):
+            try:
+                historic_depreciation.append(int(self.income_statement_annuals[i]['depreciation']))
+            except ValueError:
+                print("Invalid number format")
+
+        return historic_depreciation
+
+    def get_historic_sga(self):
+        
+        historic_sga = []
+
+        for i in range(3):
+            try:
+                historic_sga.append(int(self.income_statement_annuals[i]['sellingGeneralAndAdministrative']))
+            except ValueError:
+                print("Invalid number format")
+
+        return historic_sga
+
+    ## this may need some work, amort
+    def get_historic_amortization(self):
+        
+        historic_amortization = []
+
+        for i in range(3):
+            try:
+                historic_amortization.append(int(self.income_statement_annuals[i]['depreciationAndAmortization']))
+            except ValueError:
+                print("Invalid number format")
+
+        return historic_amortization  
     
     # def bs_test(self):
     #     iss = self.income_statement['annualReports']
