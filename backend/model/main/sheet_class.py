@@ -10,17 +10,28 @@ class Sheet:
         self.workbook = load_workbook(filename=self.file_path)
         self.worksheet = self.workbook['Sheet1']
         self.date = datetime.date.today()
+        self.fin_data = FinancialData(stock_model)
+
         self.create_model()
-        self.data = FinancialData(stock_model)
     
     def insert_year(self):
         self.worksheet['E74'] = self.date.year
 
     def insert_revenue(self):
-        data = self.data.get_historic_revenue()
-        print(data)
+        data = self.fin_data.get_historic_revenue()
+        self.worksheet['D76'] = data[0]
+        self.worksheet['C76'] = data[1]
+        self.worksheet['B76'] = data[2]
+
+    def insert_cogs(self):
+        data = self.fin_data.get_historic_cogs()
+        self.worksheet['D80'] = data[0]
+        self.worksheet['C80'] = data[1]
+        self.worksheet['B80'] = data[2]
         
     def create_model(self):
         self.insert_year()
+        self.insert_revenue()
+        self.insert_cogs()
         self.workbook.save('model_year_stock.xlsx')
         self.workbook.close()

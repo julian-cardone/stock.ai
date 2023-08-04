@@ -7,7 +7,7 @@ class StockModel:
         try:
             stock = yf.Ticker(symbol.upper())
             stock_info = stock.info
-            self.symbol = symbol
+            self.symbol = symbol.upper()
             self.info = stock_info
         except Exception as e:
             print(f"An error occurred: {e}")
@@ -17,7 +17,7 @@ class StockModel:
     def create_model(self):
         self.model = Sheet(self)
 
-StockModel('aapl').create_model()
+StockModel('ibm').create_model()
 
 # {   '52WeekChange': 0.15615356,
 #     'SandP52WeekChange': 0.08605158,
