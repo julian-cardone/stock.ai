@@ -4,24 +4,14 @@ class StockModel:
 
     def __init__(self, symbol):
         try:
-            stock = yf.Ticker(self.symbol.upper())
+            stock = yf.Ticker(symbol.upper())
             stock_info = stock.info
             self.symbol = symbol
             self.info = stock_info
-        except HTTPError:
-            raise ValueError("improper stock symbol")
         except Exception as e:
             print(f"An error occurred: {e}")
             self.symbol = None
             raise RuntimeError("Instance creation aborted")
-        
-    def stock_info(self):
-        try:
-            stock = yf.Ticker(self.symbol.upper())
-            stock_info = stock.info
-            return stock_info
-        except:
-            return "false"
 
 # {   '52WeekChange': 0.15615356,
 #     'SandP52WeekChange': 0.08605158,
