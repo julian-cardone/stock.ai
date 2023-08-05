@@ -76,6 +76,8 @@ class FinancialData:
                 print("Invalid number format")
 
         return historic_amortization  
+
+IBM 2022 annual EBITDA was $12.314B, a 2.8% decline from 2021. IBM 2021 annual EBITDA was $12.669B, a 17.99% increase from 2020. IBM 2020 annual EBITDA was $10.737B
     
     # def bs_test(self):
     #     iss = self.income_statement['annualReports']
