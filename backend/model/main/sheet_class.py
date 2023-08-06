@@ -13,6 +13,13 @@ class Sheet:
         self.fin_data = FinancialData(stock_model)
 
         self.create_model()
+
+    def insert_specs(self):
+        if self.fin_data.format:
+            self.worksheet['O1'] = "MILLIONS"
+        else:
+            self.worksheet['O1'] = "NONE"
+        self.worksheet['Q1'] = self.stock_model.symbol
     
     def insert_year(self):
         self.worksheet['I53'] = self.date.year
@@ -57,6 +64,7 @@ class Sheet:
     def create_model(self):
         self.insert_year()
         self.insert_historic_revenue()
+        self.insert_specs()
         self.insert_historic_cor()
         self.insert_historic_depreciation()
         self.insert_historic_rnd()

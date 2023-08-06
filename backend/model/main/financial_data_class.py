@@ -16,13 +16,22 @@ class FinancialData:
         self.income_statement_annuals = requests.get(INCOME_STATEMENT_URL).json()['annualReports']
         self.balance_sheet = requests.get(BALANCE_SHEET_URL).json()['annualReports']
 
+    def number_formatter(self, n):
+        if self.format:
+            return n/1000000
+        else:
+            return n
+
     def get_historic_revenue(self):
+
+        if int(self.income_statement_annuals[0]['totalRevenue']) >= 100000000:
+            self.format = True
 
         historic_revenue = []
 
         for i in range(3):
             try:
-                historic_revenue.append(int(self.income_statement_annuals[i]['totalRevenue']))
+                historic_revenue.append(self.number_formatter(int(self.income_statement_annuals[i]['totalRevenue'])))
             except ValueError:
                 print("Invalid number format")
 
@@ -34,7 +43,7 @@ class FinancialData:
 
         for i in range(3):
             try:
-                historic_cor.append(int(self.income_statement_annuals[i]['costOfRevenue']))
+                historic_cor.append(self.number_formatter(int(self.income_statement_annuals[i]['costOfRevenue'])))
             except ValueError:
                 print("Invalid number format")
 
@@ -46,7 +55,7 @@ class FinancialData:
 
         for i in range(3):
             try:
-                historic_depreciation.append(int(self.income_statement_annuals[i]['depreciationAndAmortization']))
+                historic_depreciation.append(self.number_formatter(int(self.income_statement_annuals[i]['depreciationAndAmortization'])))
             except ValueError:
                 print("Invalid number format")
 
@@ -58,7 +67,7 @@ class FinancialData:
 
         for i in range(3):
             try:
-                historic_rnd.append(int(self.income_statement_annuals[i]['researchAndDevelopment']))
+                historic_rnd.append(self.number_formatter(int(self.income_statement_annuals[i]['researchAndDevelopment'])))
             except ValueError:
                 print("Invalid number format")
 
@@ -70,7 +79,7 @@ class FinancialData:
 
         for i in range(3):
             try:
-                historic_sga.append(int(self.income_statement_annuals[i]['sellingGeneralAndAdministrative']))
+                historic_sga.append(self.number_formatter(int(self.income_statement_annuals[i]['sellingGeneralAndAdministrative'])))
             except ValueError:
                 print("Invalid number format")
 
