@@ -46,11 +46,23 @@ class FinancialData:
 
         for i in range(3):
             try:
-                historic_depreciation.append(int(self.income_statement_annuals[i]['depreciation']))
+                historic_depreciation.append(int(self.income_statement_annuals[i]['depreciationAndAmortization']))
             except ValueError:
                 print("Invalid number format")
 
         return historic_depreciation
+
+    def get_historic_rnd(self):
+
+        historic_rnd = []
+
+        for i in range(3):
+            try:
+                historic_rnd.append(int(self.income_statement_annuals[i]['researchAndDevelopment']))
+            except ValueError:
+                print("Invalid number format")
+
+        return historic_rnd
 
     def get_historic_sga(self):
         
@@ -64,20 +76,17 @@ class FinancialData:
 
         return historic_sga
 
-    ## this may need some work, amort
-    def get_historic_amortization(self):
+    # def get_historic_amortization(self):
         
-        historic_amortization = []
+    #     historic_amortization = []
 
-        for i in range(3):
-            try:
-                historic_amortization.append(int(self.income_statement_annuals[i]['depreciationAndAmortization']))
-            except ValueError:
-                print("Invalid number format")
+    #     for i in range(3):
+    #         try:
+    #             historic_amortization.append(int(self.income_statement_annuals[i]['depreciationAndAmortization']))
+    #         except ValueError:
+    #             print("Invalid number format")
 
-        return historic_amortization  
-
-IBM 2022 annual EBITDA was $12.314B, a 2.8% decline from 2021. IBM 2021 annual EBITDA was $12.669B, a 17.99% increase from 2020. IBM 2020 annual EBITDA was $10.737B
+    #     return historic_amortization  
     
     # def bs_test(self):
     #     iss = self.income_statement['annualReports']
