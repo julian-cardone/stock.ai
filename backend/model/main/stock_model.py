@@ -1,6 +1,16 @@
 import yfinance as yf
 from sheet_class import Sheet
 
+"""
+StockModel class is the parent class for model creation
+
+Args:
+    symbol (string): stock ticker symbol as a string, either lowercase or uppercase
+
+Constructor:
+    attempts to fetch stock info with the symbol inputted from the user to confirm its validity
+"""
+
 class StockModel:
 
     def __init__(self, symbol):
@@ -19,6 +29,7 @@ class StockModel:
 
 StockModel('ibm').create_model()
 
+## stock info object
 # {   '52WeekChange': 0.15615356,
 #     'SandP52WeekChange': 0.08605158,
 #     'address1': 'One Apple Park Way',
