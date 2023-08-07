@@ -36,15 +36,15 @@ class FinancialData:
 
     """
     THIS IS THE BEGINNING OF THE OPERATING ASSUMPTIONS DATA COLLECTION FUNCTIONS
-    
+
     they are mostly all the same: atempt to fetch data from the api, convert to integer, append to an array
     however, the historic revenue function checks to see if the most recent revenue is greater than or equal to 1 million
     if it is, then it activates a formatting trigger to scale every number down by 1 million
     so 1 million would be 1 in the sheet
-    
+
     Arguments:
         self (FinancialData object): current instance of the FinancialData object
-    
+
     Returns:
         historic_{metric} (array): 3 most recent years of data in descending chronological order
     """
@@ -57,9 +57,8 @@ class FinancialData:
         for i in range(3):
             try:
                 historic_revenue.append(self.number_formatter(int(self.income_statement_annuals[i]['totalRevenue'])))
-            except Exception as e:
-                print(f"an error has occurred: {e}")
-                raise RuntimeError("unable to fetch data")
+            except:
+                historic_revenue.append(0)
 
         return historic_revenue
 
@@ -69,9 +68,8 @@ class FinancialData:
         for i in range(3):
             try:
                 historic_cor.append(self.number_formatter(int(self.income_statement_annuals[i]['costOfRevenue'])))
-            except Exception as e:
-                print(f"an error has occurred: {e}")
-                raise RuntimeError("unable to fetch data")
+            except:
+                historic_cor.append(0)
 
         return historic_cor
 
@@ -81,9 +79,8 @@ class FinancialData:
         for i in range(3):
             try:
                 historic_depreciation.append(self.number_formatter(int(self.income_statement_annuals[i]['depreciationAndAmortization'])))
-            except Exception as e:
-                print(f"an error has occurred: {e}")
-                raise RuntimeError("unable to fetch data")
+            except:
+                historic_depreciation.append(0)
 
         return historic_depreciation
 
@@ -93,9 +90,8 @@ class FinancialData:
         for i in range(3):
             try:
                 historic_rnd.append(self.number_formatter(int(self.income_statement_annuals[i]['researchAndDevelopment'])))
-            except Exception as e:
-                print(f"an error has occurred: {e}")
-                raise RuntimeError("unable to fetch data")
+            except:
+                historic_rnd.append(0)
 
         return historic_rnd
 
@@ -105,9 +101,8 @@ class FinancialData:
         for i in range(3):
             try:
                 historic_sga.append(self.number_formatter(int(self.income_statement_annuals[i]['sellingGeneralAndAdministrative'])))
-            except Exception as e:
-                print(f"an error has occurred: {e}")
-                raise RuntimeError("unable to fetch data")
+            except:
+                historic_sga.append(0)
 
         return historic_sga
 
@@ -117,8 +112,7 @@ class FinancialData:
         for i in range(3):
             try:
                 historic_capex.append(self.number_formatter(int(self.cash_flow_statement[i]['capitalExpenditures'])))
-            except Exception as e:
-                print(f"an error has occurred: {e}")
-                raise RuntimeError("unable to fetch data")
+            except:
+                historic_capex.append(0)
 
         return historic_capex
