@@ -61,6 +61,12 @@ class Sheet:
         self.worksheet['G69'] = data[1]
         self.worksheet['F69'] = data[2]
 
+    def insert_historic_capex(self):
+        data = self.fin_data.get_historic_capex()
+        self.worksheet['H79'] = data[0]
+        self.worksheet['G79'] = data[1]
+        self.worksheet['F79'] = data[2]
+
     def create_model(self):
         self.insert_year()
         self.insert_historic_revenue()
@@ -69,5 +75,6 @@ class Sheet:
         self.insert_historic_depreciation()
         self.insert_historic_rnd()
         self.insert_historic_sga()
+        self.insert_historic_capex()
         self.workbook.save('model_year_stock.xlsx')
         self.workbook.close()

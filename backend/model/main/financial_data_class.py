@@ -11,10 +11,12 @@ class FinancialData:
 
         INCOME_STATEMENT_URL = f'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={stock_model.symbol}&apikey={key}'
         BALANCE_SHEET_URL = f'https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={stock_model.symbol}&apikey={key}'
+        CASH_FLOW_STATEMENT_URL = f'https://www.alphavantage.co/query?function=CASH_FLOW&symbol={stock_model.symbol}&apikey={key}'
         
         self.stock_model = stock_model
         self.income_statement_annuals = requests.get(INCOME_STATEMENT_URL).json()['annualReports']
         self.balance_sheet = requests.get(BALANCE_SHEET_URL).json()['annualReports']
+        self.cash_flow_statement = requests.get(CASH_FLOW_STATEMENT_URL).json()['annualReports']
 
     def number_formatter(self, n):
         if self.format:
@@ -84,6 +86,20 @@ class FinancialData:
                 print("Invalid number format")
 
         return historic_sga
+
+    def get_historic_capex(self):
+        
+        historic_capex = []
+
+        for i in range(3):
+            try:
+                historic_capex.append(self.number_formatter(int(self.cash_flow_statement[i]['capitalExpenditures'])))
+            except ValueError:
+                print("Invalid number format")
+
+        return historic_capex
+
+
 
     # def get_historic_amortization(self):
         
