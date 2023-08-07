@@ -36,18 +36,11 @@ class Sheet:
         self.worksheet['G59'] = data[1]
         self.worksheet['F59'] = data[2]
 
-    # if amort < conflated deprec then add them? need to test this
     def insert_historic_depreciation(self):
         data = self.fin_data.get_historic_depreciation()
         self.worksheet['H62'] = data[0]
         self.worksheet['G62'] = data[1]
         self.worksheet['F62'] = data[2]
-        
-    # def insert_historic_amortization(self):
-    #     data = self.fin_data.get_historic_amortization()
-    #     self.worksheet['D93'] = data[0]
-    #     self.worksheet['C93'] = data[1]
-    #     self.worksheet['B93'] = data[2]
 
     def insert_historic_rnd(self):
         data = self.fin_data.get_historic_rnd()

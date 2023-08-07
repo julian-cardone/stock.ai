@@ -25,7 +25,6 @@ class FinancialData:
             return n
 
     def get_historic_revenue(self):
-
         if int(self.income_statement_annuals[0]['totalRevenue']) >= 100000000:
             self.format = True
 
@@ -39,8 +38,7 @@ class FinancialData:
 
         return historic_revenue
 
-    def get_historic_cor(self):
-        
+    def get_historic_cor(self):        
         historic_cor = []
 
         for i in range(3):
@@ -51,8 +49,7 @@ class FinancialData:
 
         return historic_cor
 
-    def get_historic_depreciation(self):
-        
+    def get_historic_depreciation(self):        
         historic_depreciation = []
 
         for i in range(3):
@@ -64,7 +61,6 @@ class FinancialData:
         return historic_depreciation
 
     def get_historic_rnd(self):
-
         historic_rnd = []
 
         for i in range(3):
@@ -75,8 +71,7 @@ class FinancialData:
 
         return historic_rnd
 
-    def get_historic_sga(self):
-        
+    def get_historic_sga(self):        
         historic_sga = []
 
         for i in range(3):
@@ -87,8 +82,7 @@ class FinancialData:
 
         return historic_sga
 
-    def get_historic_capex(self):
-        
+    def get_historic_capex(self):        
         historic_capex = []
 
         for i in range(3):
@@ -98,22 +92,3 @@ class FinancialData:
                 print("Invalid number format")
 
         return historic_capex
-
-
-
-    # def get_historic_amortization(self):
-        
-    #     historic_amortization = []
-
-    #     for i in range(3):
-    #         try:
-    #             historic_amortization.append(int(self.income_statement_annuals[i]['depreciationAndAmortization']))
-    #         except ValueError:
-    #             print("Invalid number format")
-
-    #     return historic_amortization  
-    
-    # def bs_test(self):
-    #     iss = self.income_statement['annualReports']
-    #     pp = pprint.PrettyPrinter(indent=4)
-    #     pp.pprint(iss)
