@@ -1,5 +1,5 @@
 import yfinance as yf
-from sheet_class import Sheet
+from backend.model.main.sheet_class import Sheet
 
 """
 StockModel class is the parent class for model creation
@@ -26,8 +26,6 @@ class StockModel:
 
     def create_model(self):
         self.model = Sheet(self)
-
-StockModel('ibm').create_model()
 
 ## stock info object
 # {   '52WeekChange': 0.15615356,

@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify, session, make_response
+from flask import Flask, request, jsonify, session, make_response, send_file
 from backend.db import db_setup
 from backend.db.models.instance import Instance
+from backend.model.main.stock_model import StockModel
 
 app = Flask(__name__)
 
@@ -55,7 +56,7 @@ def create_instance():
 
 @app.route('/operating_assumptions', methods=["POST"])
 def create_hoa_model():
-    try:
+    # try:
         # Get JSON data from the request body
         json_data = request.get_json()
 
@@ -63,8 +64,12 @@ def create_hoa_model():
         inputValue = json_data.get('inputValue', '') #symbol
 
         # Process the inputValue or perform any other operations
-        print("inputValue:", inputValue)
+        model = StockModel(inputValue)
+        model.create_model()
 
-        return jsonify({"message": "endpoint reached", "body": json_data})
-    except:
-        return jsonify({"error": "there was an error"})
+        # return send_file(file_path, as_attachment=True, download_name=f'{file_name}.xlsx')
+        return jsonify({"working": "it worked"})
+
+    # except Exception as e:
+    #     print(e)
+    #     return jsonify({"error": "there was an error"})

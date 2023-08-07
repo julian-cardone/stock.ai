@@ -1,7 +1,8 @@
 from openpyxl import load_workbook, worksheet, workbook
 import datetime
 import os
-from financial_data_class import FinancialData
+from backend.model.main.financial_data_class import FinancialData
+import tempfile
 
 """
 Sheet class is responsible for all interactions with the spreadsheet
@@ -26,7 +27,7 @@ class Sheet:
         self.date = datetime.date.today()
         self.fin_data = FinancialData(stock_model)
 
-        self.create_model()
+        self.file_path = self.create_model()
 
     def insert_specs(self):
         """
