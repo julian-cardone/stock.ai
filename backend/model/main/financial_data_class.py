@@ -4,17 +4,17 @@ import os
 from dotenv import load_dotenv
 
 class FinancialData:
-"""
-FinancialData class is an interface for collecting and parsing financial data from the Alpha Vantage API
+    """
+    FinancialData class is an interface for collecting and parsing financial data from the Alpha Vantage API
 
-Arguments:
-    stock_model (StockModel object): StockModel instance of the user-inputted symbol
+    Arguments:
+        stock_model (StockModel object): StockModel instance of the user-inputted symbol
 
-Constructor Overview:
-    loads the API key from the .env file
-    json request to the corresponding URLs, pulls anual report data 
-    the data comes in an array of objects wrapped in a parent object, with two keys: 'annualReports', and a quarterly one
-"""
+    Constructor Overview:
+        loads the API key from the .env file
+        json request to the corresponding URLs, pulls anual report data 
+        the data comes in an array of objects wrapped in a parent object, with two keys: 'annualReports', and a quarterly one
+    """
     def __init__(self, stock_model):
         load_dotenv()
         key = os.getenv("AV_KEY")
@@ -34,21 +34,20 @@ Constructor Overview:
         else:
             return n
 
-"""
-THIS IS THE BEGINNING OF THE OPERATING ASSUMPTIONS DATA COLLECTION FUNCTIONS
-
-they are mostly all the same: atempt to fetch data from the api, convert to integer, append to an array
-however, the historic revenue function checks to see if the most recent revenue is greater than or equal to 1 million
-if it is, then it activates a formatting trigger to scale every number down by 1 million
-so 1 million would be 1 in the sheet
-
-Arguments:
-    self (FinancialData object): current instance of the FinancialData object
-
-Returns:
-    historic_{metric} (array): 3 most recent years of data in descending chronological order
-"""
-## note: might be worth to add better error handling here, maybe throw an exception or make it "none"
+    """
+    THIS IS THE BEGINNING OF THE OPERATING ASSUMPTIONS DATA COLLECTION FUNCTIONS
+    
+    they are mostly all the same: atempt to fetch data from the api, convert to integer, append to an array
+    however, the historic revenue function checks to see if the most recent revenue is greater than or equal to 1 million
+    if it is, then it activates a formatting trigger to scale every number down by 1 million
+    so 1 million would be 1 in the sheet
+    
+    Arguments:
+        self (FinancialData object): current instance of the FinancialData object
+    
+    Returns:
+        historic_{metric} (array): 3 most recent years of data in descending chronological order
+    """
     def get_historic_revenue(self):
         if int(self.income_statement_annuals[0]['totalRevenue']) >= 100000000:
             self.format = True
@@ -58,8 +57,9 @@ Returns:
         for i in range(3):
             try:
                 historic_revenue.append(self.number_formatter(int(self.income_statement_annuals[i]['totalRevenue'])))
-            except ValueError:
-                print("Invalid number format")
+            except Exception as e:
+                print(f"an error has occurred: {e}")
+                raise RuntimeError("unable to fetch data")
 
         return historic_revenue
 
@@ -69,8 +69,9 @@ Returns:
         for i in range(3):
             try:
                 historic_cor.append(self.number_formatter(int(self.income_statement_annuals[i]['costOfRevenue'])))
-            except ValueError:
-                print("Invalid number format")
+            except Exception as e:
+                print(f"an error has occurred: {e}")
+                raise RuntimeError("unable to fetch data")
 
         return historic_cor
 
@@ -80,8 +81,9 @@ Returns:
         for i in range(3):
             try:
                 historic_depreciation.append(self.number_formatter(int(self.income_statement_annuals[i]['depreciationAndAmortization'])))
-            except ValueError:
-                print("Invalid number format")
+            except Exception as e:
+                print(f"an error has occurred: {e}")
+                raise RuntimeError("unable to fetch data")
 
         return historic_depreciation
 
@@ -91,8 +93,9 @@ Returns:
         for i in range(3):
             try:
                 historic_rnd.append(self.number_formatter(int(self.income_statement_annuals[i]['researchAndDevelopment'])))
-            except ValueError:
-                print("Invalid number format")
+            except Exception as e:
+                print(f"an error has occurred: {e}")
+                raise RuntimeError("unable to fetch data")
 
         return historic_rnd
 
@@ -102,8 +105,9 @@ Returns:
         for i in range(3):
             try:
                 historic_sga.append(self.number_formatter(int(self.income_statement_annuals[i]['sellingGeneralAndAdministrative'])))
-            except ValueError:
-                print("Invalid number format")
+            except Exception as e:
+                print(f"an error has occurred: {e}")
+                raise RuntimeError("unable to fetch data")
 
         return historic_sga
 
@@ -113,7 +117,8 @@ Returns:
         for i in range(3):
             try:
                 historic_capex.append(self.number_formatter(int(self.cash_flow_statement[i]['capitalExpenditures'])))
-            except ValueError:
-                print("Invalid number format")
+            except Exception as e:
+                print(f"an error has occurred: {e}")
+                raise RuntimeError("unable to fetch data")
 
         return historic_capex
