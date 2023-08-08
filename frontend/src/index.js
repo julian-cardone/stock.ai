@@ -8,11 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // strictmode is for development
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <AppContextProvider>
         <App />
       </AppContextProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

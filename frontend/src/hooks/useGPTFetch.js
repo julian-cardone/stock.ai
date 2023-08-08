@@ -5,10 +5,11 @@ import { useCustomFetch } from "./useCustomFetch";
 export function useGPTFetch() {
   const { cache } = useContext(AppContext);
   const { loading, sessionFetch } = useCustomFetch();
-  const [info, setInfo] = useState(null);
+  const [info, setInfo] = useState("");
 
   const gptFetch = useCallback(
     async (url, inputValue) => {
+      setInfo("")
       if (cache.current.has(inputValue)) {
         setInfo(cache.current.get(inputValue))
         return cache.current.get(inputValue);
@@ -31,5 +32,5 @@ export function useGPTFetch() {
     [cache, sessionFetch]
   );
 
-  return { gptFetch, info, setInfo };
+  return { gptFetch, info, setInfo, loading };
 }

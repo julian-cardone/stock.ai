@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useCustomFetch } from "../../hooks/useCustomFetch";
 import { useGPTFetch } from "../../hooks/useGPTFetch";
-import InfoArea from "./InfoArea";
+import "./index.css";
 
 function BusinessPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [inputValue, setInputValue] = useState("");
   const { loading, sessionFetch } = useCustomFetch();
-  const { gptFetch, info, setInfo } = useGPTFetch();
+  const { gptFetch, info, setInfo, loadingTwo } = useGPTFetch();
+  const [loadingState, setLoadingState] = useState(false);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -19,8 +20,9 @@ function BusinessPage() {
 
   const handleSubimt = async (event) => {
     event.preventDefault();
+    setLoadingState(true);
 
-    const resOne = await gptFetch("/info", inputValue);
+    await gptFetch("/info", inputValue);
 
     const res = await sessionFetch(`${selectedOption}`, {
       method: "POST",
@@ -41,6 +43,7 @@ function BusinessPage() {
         setInfo(data.error);
       }
     }
+    setLoadingState(false)
   };
 
   return (
@@ -81,22 +84,25 @@ function BusinessPage() {
                 disabled={
                   loading ||
                   inputValue.length === 0 ||
-                  selectedOption.value === ""
+                  selectedOption.value === "" ||
+                  loadingTwo ||
+                  loadingState
                 }
                 type="submit"
                 className="btn btn-outline-success"
               >
                 GENERATE + DOWNLOAD
               </button>
-              {info != null && (
-                <div className="row d-flex justify-content-center">
-                  <p className="mt-2 mb-0">{info}</p>
-                </div>
-              )}
-              <InfoArea></InfoArea>
             </div>
           </div>
         </form>
+        {info != null && (
+          <div className="row d-flex justify-content-center">
+            <div className="col-sm-9 col-lg-9 justify-content-center">
+              <p id="text" className="mt-5 mb-0 typewriter">{info}</p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

@@ -28,12 +28,12 @@ class FinancialData:
         try:
             self.income_statement_annuals = requests.get(INCOME_STATEMENT_URL).json()['annualReports']
         except:
-            raise RuntimeError("API limit reached for the day, please try again tomorrow!")
+            raise RuntimeError("External API overloaded, please try again later!")
         # self.balance_sheet = requests.get(BALANCE_SHEET_URL).json()['annualReports']
         try:
             self.cash_flow_statement = requests.get(CASH_FLOW_STATEMENT_URL).json()['annualReports']
         except:
-            raise RuntimeError("API limit reached for the day, please try again tomorrow!")
+            raise RuntimeError("External API overloaded, please try again later!")
 
     def number_formatter(self, n):
         if self.format:
