@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useCustomFetch } from "../../hooks/useCustomFetch";
 import { useGPTFetch } from "../../hooks/useGPTFetch";
+import InfoArea from "./InfoArea";
 
 function BusinessPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [inputValue, setInputValue] = useState("");
   const { loading, sessionFetch } = useCustomFetch();
-  const [error, setError] = useState(null);
-  const { gptFetch } = useGPTFetch();
+  const { gptFetch, info, setInfo } = useGPTFetch();
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -19,14 +19,8 @@ function BusinessPage() {
 
   const handleSubimt = async (event) => {
     event.preventDefault();
-    setError(null);
 
     const resOne = await gptFetch("/info", inputValue);
-    console.log(resOne)
-    if ("error" in resOne) {
-      setError(resOne.error);
-      return;
-    }
 
     const res = await sessionFetch(`${selectedOption}`, {
       method: "POST",
@@ -44,7 +38,7 @@ function BusinessPage() {
     } else {
       const data = await res.json();
       if ("error" in data) {
-        setError(data.error);
+        setInfo(data.error);
       }
     }
   };
@@ -94,11 +88,12 @@ function BusinessPage() {
               >
                 GENERATE + DOWNLOAD
               </button>
-              {error != null && (
+              {info != null && (
                 <div className="row d-flex justify-content-center">
-                  <p className="mt-2">{error}</p>
+                  <p className="mt-2 mb-0">{info}</p>
                 </div>
               )}
+              <InfoArea></InfoArea>
             </div>
           </div>
         </form>

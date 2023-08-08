@@ -45,6 +45,7 @@ class StockModel:
         response = openai.Completion.create(
           model="text-davinci-003",
           prompt=f"Please summarize this information about a public company: {info}",
+          max_tokens=2000,
           temperature=0)
         
         res = (response.choices[0].text.strip())
