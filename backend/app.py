@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, session, make_response, send_file
 from backend.db import db_setup
 from backend.db.models.instance import Instance
 from backend.model.main.stock_model import StockModel
+import os
 
 app = Flask(__name__)
 
@@ -69,7 +70,10 @@ def create_hoa_model():
         file_path = f'{inputValue}_operating_assumptions.xlsx'
 
         # Return the saved spreadsheet as a downloadable file
-        return send_file(file_path, as_attachment=True, download_name=f'{inputValue}_operating_assumptions.xlsx')
+        response = send_file(file_path, as_attachment=True, download_name=f'{inputValue}_operating_assumptions.xlsx')
+        os.remove(file_path)
+
+        return response
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
