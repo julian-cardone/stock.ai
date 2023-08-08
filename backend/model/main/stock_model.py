@@ -1,5 +1,6 @@
 import yfinance as yf
 from backend.model.main.sheet_class import Sheet
+from yfinance.exceptions import YFinanceException
 
 """
 StockModel class is the parent class for model creation
@@ -19,10 +20,10 @@ class StockModel:
             stock_info = stock.info
             self.symbol = symbol.upper()
             self.info = stock_info
-        except Exception as e:
-            print(f"An error occurred: {e}")
+        except Exception as yf_error:
+            print(f"An error occurred: {yf_error}")
             self.symbol = None
-            raise RuntimeError("Instance creation aborted, Please enter a valid stock symbol")
+            raise RuntimeError("Instance creation aborted. Please enter a valid stock symbol.")
 
     def create_model(self):
         self.model = Sheet(self)

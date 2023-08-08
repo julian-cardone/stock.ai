@@ -53,7 +53,6 @@ def create_instance():
 
     return jsonify({"message": "Instance Created", "session_token": token_id})
 
-
 @app.route('/operating_assumptions', methods=["POST"])
 def create_hoa_model():
     try:
@@ -71,4 +70,4 @@ def create_hoa_model():
         return jsonify({"working": "it worked"})
 
     except Exception as e:
-        return jsonify({"there was an error": e.message })
+        return jsonify({"error": str(e)})
