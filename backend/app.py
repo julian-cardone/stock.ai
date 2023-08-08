@@ -67,7 +67,7 @@ def create_hoa_model():
         model.create_model()
 
         # return send_file(file_path, as_attachment=True, download_name=f'{file_name}.xlsx')
-        return jsonify({"working": "it worked"})
+        return jsonify({"working": "success"})
 
     except Exception as e:
         return jsonify({"error": str(e)})

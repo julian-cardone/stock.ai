@@ -5,6 +5,7 @@ function BusinessPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [inputValue, setInputValue] = useState("");
   const { loading, sessionFetch } = useCustomFetch();
+  const [error, setError] = useState(null);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -16,12 +17,16 @@ function BusinessPage() {
 
   const handleSubimt = async (event) => {
     event.preventDefault();
-    const res = await sessionFetch(`${selectedOption}`, {
-      method: "POST",
-      body: JSON.stringify({ inputValue: inputValue }),
-    });
-    const data = await res.json();
-    console.log(data);
+    setError(null);
+      const res = await sessionFetch(`${selectedOption}`, {
+        method: "POST",
+        body: JSON.stringify({ inputValue: inputValue }),
+      });
+      const data = await res.json();
+      console.log(data)
+      if ("error" in data){
+        setError(data.error)
+      }
   };
 
   return (
@@ -66,9 +71,14 @@ function BusinessPage() {
                 }
                 type="submit"
                 className="btn btn-outline-success"
-              >
+                >
                 GENERATE
               </button>
+                {error != null && (
+                  <div className="row d-flex justify-content-center">
+                    <p>{error}</p>
+                  </div>
+                )}
             </div>
           </div>
         </form>
