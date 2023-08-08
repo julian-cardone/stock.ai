@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useCustomFetch } from "../../hooks/useCustomFetch";
+import { useGPTFetch } from "../../hooks/useGPTFetch";
 
 function BusinessPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [inputValue, setInputValue] = useState("");
   const { loading, sessionFetch } = useCustomFetch();
   const [error, setError] = useState(null);
+  const { gptFetch } = useGPTFetch();
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -18,6 +20,14 @@ function BusinessPage() {
   const handleSubimt = async (event) => {
     event.preventDefault();
     setError(null);
+
+    const resOne = await gptFetch("/info", inputValue);
+    console.log(resOne)
+    if ("error" in resOne) {
+      setError(resOne.error);
+      return;
+    }
+
     const res = await sessionFetch(`${selectedOption}`, {
       method: "POST",
       body: JSON.stringify({ inputValue: inputValue }),

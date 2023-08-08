@@ -77,3 +77,18 @@ def create_hoa_model():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+@app.route("/info", methods=["POST"])
+def gather_info():
+    try:
+        json_data = request.get_json()
+        # Access the inputValue from the JSON data
+        inputValue = json_data.get('inputValue', '') #symbol
+        
+        model = StockModel(inputValue)
+        res = model.generate_info()
+
+        return jsonify({"info": res})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+        
