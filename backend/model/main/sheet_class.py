@@ -107,5 +107,5 @@ class Sheet:
         self.insert_historic_rnd()
         self.insert_historic_sga()
         self.insert_historic_capex()
-        self.workbook.save('model_year_stock.xlsx')
+        self.workbook.save(f'{self.stock_model.symbol}_operating_assumptions.xlsx')
         self.workbook.close()

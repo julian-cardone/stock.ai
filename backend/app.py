@@ -66,8 +66,10 @@ def create_hoa_model():
         model = StockModel(inputValue)
         model.create_model()
 
-        # return send_file(file_path, as_attachment=True, download_name=f'{file_name}.xlsx')
-        return jsonify({"working": "success"})
+        file_path = f'{inputValue}_operating_assumptions.xlsx'
+
+        # Return the saved spreadsheet as a downloadable file
+        return send_file(file_path, as_attachment=True, download_name=f'{inputValue}_operating_assumptions.xlsx')
 
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return jsonify({"error": str(e)}), 400

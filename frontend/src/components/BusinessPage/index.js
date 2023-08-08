@@ -12,21 +12,31 @@ function BusinessPage() {
   };
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    setInputValue(event.target.value.toUpperCase());
   };
 
   const handleSubimt = async (event) => {
     event.preventDefault();
     setError(null);
-      const res = await sessionFetch(`${selectedOption}`, {
-        method: "POST",
-        body: JSON.stringify({ inputValue: inputValue }),
-      });
+    const res = await sessionFetch(`${selectedOption}`, {
+      method: "POST",
+      body: JSON.stringify({ inputValue: inputValue }),
+    });
+
+    if (res.ok) {
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${inputValue}_operating_assumptions.xlsx`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } else {
       const data = await res.json();
-      console.log(data)
-      if ("error" in data){
-        setError(data.error)
+      if ("error" in data) {
+        setError(data.error);
       }
+    }
   };
 
   return (
@@ -71,14 +81,14 @@ function BusinessPage() {
                 }
                 type="submit"
                 className="btn btn-outline-success"
-                >
-                GENERATE
+              >
+                GENERATE + DOWNLOAD
               </button>
-                {error != null && (
-                  <div className="row d-flex justify-content-center">
-                    <p>{error}</p>
-                  </div>
-                )}
+              {error != null && (
+                <div className="row d-flex justify-content-center">
+                  <p className="mt-2">{error}</p>
+                </div>
+              )}
             </div>
           </div>
         </form>
