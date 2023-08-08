@@ -56,7 +56,7 @@ def create_instance():
 
 @app.route('/operating_assumptions', methods=["POST"])
 def create_hoa_model():
-    # try:
+    try:
         # Get JSON data from the request body
         json_data = request.get_json()
 
@@ -70,6 +70,5 @@ def create_hoa_model():
         # return send_file(file_path, as_attachment=True, download_name=f'{file_name}.xlsx')
         return jsonify({"working": "it worked"})
 
-    # except Exception as e:
-    #     print(e)
-    #     return jsonify({"error": "there was an error"})
+    except Exception as e:
+        return jsonify({"there was an error": e.message })

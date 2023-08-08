@@ -22,7 +22,7 @@ class StockModel:
         except Exception as e:
             print(f"An error occurred: {e}")
             self.symbol = None
-            raise RuntimeError("Instance creation aborted")
+            raise RuntimeError("Instance creation aborted, Please enter a valid stock symbol")
 
     def create_model(self):
         self.model = Sheet(self)
