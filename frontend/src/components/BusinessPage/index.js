@@ -46,6 +46,28 @@ function BusinessPage() {
     setLoadingState(false)
   };
 
+    // const pTag = () => {
+  //   if (loadingState) {
+  //     return (
+  //       <div className="row d-flex justify-content-center">
+  //         <div className="col-sm-9 col-lg-9 justify-content-center">
+  //           <p id="text" className="mt-5 mb-0 typewriter">
+  //             Loading...
+  //           </p>
+  //         </div>
+  //       </div>
+  //     );
+  //   } else {
+  //     <div className="row d-flex justify-content-center">
+  //       <div className="col-sm-9 col-lg-9 justify-content-center">
+  //         <p id="text" className="mt-5 mb-0 typewriter">
+  //           {info}
+  //         </p>
+  //       </div>
+  //     </div>;
+  //   }
+  // };
+
   return (
     <>
       <div className="container-lg my-5 text-center">
