@@ -1,0 +1,10 @@
+#user-note {
+    overflow: hidden;
+    min-height: 40px; /* Initial height */
+    transition: min-height 0.5s ease-in-out; /* Transition property */
+    cursor: pointer;
+  }
+  
+#user-note.expanded {
+  min-height: 20vh; /* Expanded height */
+}

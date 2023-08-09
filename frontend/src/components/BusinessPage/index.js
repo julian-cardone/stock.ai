@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCustomFetch } from "../../hooks/useCustomFetch";
 import { useGPTFetch } from "../../hooks/useGPTFetch";
 import "./index.css";
+import UserNote from "./UserNote";
 
 function BusinessPage() {
   const [selectedOption, setSelectedOption] = useState("");
@@ -43,10 +44,10 @@ function BusinessPage() {
         setInfo(data.error);
       }
     }
-    setLoadingState(false)
+    setLoadingState(false);
   };
 
-    // const pTag = () => {
+  // const pTag = () => {
   //   if (loadingState) {
   //     return (
   //       <div className="row d-flex justify-content-center">
@@ -113,7 +114,7 @@ function BusinessPage() {
                 type="submit"
                 className="btn btn-outline-success"
               >
-                GENERATE + DOWNLOAD
+                {loadingState ? "Loading..." : "GENERATE + DOWNLOAD"}
               </button>
             </div>
           </div>
@@ -121,10 +122,13 @@ function BusinessPage() {
         {info != null && (
           <div className="row d-flex justify-content-center">
             <div className="col-sm-9 col-lg-9 justify-content-center">
-              <p id="text" className="mt-5 mb-0 typewriter">{info}</p>
+              <p id="text" className="mt-5 mb-0 typewriter">
+                {info}
+              </p>
             </div>
           </div>
         )}
+        <UserNote></UserNote>
       </div>
     </>
   );
