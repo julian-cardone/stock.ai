@@ -122,7 +122,7 @@ function BusinessPage() {
         {info != null && (
           <div className="row d-flex justify-content-center">
             <div className="col-sm-9 col-lg-9 justify-content-center">
-              <p id="text" className="mt-5 mb-0 typewriter">
+              <p id="text" className="mt-4 mb-0 typewriter">
                 {info}
               </p>
             </div>
