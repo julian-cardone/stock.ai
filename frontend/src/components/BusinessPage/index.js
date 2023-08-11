@@ -25,24 +25,31 @@ function BusinessPage() {
 
     await gptFetch("/info", inputValue);
 
-    const res = await sessionFetch(`${selectedOption}`, {
-      method: "POST",
-      body: JSON.stringify({ inputValue: inputValue }),
-    });
+    if (selectedOption === "/operating_assumptions") {
+      const res = await sessionFetch(`${selectedOption}`, {
+        method: "POST",
+        body: JSON.stringify({ inputValue: inputValue }),
+      });
 
-    if (res.ok) {
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${inputValue}_operating_assumptions.xlsx`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-    } else {
-      const data = await res.json();
-      if ("error" in data) {
-        setInfo(data.error);
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${inputValue}_operating_assumptions.xlsx`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      } else {
+        const data = await res.json();
+        if ("error" in data) {
+          setInfo(data.error);
+        }
       }
+    } else if (selectedOption === "/two_day_averages") {
+      const res = await sessionFetch(`${selectedOption}`, {
+        method: "POST",
+        body: JSON.stringify({ inputValue: inputValue }),
+      });
     }
     setLoadingState(false);
   };
@@ -98,6 +105,7 @@ function BusinessPage() {
                 <option value="/operating_assumptions">
                   Historical Operating Assumptions
                 </option>
+                <option value="/two_day_averages">Two Day Averages</option>
               </select>
             </div>
           </div>

@@ -3,6 +3,15 @@ from backend.db import db_setup
 from backend.db.models.instance import Instance
 from backend.model.main.stock_model import StockModel
 import os
+import dash
+from dash import dcc
+from dash import html
+from dash.dependencies import Input, Output
+import plotly.graph_objs as go
+from backend.graph.data_fetching import create_historical_data_csv
+from backend.graph.data_processing import process_data
+from dash import dash_table
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -91,4 +100,55 @@ def gather_info():
         return jsonify({"info": res})
     except Exception as e:
         return jsonify({"error": str(e)})
+
+
+@app.route("/two_day_averages", methods=['POST'])
+def two_day_averages():
+    # try:
+        json_data = request.get_json()
+        # Access the inputValue from the JSON data
+        inputValue = json_data.get('inputValue', '') #symbol
+
+        # Check if the CSV file exists, and if not, create it
+        csv_file = './historical_stock_data.csv'
+        if not os.path.exists(csv_file):
+            create_historical_data_csv(inputValue)
+
+        # Read and process the CSV file with 2-day moving averages
+        df = process_data(csv_file)
+
+        # Create a Dash web application
+        app = dash.Dash(__name__)
+
+        # Define the layout of the Dash app
+        app.layout = html.Div([
+
+            # Table to display stock data and moving averages
+            dash_table.DataTable(
+                id='data-table',
+                columns=[{"name": col, "id": col} for col in df.columns],
+                data=df.to_dict('records'),
+                style_cell={'textAlign': 'center'},
+            ),
+
+            # Chart to display only VWAP
+            dcc.Graph(
+                id='vwap-chart',
+                figure={
+                    'data': [
+                        {'x': df['Date'], 'y': df[f'{inputValue} Close_Price'], 'type': 'line', 'name': 'DRI'},
+                    ],
+                    'layout': go.Layout(
+                        title='2D moving vwap of close price',
+                        xaxis={'title': 'Dates'},
+                        yaxis={'title': '2 day moving vwap'}
+                    )
+                }
+            )
+        ])
+        app.run_server(debug=True)
+        return jsonify({"success" : True})
+
+    # except Exception as e:
+        # return jsonify({"error": str(e)})
         
