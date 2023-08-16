@@ -11,6 +11,7 @@ assumptions reports
 * Alpha Vantage API
 
 ## Selecting a company and a financial statement
+A short summary on the business is generated with OpenAI's completion endpoint
 ![Main Page Picture](media/stockai-input.png)
 
 ## An excel file is genereated and downloaded to your device
