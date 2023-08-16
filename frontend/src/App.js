@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useStorageKey } from "./hooks/useStorageKey";
 import MainPage from "./components/MainPage";
 import BusinessPage from "./components/BusinessPage";
