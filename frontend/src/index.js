@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // strictmode is for development
+  //strictmode is for development
     <BrowserRouter>
       <AppContextProvider>
         <App />
