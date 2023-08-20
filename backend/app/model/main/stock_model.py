@@ -1,5 +1,5 @@
 import yfinance as yf
-from backend.model.main.sheet_class import Sheet
+from backend.app.model.main.sheet_class import Sheet
 from yfinance.exceptions import YFinanceException
 import openai
 import os

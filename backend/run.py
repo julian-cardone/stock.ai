@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, session, make_response, send_file
-from backend.db import db_setup
-from backend.db.models.instance import Instance
-from backend.model.main.stock_model import StockModel
+from backend.app.db import db_setup
+from backend.app.db.models.instance import Instance
+from backend.app.model.main.stock_model import StockModel
 import os
 
 app = Flask(__name__)

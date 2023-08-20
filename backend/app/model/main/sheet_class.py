@@ -1,7 +1,7 @@
 from openpyxl import load_workbook, worksheet, workbook
 import datetime
 import os
-from backend.model.main.financial_data_class import FinancialData
+from backend.app.model.main.financial_data_class import FinancialData
 import tempfile
 
 """
