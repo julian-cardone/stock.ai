@@ -10,16 +10,19 @@ function App() {
   return (
     <>
       <Switch>
-        {storageKey == null && (
-          <MainPage
-            createSession={storageKeyUtils.createSession}
-            loading={storageKeyUtils.loading}
-          />
-        )}
-        {storageKey != null && (
-          <div>This is the home page</div>
-        )}
-        <Route exact path="/generate" component={BusinessPage}></Route>
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <MainPage
+              createSession={storageKeyUtils.createSession}
+              loading={storageKeyUtils.loading}
+              storageKey={storageKey}
+              {...props} // Pass route props here
+            />
+          )}
+        />
+        <Route exact path="/generate" component={BusinessPage} />
       </Switch>
     </>
   );

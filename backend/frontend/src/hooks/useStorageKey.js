@@ -24,6 +24,6 @@ export function useStorageKey(){
     setStorageKey(null)
   },[])
 
-  return { data: storageKey ,loading, createSession, invalidateSession }
+  return { data: storageKey, loading, createSession, invalidateSession }
 
 }
