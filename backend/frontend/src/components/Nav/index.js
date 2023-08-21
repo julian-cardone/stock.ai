@@ -6,9 +6,9 @@ function Nav() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light ps-lg-5 ps-md-3 ps-sm-1">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light ps-lg-5 ps-md-3 ps-sm-1 navbar-custom-css">
         <div className="container-fluid">
-          <Link className="navbar-brand logo-text" to="/home">
+          <Link className="logo-text" to="/home">
             stock.ai
           </Link>
           <form className="d-flex col-lg-5 col-md-5 col-sm-3 ms-5">
