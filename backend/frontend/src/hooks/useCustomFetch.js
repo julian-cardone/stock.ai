@@ -1,12 +1,18 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { useWrappedRequest } from "./useWrappedRequest";
+import { AppContext } from "../utils/context";
 
 export function useCustomFetch() {
   const { loading, wrappedRequest } = useWrappedRequest();
+  const { cache } = useContext(AppContext);
 
   const sessionFetch = useCallback(
     async (url, options = {}) =>
       wrappedRequest(async () => {
+        if (cache.current.has(url)) {
+          return cache.current.get(url);
+        }
+
         try {
           // set options.method to 'GET' if there is no method
           options.method = options.method || "GET";
@@ -32,10 +38,12 @@ export function useCustomFetch() {
 
           // call fetch with the url and the updated options hash
           const res = await fetch(url, options);
+          const data = res.json();
+          cache.current.set(url, data);
 
           // if the response status code is 400 or above, then throw an error with the
           // error being the response
-          return res;
+          return data;
         } catch (error) {
           return error;
         }
@@ -43,7 +51,7 @@ export function useCustomFetch() {
         // if the response status code is under 400, then return the response to the
         // next promise chain
       }),
-    [wrappedRequest]
+    [wrappedRequest, cache]
   );
 
   return { loading, sessionFetch };

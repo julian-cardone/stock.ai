@@ -1,8 +1,18 @@
 import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import "./navbar.css";
+import { useState } from "react";
 
 function Nav() {
   const location = useLocation();
+  const [value, setValue] = useState();
+
+  const handleInputChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
 
   return (
     <>
@@ -11,9 +21,14 @@ function Nav() {
           <Link className="logo-text" to="/home">
             stock.ai
           </Link>
-          <form className="d-flex col-lg-5 col-md-5 col-sm-3 ms-5">
+          <form
+            className="d-flex col-lg-5 col-md-5 col-sm-3 ms-5"
+            onSubmit={handleSubmit}
+          >
             <input
               className="form-control me-2"
+              value={value}
+              onChange={handleInputChange}
               type="search"
               placeholder="Enter a stock symbol or company name"
               aria-label="Search"
