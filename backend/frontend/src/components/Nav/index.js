@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import "./navbar.css";
 import { useState } from "react";
+import { useCustomFetch } from "../../hooks/useCustomFetch";
 
 function Nav() {
   const location = useLocation();
   const [value, setValue] = useState();
+  const { loading, sessionFetch } = useCustomFetch();
 
   const handleInputChange = (e) => {
     setValue(e.target.value);
@@ -12,6 +14,13 @@ function Nav() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const result = await sessionFetch(`${value}_info`, {
+      method: "POST",
+      body: JSON.stringify({ inputValue: value }),
+    });
+
+    console.log(result);
   };
 
   return (
@@ -33,7 +42,11 @@ function Nav() {
               placeholder="Enter a stock symbol or company name"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button
+              className="btn btn-outline-success"
+              type="submit"
+              disabled={loading}
+            >
               Search
             </button>
           </form>
