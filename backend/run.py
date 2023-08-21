@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, session, make_response, send_file
 from backend.app.db import db_setup
+from backend.app.routes.stock_routes import stock_bp
 from backend.app.db.models.instance import Instance
-from backend.app.model.main.stock_model import StockModel
 import os
 
 app = Flask(__name__)
@@ -53,44 +53,4 @@ def create_instance():
         token_id = cursor.fetchone()[0]
 
     return jsonify({"message": "Instance Created", "session_token": token_id})
-
-@app.route
-
-@app.route('/operating_assumptions', methods=["POST"])
-def create_hoa_model():
-    try:
-        # Get JSON data from the request body
-        json_data = request.get_json()
-
-        # Access the inputValue from the JSON data
-        inputValue = json_data.get('inputValue', '') #symbol
-
-        # Process the inputValue or perform any other operations
-        model = StockModel(inputValue)
-        model.create_model()
-
-        file_path = f'{inputValue}_operating_assumptions.xlsx'
-
-        # Return the saved spreadsheet as a downloadable file
-        response = send_file(file_path, as_attachment=True, download_name=f'{inputValue}_operating_assumptions.xlsx')
-        os.remove(file_path)
-
-        return response
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 400
-
-@app.route("/info", methods=["POST"])
-def gather_info():
-    try:
-        json_data = request.get_json()
-        # Access the inputValue from the JSON data
-        inputValue = json_data.get('inputValue', '') #symbol
-        
-        model = StockModel(inputValue)
-        res = model.generate_info()
-
-        return jsonify({"info": res})
-    except Exception as e:
-        return jsonify({"error": str(e)})
         
