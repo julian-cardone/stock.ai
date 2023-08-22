@@ -7,11 +7,8 @@ import Home from "./components/Home";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import Nav from "./components/Nav";
 import CompanyPage from "./components/CompanyPage";
-import { useSearch } from "./hooks/useSearch";
 
 function App() {
-  const { data: searchData } = useSearch();
-
   return (
     <>
       <Nav />
@@ -20,12 +17,7 @@ function App() {
 
         <ProtectedRoute exact path="/home" component={Home} />
 
-        <ProtectedRoute
-          exact
-          path="/company"
-          component={CompanyPage}
-          searchData={searchData}
-        />
+        <ProtectedRoute exact path="/company" component={CompanyPage} />
 
         <ProtectedRoute exact path="/generate" component={BusinessPage} />
 

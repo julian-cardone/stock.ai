@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useCustomFetch } from "./useCustomFetch";
 
-export function useSearch() {
+export function useSearchData() {
   const { loading, sessionFetch } = useCustomFetch();
   const [searchData, setSearchData] = useState({});
 

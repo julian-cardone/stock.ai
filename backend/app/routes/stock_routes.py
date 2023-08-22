@@ -3,6 +3,19 @@ from backend.app.logic.main.stock_manager import StockManager
 
 stock_bp = Blueprint('stock', __name__)
 
+@stock_bp.route('/validate', methods=['POST'])
+def validate_stock():
+    try:
+        json_data = request.get_json()
+        inputValue = json_data.get('inputValue', '') #symbol
+
+        stock = StockManager(inputValue)
+
+        return jsonify({"validity": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+        
+
 @stock_bp.route('/get_stock_info', methods=["POST"])
 def get_stock_info():
     try:

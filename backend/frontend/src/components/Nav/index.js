@@ -4,13 +4,13 @@ import {
   useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
 import "./navbar.css";
-import { useSearch } from "../../hooks/useSearch";
 import { useState } from "react";
+import useSearchValidation from "../../hooks/useSearchValidation";
 
 function Nav() {
   const location = useLocation();
   const [value, setValue] = useState();
-  const { loading, fetchSearchInfo } = useSearch();
+  const { loading, validateSymbol } = useSearchValidation();
   const history = useHistory();
 
   const handleInputChange = (e) => {
@@ -19,7 +19,7 @@ function Nav() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const valid = await fetchSearchInfo(value);
+    const valid = await validateSymbol(value);
     if (valid) {
       history.push("/company");
     }

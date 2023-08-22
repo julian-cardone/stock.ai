@@ -1,7 +1,5 @@
 function SummaryHeader({ searchData, cache }) {
 
-  console.log(searchData, cache)
-
   return (
     <>
       <div className="container-fluid bg-success px-5 py-4">

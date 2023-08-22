@@ -32,7 +32,6 @@ function MarketsCarousel() {
     "Item 6",
   ];
 
-  console.log(length);
   //if less than 576 pixels, hide the carousel
   //the idea was to move the position to the right, and shift the array whenever it reaches the position of the next div
   //not bad, come back to this later
