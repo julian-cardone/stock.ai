@@ -4,15 +4,13 @@ import {
   useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
 import "./navbar.css";
-import { useContext, useState } from "react";
 import { useSearch } from "../../hooks/useSearch";
-import { AppContext } from "../../utils/context";
+import { useState } from "react";
 
 function Nav() {
   const location = useLocation();
   const [value, setValue] = useState();
   const { loading, fetchSearchInfo } = useSearch();
-  const { error } = useContext(AppContext);
   const history = useHistory();
 
   const handleInputChange = (e) => {
@@ -46,7 +44,6 @@ function Nav() {
               placeholder="Enter a stock symbol"
               aria-label="Search"
             />
-            {error}
             <button
               className="btn btn-outline-success"
               type="submit"

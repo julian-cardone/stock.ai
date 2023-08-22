@@ -2,8 +2,8 @@ import { useCallback, useState } from "react";
 import { useCustomFetch } from "./useCustomFetch";
 
 export function useSearch() {
-  const { sessionFetch } = useCustomFetch();
-  const [searchData, setSearchData] = useState();
+  const { loading, sessionFetch } = useCustomFetch();
+  const [searchData, setSearchData] = useState({});
 
   const fetchSearchInfo = useCallback(
     async (value) => {
@@ -26,5 +26,5 @@ export function useSearch() {
     [sessionFetch]
   );
 
-  return { data: searchData, fetchSearchInfo };
+  return { data: searchData, loading, fetchSearchInfo };
 }
