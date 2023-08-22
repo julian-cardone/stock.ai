@@ -12,7 +12,7 @@ export function useWrappedRequest() {
         const result = await promise();
         return result;
       } catch (error) {
-        setError(error);
+        setError(error.message);
         return null;
       } finally {
         setLoading(false);

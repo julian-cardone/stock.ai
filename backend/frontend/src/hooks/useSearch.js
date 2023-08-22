@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useCustomFetch } from "./useCustomFetch";
 
 export function useSearch() {
-  const { loading, sessionFetch } = useCustomFetch();
+  const { sessionFetch } = useCustomFetch();
   const [searchData, setSearchData] = useState();
 
   const fetchSearchInfo = useCallback(
@@ -15,11 +15,13 @@ export function useSearch() {
         },
         value
       );
-
-      console.log(result)
-      setSearchData(result);
+      if (result != null) {
+        setSearchData(result);
+        return true;
+      }
     },
     [sessionFetch]
   );
-  return { data: searchData, loading, fetchSearchInfo };
+
+  return { data: searchData, fetchSearchInfo };
 }

@@ -7,15 +7,15 @@ export function useCustomFetch() {
   const { cache } = useContext(AppContext);
 
   const sessionFetch = useCallback(
-    async (url, options = {}, symbol) =>
-      wrappedRequest(async () => {
-        const key = createCacheKey(url, symbol);
+    async (url, options = {}, symbol) => {
+      try {
+        return await wrappedRequest(async () => {
+          const key = createCacheKey(url, symbol);
 
-        if (cache.current.has(key)) {
-          return cache.current.get(key);
-        }
+          if (cache.current.has(key)) {
+            return cache.current.get(key);
+          }
 
-        try {
           // set options.method to 'GET' if there is no method
           options.method = options.method || "GET";
           // set options.headers to an empty object if there is no headers
@@ -40,27 +40,21 @@ export function useCustomFetch() {
 
           // call fetch with the url and the updated options hash
           const res = await fetch(url, options);
-          if (res.ok) {
-            const data = await res.json();
-            cache.current.set(key, data); // Store in cache using the computed key
-            console.log(cache);
-            return data;
-          } else {
-            const errorData = await res.json();
-            console.log(errorData)
-            console.log(cache)
-            throw new Error(errorData.error); // Throw an error with the error message from the response
-          }
-          // if the response status code is 400 or above, then throw an error with the
-          // error being the response
-        } catch (error) {
-          console.log(error)
-          return error
-        }
 
-        // if the response status code is under 400, then return the response to the
-        // next promise chain
-      }),
+          if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.error);
+          }
+
+          const data = await res.json();
+          cache.current.set(key, data);
+          console.log(cache)
+          return data;
+        });
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
     [wrappedRequest, cache]
   );
 

@@ -15,7 +15,7 @@ function Nav() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await fetchSearchInfo(value);
-    console.log(searchData);
+    console.log(searchData)
   };
 
   return (
