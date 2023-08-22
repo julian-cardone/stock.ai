@@ -1,4 +1,5 @@
 from yahooquery import Ticker
+from yahooquery import search
 from backend.app.logic.main.sheet_class import Sheet
 # import openai
 # import os
@@ -15,29 +16,33 @@ class StockManager:
     _instances = {} # underscore is convention to indicate that the variable is intended for internal use within a class or module
 
     def __new__(cls, symbol):
-        if symbol not in cls._instances:
-            cls._instances[symbol] = super().__new__(cls)
-            cls._instances[symbol].initialize(symbol)
-        return cls._instances[symbol]
-
-    def initialize(self, symbol):
         try:
-            stock = Ticker(symbol)
-            stock_info = stock.asset_profile
-            self.symbol = symbol
-            self.info = stock_info
+            if symbol not in cls._instances:
+                stock = Ticker(symbol)
+                stock_info = stock.asset_profile
+                if stock_info.get(symbol) == f"Quote not found for ticker symbol: {symbol}":
+                    raise RuntimeError("Quote not found for ticker symbol")
+                cls._instances[symbol] = super().__new__(cls)
+                cls._instances[symbol].initialize(symbol, stock_info)
         except Exception as yq_error:
             print(f"An error occurred: {yq_error}")
-            self.symbol = None
             raise RuntimeError("Instance creation aborted. Please enter a valid stock symbol.")
+        return cls._instances[symbol]
+
+    def initialize(self, symbol, stock_info):
+        try:
+            self.symbol = symbol
+            self.info = stock_info
+        except Exception as e:
+            print(f"An error occurred during initialization: {e}")
+            raise RuntimeError("Instance initialization failed.")
 
     def get_stock_info(self):
-        print(self.info)
         return self.info
 
-        # def create_model(self):
+    # def create_model(self):
         # self.model = Sheet(self)
-        
+
 
     # def generate_info(self):
     #     info = {

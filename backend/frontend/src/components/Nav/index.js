@@ -1,12 +1,12 @@
 import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import "./navbar.css";
 import { useState } from "react";
-import { useCustomFetch } from "../../hooks/useCustomFetch";
+import { useSearch } from "../../hooks/useSearch";
 
 function Nav() {
   const location = useLocation();
   const [value, setValue] = useState();
-  const { loading, sessionFetch } = useCustomFetch();
+  const { data: searchData, loading, fetchSearchInfo } = useSearch();
 
   const handleInputChange = (e) => {
     setValue(e.target.value.toUpperCase());
@@ -14,13 +14,8 @@ function Nav() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const result = await sessionFetch('/stock/get_stock_info', {
-      method: 'POST',
-      body: JSON.stringify({ inputValue: value }),
-    }, value);
-
-    console.log(result);
+    await fetchSearchInfo(value);
+    console.log(searchData);
   };
 
   return (
@@ -39,7 +34,7 @@ function Nav() {
               value={value}
               onChange={handleInputChange}
               type="search"
-              placeholder="Enter a stock symbol or company name"
+              placeholder="Enter a stock symbol"
               aria-label="Search"
             />
             <button

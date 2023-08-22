@@ -40,14 +40,22 @@ export function useCustomFetch() {
 
           // call fetch with the url and the updated options hash
           const res = await fetch(url, options);
-          const data = res.json();
-          cache.current.set(url, data);
-
+          if (res.ok) {
+            const data = await res.json();
+            cache.current.set(key, data); // Store in cache using the computed key
+            console.log(cache);
+            return data;
+          } else {
+            const errorData = await res.json();
+            console.log(errorData)
+            console.log(cache)
+            throw new Error(errorData.error); // Throw an error with the error message from the response
+          }
           // if the response status code is 400 or above, then throw an error with the
           // error being the response
-          return data;
         } catch (error) {
-          return error;
+          console.log(error)
+          return error
         }
 
         // if the response status code is under 400, then return the response to the
