@@ -1,9 +1,7 @@
-import MarketsCarousel from "./MarketsCarousel";
-
 function CompanyPage() {
   return (
     <>
-      <MarketsCarousel />
+      {/* <MarketsCarousel /> */}
     </>
   );
 }
