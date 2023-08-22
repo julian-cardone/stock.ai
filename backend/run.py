@@ -8,12 +8,13 @@ app = Flask(__name__)
 
 db = db_setup.setup_db()
 
+app.register_blueprint(stock_bp, url_prefix='/stock')
+
 @app.before_request
 def before_request():
     # Apply the authorization middleware to all routes except "/start_session"
     if request.endpoint != 'start_session':
         authorize_request()
-
 
 def authorize_request():
     # Extract the session token from the request headers
@@ -53,4 +54,3 @@ def create_instance():
         token_id = cursor.fetchone()[0]
 
     return jsonify({"message": "Instance Created", "session_token": token_id})
-        

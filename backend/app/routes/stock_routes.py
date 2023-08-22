@@ -1,7 +1,22 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, jsonify, request
+from backend.app.logic.main.stock_manager import StockManager
 
 stock_bp = Blueprint('stock', __name__)
 
+@stock_bp.route('/get_stock_info', methods=["POST"])
+def get_stock_info():
+    try:
+        json_data = request.get_json()
+        inputValue = json_data.get('inputValue', '') #symbol
+
+        stock = StockManager(inputValue)
+        stock_info = stock.get_stock_info()
+
+        return jsonify({"stock_info": stock_info})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+# !!! DO NOT DELETE THESE, THESE ARE THE LOGICS FOR THE MODEL CREATION AND DOWNOADING, AND THE GPT LOGIC !!!
 # @app.route('/operating_assumptions', methods=["POST"])
 # def create_hoa_model():
 #     try:

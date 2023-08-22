@@ -9,16 +9,16 @@ function Nav() {
   const { loading, sessionFetch } = useCustomFetch();
 
   const handleInputChange = (e) => {
-    setValue(e.target.value);
+    setValue(e.target.value.toUpperCase());
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await sessionFetch(`${value}_info`, {
-      method: "POST",
+    const result = await sessionFetch('/stock/get_stock_info', {
+      method: 'POST',
       body: JSON.stringify({ inputValue: value }),
-    });
+    }, value);
 
     console.log(result);
   };

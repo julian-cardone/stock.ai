@@ -7,10 +7,12 @@ export function useCustomFetch() {
   const { cache } = useContext(AppContext);
 
   const sessionFetch = useCallback(
-    async (url, options = {}) =>
+    async (url, options = {}, symbol) =>
       wrappedRequest(async () => {
-        if (cache.current.has(url)) {
-          return cache.current.get(url);
+        const key = createCacheKey(url, symbol);
+
+        if (cache.current.has(key)) {
+          return cache.current.get(key);
         }
 
         try {
@@ -53,6 +55,10 @@ export function useCustomFetch() {
       }),
     [wrappedRequest, cache]
   );
+
+  const createCacheKey = (url, symbol) => {
+    return `${url}-${symbol}`;
+  };
 
   return { loading, sessionFetch };
 }
