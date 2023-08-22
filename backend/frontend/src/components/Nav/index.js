@@ -1,12 +1,19 @@
-import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  Link,
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
 import "./navbar.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSearch } from "../../hooks/useSearch";
+import { AppContext } from "../../utils/context";
 
 function Nav() {
   const location = useLocation();
   const [value, setValue] = useState();
   const { data: searchData, loading, fetchSearchInfo } = useSearch();
+  const { error } = useContext(AppContext);
+  const history = useHistory();
 
   const handleInputChange = (e) => {
     setValue(e.target.value.toUpperCase());
@@ -14,8 +21,10 @@ function Nav() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetchSearchInfo(value);
-    console.log(searchData)
+    const valid = await fetchSearchInfo(value);
+    if (valid) {
+      history.push("/company");
+    }
   };
 
   return (
@@ -37,6 +46,7 @@ function Nav() {
               placeholder="Enter a stock symbol"
               aria-label="Search"
             />
+            {error}
             <button
               className="btn btn-outline-success"
               type="submit"

@@ -7,18 +7,21 @@ export function useSearch() {
 
   const fetchSearchInfo = useCallback(
     async (value) => {
-      const result = await sessionFetch(
+      return sessionFetch(
         "/stock/get_stock_info",
         {
           method: "POST",
           body: JSON.stringify({ inputValue: value }),
         },
         value
-      );
-      if (result != null) {
-        setSearchData(result);
-        return true;
-      }
+      ).then((result) => {
+        if (result != null) {
+          setSearchData(result);
+          return true;
+        } else {
+          return false;
+        }
+      });
     },
     [sessionFetch]
   );

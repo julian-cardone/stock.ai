@@ -7,15 +7,15 @@ export function useCustomFetch() {
   const { cache } = useContext(AppContext);
 
   const sessionFetch = useCallback(
-    async (url, options = {}, symbol) => {
-      try {
-        return await wrappedRequest(async () => {
-          const key = createCacheKey(url, symbol);
+    async (url, options = {}, symbol) =>
+      wrappedRequest(async () => {
+        const key = createCacheKey(url, symbol);
 
-          if (cache.current.has(key)) {
-            return cache.current.get(key);
-          }
+        if (cache.current.has(key)) {
+          return cache.current.get(key);
+        }
 
+        try {
           // set options.method to 'GET' if there is no method
           options.method = options.method || "GET";
           // set options.headers to an empty object if there is no headers
@@ -45,16 +45,13 @@ export function useCustomFetch() {
             const errorData = await res.json();
             throw new Error(errorData.error);
           }
-
           const data = await res.json();
           cache.current.set(key, data);
-          console.log(cache)
           return data;
-        });
-      } catch (error) {
-        throw new Error(error.message);
-      }
-    },
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      }),
     [wrappedRequest, cache]
   );
 
