@@ -47,7 +47,6 @@ export function useCustomFetch() {
           }
 
           cache.current.set("current", symbol);
-          console.log(cache);
           const data = await res.json();
           cache.current.set(key, data);
           return data;

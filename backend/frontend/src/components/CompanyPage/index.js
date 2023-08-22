@@ -1,7 +1,9 @@
+import MarketsCarousel from "./MarketsCarousel";
+
 function CompanyPage() {
   return (
     <>
-      <div>this is the company page</div>
+      <MarketsCarousel />
     </>
   );
 }
