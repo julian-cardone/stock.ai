@@ -6,6 +6,7 @@ import { AuthRoute, ProtectedRoute } from "./components/Routes";
 import Home from "./components/Home";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import Nav from "./components/Nav";
+import CompanyPage from "./components/CompanyPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Switch>
         <AuthRoute exact path="/" component={SessionPage} />
         <ProtectedRoute exact path="/home" component={Home} />
+        <ProtectedRoute exact path="/company" component={CompanyPage} />
         <ProtectedRoute exact path="/generate" component={BusinessPage} />
         <Redirect to="/home" />
       </Switch>

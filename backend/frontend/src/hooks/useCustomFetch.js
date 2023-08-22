@@ -45,6 +45,9 @@ export function useCustomFetch() {
             const errorData = await res.json();
             throw new Error(errorData.error);
           }
+
+          cache.current.set("current", symbol);
+          console.log(cache);
           const data = await res.json();
           cache.current.set(key, data);
           return data;

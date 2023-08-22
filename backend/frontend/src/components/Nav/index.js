@@ -11,7 +11,7 @@ import { AppContext } from "../../utils/context";
 function Nav() {
   const location = useLocation();
   const [value, setValue] = useState();
-  const { data: searchData, loading, fetchSearchInfo } = useSearch();
+  const { loading, fetchSearchInfo } = useSearch();
   const { error } = useContext(AppContext);
   const history = useHistory();
 
