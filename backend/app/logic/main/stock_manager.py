@@ -33,39 +33,58 @@ class StockManager:
 
     def initialize(self, symbol):
         try:
-            yf_stock = yf.Ticker(symbol)
-            yq_stock = Ticker(symbol)
-            yf_stock_info = yf_stock.info
-            yq_stock_info = yq_stock.asset_profile[symbol]
-            combined_dict = yq_stock_info.copy()
-            combined_dict.update(yf_stock_info)
             self.symbol = symbol
-            self.yf_stock = yf_stock
-            self.yq_stock = yq_stock
-            self.yf_stock_info = yf_stock_info
-            self.yq_stock_info = yq_stock_info
-            self.combined_info = combined_dict
+            self.yq_stock = Ticker(symbol)
+            self.yf_stock = yf.Ticker(symbol)
+            self.yq_stock_info = self.yq_stock.asset_profile[symbol]
+            self.yf_stock_info = self.yf_stock.info
+            self.combined_info = self._combine_stock_info()
         except Exception as e:
             print(f"An error occurred during initialization: {e}")
             raise RuntimeError("Instance initialization failed.")
 
+    def _combine_stock_info(self):
+        combined_dict = self.yq_stock_info.copy()
+        combined_dict.update(self.yf_stock_info)
+        return combined_dict
+
     def get_stock_info(self):
         return self.combined_info
-    
-    def get_real_time_data(self):
-        yf_stock_info = self.yf_stock.info
-        yq_stock_info = self.yq_stock.asset_profile[self.symbol]
-        combined_dict = yf_stock_info.copy()
-        combined_dict.update(yq_stock_info)
-        current_price = combined_dict['currentPrice']
-        previous_close = combined_dict['previousClose']
 
-        current_time = datetime.datetime.now()
-        formatted_time = current_time.strftime("%I:%M%p %Z")
-        
-        real_time_info = {"currentPrice": current_price, 'previousClose': previous_close}
-        print(real_time_info)
-        return real_time_info
+    def get_real_time_data(self):
+        try:
+            yq_stock = Ticker(self.symbol)
+            yf_stock = yf.Ticker(self.symbol)
+            
+            yq_stock_info = yq_stock.asset_profile[self.symbol]
+            yf_stock_info = yf_stock.info
+            combined_dict = yq_stock_info.copy()
+            combined_dict.update(yf_stock_info)
+
+            current_price = combined_dict['currentPrice']
+            previous_close = combined_dict['previousClose']
+            long_name = combined_dict['longName']
+            underlying_symbol = combined_dict['underlyingSymbol']
+            exchange = combined_dict['exchange']
+            currency = combined_dict['currency']
+
+            current_time = datetime.datetime.now()
+            formatted_time = current_time.strftime("%I:%M%p %Z")
+
+            real_time_info = {
+                "currentPrice": current_price, 
+                "previousClose": previous_close, 
+                'currentTime': formatted_time, 
+                'longName': long_name, 
+                'underlyingSymbol': underlying_symbol, 
+                'exchange': exchange, 
+                'currency': currency
+                }
+
+            return real_time_info
+        except Exception as e:
+            print(f"An error occurred while fetching real-time data: {e}")
+            return None
         
         
     # def create_model(self):

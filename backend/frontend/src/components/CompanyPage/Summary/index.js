@@ -1,11 +1,11 @@
 import SummaryHeader from "./SummaryHeader";
 import "./summary.css";
 
-function Summary({ stockInfo }) {
+function Summary({ realTimeStockInfo }) {
 
   return (
     <>
-      <SummaryHeader stockInfo={stockInfo} />
+      <SummaryHeader realTimeStockInfo={realTimeStockInfo} />
     </>
   );
 }

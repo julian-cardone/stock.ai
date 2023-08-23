@@ -4,7 +4,7 @@ import { useCustomFetch } from "./useCustomFetch";
 
 export function useGPTFetch() {
   const { cache } = useContext(AppContext);
-  const { loading, sessionFetch } = useCustomFetch();
+  const { loading, sessionFetchWithCache } = useCustomFetch();
   const [info, setInfo] = useState("");
 
   const gptFetch = useCallback(
@@ -14,7 +14,7 @@ export function useGPTFetch() {
         setInfo(cache.current.get(inputValue))
         return cache.current.get(inputValue);
       } else {
-        const res = await sessionFetch("/info", {
+        const res = await sessionFetchWithCache("/info", {
           method: "POST",
           body: JSON.stringify({ inputValue: inputValue }),
         });
@@ -29,7 +29,7 @@ export function useGPTFetch() {
         }
       }
     },
-    [cache, sessionFetch]
+    [cache, sessionFetchWithCache]
   );
 
   return { gptFetch, info, setInfo, loading };

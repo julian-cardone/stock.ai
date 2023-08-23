@@ -3,13 +3,14 @@ import { useRealTimeData } from "../../hooks/useRealTimeData";
 import Summary from "./Summary";
 
 function CompanyPage({ currentSymbol }) {
-  const { data: searchData, fetchRealTimeData } = useRealTimeData();
-  const stockInfo = searchData?.stock_info;
+  const { data: realTimeData, fetchRealTimeData } = useRealTimeData();
+  const realTimeStockInfo = realTimeData?.stock_info;
 
   useEffect(() => {
-    const searchInfoInterval = setTimeout(() => {
+    fetchRealTimeData(currentSymbol);
+    const searchInfoInterval = setInterval(() => {
       fetchRealTimeData(currentSymbol);
-    }, 2000);
+    }, 5000);
 
     return () => {
       clearInterval(searchInfoInterval);
@@ -19,7 +20,7 @@ function CompanyPage({ currentSymbol }) {
   return (
     <>
       {/* <MarketsCarousel /> */}
-      <Summary stockInfo={stockInfo} />
+      <Summary realTimeStockInfo={realTimeStockInfo} />
     </>
   );
 }

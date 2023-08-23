@@ -2,11 +2,11 @@ import { useCallback } from "react";
 import { useCustomFetch } from "./useCustomFetch";
 
 export function useSearchValidation() {
-  const { loading, sessionFetch } = useCustomFetch();
+  const { loading, sessionFetchWithCache } = useCustomFetch();
 
   const validateSymbol = useCallback(
     async (value) => {
-      const result = await sessionFetch(
+      const result = await sessionFetchWithCache(
         "/stock/validate",
         {
           method: "POST",
@@ -16,7 +16,7 @@ export function useSearchValidation() {
       );
       return result ? true : false;
     },
-    [sessionFetch]
+    [sessionFetchWithCache]
   );
 
   return { loading, validateSymbol };

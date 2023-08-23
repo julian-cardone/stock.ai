@@ -2,12 +2,12 @@ import { useCallback, useState } from "react";
 import { useCustomFetch } from "./useCustomFetch";
 
 export function useRealTimeData() {
-  const { loading, sessionFetch } = useCustomFetch();
-  const [searchData, setSearchData] = useState({});
+  const { loading, sessionFetchWithoutCache } = useCustomFetch();
+  const [realTimeData, setRealTimeData] = useState({});
 
   const fetchRealTimeData = useCallback(
     async (value) => {
-      const result = await sessionFetch(
+      const result = await sessionFetchWithoutCache(
         "/stock/get_real_time_data",
         {
           method: "POST",
@@ -15,10 +15,10 @@ export function useRealTimeData() {
         },
         value
       );
-      setSearchData(result);
+      setRealTimeData(result);
     },
-    [sessionFetch]
+    [sessionFetchWithoutCache]
   );
 
-  return { data: searchData, loading, fetchRealTimeData };
+  return { data: realTimeData, loading, fetchRealTimeData };
 }

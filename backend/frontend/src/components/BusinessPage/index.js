@@ -7,7 +7,7 @@ import UserNote from "./UserNote";
 function BusinessPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const { loading, sessionFetch } = useCustomFetch();
+  const { loading, sessionFetchWithCache } = useCustomFetch();
   const { gptFetch, info, setInfo, loadingTwo } = useGPTFetch();
   const [loadingState, setLoadingState] = useState(false);
 
@@ -25,7 +25,7 @@ function BusinessPage() {
 
     await gptFetch("/info", inputValue);
 
-    const res = await sessionFetch(`${selectedOption}`, {
+    const res = await sessionFetchWithCache(`${selectedOption}`, {
       method: "POST",
       body: JSON.stringify({ inputValue: inputValue }),
     });

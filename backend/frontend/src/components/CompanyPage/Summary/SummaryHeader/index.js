@@ -1,7 +1,7 @@
 import PriceChange from "./PriceChange";
 
-function SummaryHeader({ stockInfo }) {
-  console.log(stockInfo);
+function SummaryHeader({ realTimeStockInfo }) {
+  console.log(realTimeStockInfo);
 
   return (
     <>
@@ -9,14 +9,14 @@ function SummaryHeader({ stockInfo }) {
         <div className="row">
           <div className="col-lg-8 col-md-8 col-sm-8 bg-success px-5 py-4">
             <h4 className="mb-0">
-              {stockInfo?.longName} ({stockInfo?.underlyingSymbol})
+              {realTimeStockInfo?.longName} ({realTimeStockInfo?.underlyingSymbol})
             </h4>
             <p className="mb-0">
-              {stockInfo?.exchange} | Currency: {stockInfo?.currency}
+              {realTimeStockInfo?.exchange} | Currency: {realTimeStockInfo?.currency}
             </p>
           </div>
         </div>
-        <PriceChange stockInfo={stockInfo} />
+        <PriceChange realTimeStockInfo={realTimeStockInfo} />
       </div>
     </>
   );
