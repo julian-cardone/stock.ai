@@ -14,7 +14,20 @@ def validate_stock():
         return jsonify({"validity": True})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-        
+
+@stock_bp.route('/get_real_time_data', methods=["POST"])
+def get_stock_price():
+    try:
+        json_data = request.get_json()
+        inputValue = json_data.get('inputValue', '') #symbol
+
+        stock = StockManager(inputValue)
+        stock_info = stock.get_real_time_data()
+
+        return jsonify({"stock_info": stock_info})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
 
 @stock_bp.route('/get_stock_info', methods=["POST"])
 def get_stock_info():

@@ -1,20 +1,20 @@
 import { useEffect } from "react";
-import { useSearchData } from "../../hooks/useSearchData";
+import { useRealTimeData } from "../../hooks/useRealTimeData";
 import Summary from "./Summary";
 
 function CompanyPage({ currentSymbol }) {
-  const { data: searchData, fetchSearchInfo } = useSearchData();
+  const { data: searchData, fetchRealTimeData } = useRealTimeData();
   const stockInfo = searchData?.stock_info;
 
   useEffect(() => {
     const searchInfoInterval = setTimeout(() => {
-      fetchSearchInfo(currentSymbol);
+      fetchRealTimeData(currentSymbol);
     }, 2000);
 
     return () => {
       clearInterval(searchInfoInterval);
     };
-  }, [currentSymbol, fetchSearchInfo]);
+  }, [currentSymbol, fetchRealTimeData]);
 
   return (
     <>

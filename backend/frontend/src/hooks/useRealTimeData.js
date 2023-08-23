@@ -1,14 +1,14 @@
 import { useCallback, useState } from "react";
 import { useCustomFetch } from "./useCustomFetch";
 
-export function useSearchData() {
+export function useRealTimeData() {
   const { loading, sessionFetch } = useCustomFetch();
   const [searchData, setSearchData] = useState({});
 
-  const fetchSearchInfo = useCallback(
+  const fetchRealTimeData = useCallback(
     async (value) => {
       const result = await sessionFetch(
-        "/stock/get_stock_info",
+        "/stock/get_real_time_data",
         {
           method: "POST",
           body: JSON.stringify({ inputValue: value }),
@@ -20,5 +20,5 @@ export function useSearchData() {
     [sessionFetch]
   );
 
-  return { data: searchData, loading, fetchSearchInfo };
+  return { data: searchData, loading, fetchRealTimeData };
 }

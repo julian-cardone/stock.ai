@@ -2,6 +2,7 @@ from yahooquery import Ticker
 from yahooquery import search
 import yfinance as yf
 from backend.app.logic.main.sheet_class import Sheet
+import datetime
 # import openai
 # import os
 '''
@@ -24,29 +25,49 @@ class StockManager:
                 if yq_stock_info.get(symbol) == f"Quote not found for ticker symbol: {symbol}":
                     raise RuntimeError("Quote not found for ticker symbol")
                 cls._instances[symbol] = super().__new__(cls)
-                cls._instances[symbol].initialize(symbol, yq_stock_info)
+                cls._instances[symbol].initialize(symbol)
         except Exception as yq_error:
             print(f"An error occurred: {yq_error}")
             raise RuntimeError("Instance creation aborted. Please enter a valid stock symbol.")
         return cls._instances[symbol]
 
-    def initialize(self, symbol, yq_stock_info):
+    def initialize(self, symbol):
         try:
             yf_stock = yf.Ticker(symbol)
+            yq_stock = Ticker(symbol)
+            yf_stock_info = yf_stock.info
+            yq_stock_info = yq_stock.asset_profile[symbol]
+            combined_dict = yq_stock_info.copy()
+            combined_dict.update(yf_stock_info)
             self.symbol = symbol
-            self.yq_stock_info = yq_stock_info[symbol]
-            self.yf_stock_info = yf_stock.info
+            self.yf_stock = yf_stock
+            self.yq_stock = yq_stock
+            self.yf_stock_info = yf_stock_info
+            self.yq_stock_info = yq_stock_info
+            self.combined_info = combined_dict
         except Exception as e:
             print(f"An error occurred during initialization: {e}")
             raise RuntimeError("Instance initialization failed.")
 
     def get_stock_info(self):
+        return self.combined_info
+    
+    def get_real_time_data(self):
+        yf_stock_info = self.yf_stock.info
+        yq_stock_info = self.yq_stock.asset_profile[self.symbol]
+        combined_dict = yf_stock_info.copy()
+        combined_dict.update(yq_stock_info)
+        current_price = combined_dict['currentPrice']
+        previous_close = combined_dict['previousClose']
 
-        combined_dict = self.yq_stock_info.copy()
-        combined_dict.update(self.yf_stock_info)
-        self.info = combined_dict
-        return self.info
-
+        current_time = datetime.datetime.now()
+        formatted_time = current_time.strftime("%I:%M%p %Z")
+        
+        real_time_info = {"currentPrice": current_price, 'previousClose': previous_close}
+        print(real_time_info)
+        return real_time_info
+        
+        
     # def create_model(self):
         # self.model = Sheet(self)
 

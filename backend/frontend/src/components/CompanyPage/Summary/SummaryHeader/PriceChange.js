@@ -62,6 +62,7 @@ function PriceChange({ stockInfo }) {
             {priceChangeDiv()}
           </div>
         </div>
+        <p>last updated..... current open? add endpoint for this</p>
       </div>
     </>
   );
