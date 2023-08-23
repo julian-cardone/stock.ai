@@ -1,9 +1,11 @@
 import SummaryHeader from "./SummaryHeader";
+import "./summary.css";
 
-function Summary({ searchData }) {
+function Summary({ stockInfo }) {
+
   return (
     <>
-      <SummaryHeader searchData={searchData} />
+      <SummaryHeader stockInfo={stockInfo} />
     </>
   );
 }

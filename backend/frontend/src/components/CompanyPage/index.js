@@ -4,15 +4,22 @@ import Summary from "./Summary";
 
 function CompanyPage({ currentSymbol }) {
   const { data: searchData, fetchSearchInfo } = useSearchData();
+  const stockInfo = searchData?.stock_info;
 
   useEffect(() => {
-    fetchSearchInfo(currentSymbol);
+    const searchInfoInterval = setTimeout(() => {
+      fetchSearchInfo(currentSymbol);
+    }, 2000);
+
+    return () => {
+      clearInterval(searchInfoInterval);
+    };
   }, [currentSymbol, fetchSearchInfo]);
 
   return (
     <>
       {/* <MarketsCarousel /> */}
-      <Summary searchData={searchData} />
+      <Summary stockInfo={stockInfo} />
     </>
   );
 }
