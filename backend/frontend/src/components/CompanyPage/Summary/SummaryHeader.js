@@ -1,4 +1,5 @@
-function SummaryHeader() {
+function SummaryHeader({ searchData }) {
+  console.log(searchData.stock_info)
   return (
     <>
       <div className="container-fluid bg-success px-5 py-4">

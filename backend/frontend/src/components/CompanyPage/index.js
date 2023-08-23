@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSearchData } from "../../hooks/useSearchData";
-import SummaryHeader from "./Summary/SummaryHeader";
+import Summary from "./Summary";
 
 function CompanyPage({ currentSymbol }) {
   const { data: searchData, fetchSearchInfo } = useSearchData();
@@ -12,7 +12,7 @@ function CompanyPage({ currentSymbol }) {
   return (
     <>
       {/* <MarketsCarousel /> */}
-      <SummaryHeader />
+      <Summary searchData={searchData} />
     </>
   );
 }
