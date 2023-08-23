@@ -49,7 +49,18 @@ class StockManager:
         return combined_dict
 
     def get_stock_info(self):
-        return self.combined_info
+        combined_dict = self.combined_info
+        long_name = combined_dict['longName']
+        underlying_symbol = combined_dict['underlyingSymbol']
+        exchange = combined_dict['exchange']
+        currency = combined_dict['currency']
+        stock_info = {
+            'longName': long_name, 
+            'underlyingSymbol': underlying_symbol, 
+            'exchange': exchange, 
+            'currency': currency
+            }
+        return stock_info
 
     def get_real_time_data(self):
         try:
@@ -63,10 +74,6 @@ class StockManager:
 
             current_price = combined_dict['currentPrice']
             previous_close = combined_dict['previousClose']
-            long_name = combined_dict['longName']
-            underlying_symbol = combined_dict['underlyingSymbol']
-            exchange = combined_dict['exchange']
-            currency = combined_dict['currency']
 
             current_time = datetime.datetime.now()
             formatted_time = current_time.strftime("%I:%M%p %Z")
@@ -74,11 +81,7 @@ class StockManager:
             real_time_info = {
                 "currentPrice": current_price, 
                 "previousClose": previous_close, 
-                'currentTime': formatted_time, 
-                'longName': long_name, 
-                'underlyingSymbol': underlying_symbol, 
-                'exchange': exchange, 
-                'currency': currency
+                'currentTime': formatted_time
                 }
 
             return real_time_info
