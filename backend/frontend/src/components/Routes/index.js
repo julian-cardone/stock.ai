@@ -22,14 +22,22 @@ export const AuthRoute = ({ component: Component, path, exact }) => {
   );
 };
 
-export const ProtectedRoute = ({ component: Component, ...rest }) => {
+export const ProtectedRoute = ({
+  component: Component,
+  currentSymbol,
+  ...rest
+}) => {
   const { data: storageKey } = useStorageKey();
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        storageKey != null ? <Component {...props} /> : <Redirect to="/" />
+        storageKey != null ? (
+          <Component currentSymbol={currentSymbol} {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
       }
     />
   );

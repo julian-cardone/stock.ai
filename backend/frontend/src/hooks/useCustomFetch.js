@@ -4,7 +4,7 @@ import { AppContext } from "../utils/context";
 
 export function useCustomFetch() {
   const { loading, wrappedRequest } = useWrappedRequest();
-  const { cache } = useContext(AppContext);
+  const { cache, setCurrentSymbol } = useContext(AppContext);
 
   const sessionFetch = useCallback(
     async (url, options = {}, symbol) =>
@@ -12,6 +12,7 @@ export function useCustomFetch() {
         const key = createCacheKey(url, symbol);
 
         if (cache.current.has(key)) {
+          setCurrentSymbol(symbol);
           return cache.current.get(key);
         }
 
@@ -46,7 +47,7 @@ export function useCustomFetch() {
             throw new Error(errorData.error);
           }
 
-          cache.current.set("current", symbol);
+          setCurrentSymbol(symbol);
           const data = await res.json();
           cache.current.set(key, data);
           return data;
@@ -54,7 +55,7 @@ export function useCustomFetch() {
           throw new Error(error.message);
         }
       }),
-    [wrappedRequest, cache]
+    [wrappedRequest, cache, setCurrentSymbol]
   );
 
   const createCacheKey = (url, symbol) => {

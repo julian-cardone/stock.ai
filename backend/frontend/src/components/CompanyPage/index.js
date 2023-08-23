@@ -1,14 +1,18 @@
-import { useContext } from "react";
-import SummaryHeader from "./SummaryHeader";
-import { AppContext } from "../../utils/context";
+import { useEffect } from "react";
+import { useSearchData } from "../../hooks/useSearchData";
+import SummaryHeader from "./Summary/SummaryHeader";
 
-function CompanyPage({ searchData }) {
-  const { cache } = useContext(AppContext);
+function CompanyPage({ currentSymbol }) {
+  const { data: searchData, fetchSearchInfo } = useSearchData();
+
+  useEffect(() => {
+    fetchSearchInfo(currentSymbol);
+  }, [currentSymbol, fetchSearchInfo]);
 
   return (
     <>
       {/* <MarketsCarousel /> */}
-      <SummaryHeader searchData={searchData} cache={cache} />
+      <SummaryHeader />
     </>
   );
 }

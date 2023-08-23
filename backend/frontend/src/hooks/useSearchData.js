@@ -7,21 +7,15 @@ export function useSearchData() {
 
   const fetchSearchInfo = useCallback(
     async (value) => {
-      return sessionFetch(
+      const result = await sessionFetch(
         "/stock/get_stock_info",
         {
           method: "POST",
           body: JSON.stringify({ inputValue: value }),
         },
         value
-      ).then((result) => {
-        if (result != null) {
-          setSearchData(result);
-          return true;
-        } else {
-          return false;
-        }
-      });
+      );
+      setSearchData(result);
     },
     [sessionFetch]
   );

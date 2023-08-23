@@ -5,11 +5,13 @@ import React from "react";
 export const AppContextProvider = ({ children }) => {
   // intialize cache
   const cache = useRef(new Map());
-  //
   const [error, setError] = useState("");
+  const [currentSymbol, setCurrentSymbol] = useState();
 
   return (
-    <AppContext.Provider value={{ setError, cache }}>
+    <AppContext.Provider
+      value={{ setError, cache, currentSymbol, setCurrentSymbol }}
+    >
       {error ? (
         <div className="AppError">Something broke... Error: {error}</div>
       ) : (

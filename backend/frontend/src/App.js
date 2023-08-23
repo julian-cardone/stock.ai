@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import SessionPage from "./components/SessionPage";
 import BusinessPage from "./components/BusinessPage";
 import { Switch } from "react-router-dom";
@@ -7,8 +7,11 @@ import Home from "./components/Home";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import Nav from "./components/Nav";
 import CompanyPage from "./components/CompanyPage";
+import { AppContext } from "./utils/context";
 
 function App() {
+  const { currentSymbol } = useContext(AppContext);
+
   return (
     <>
       <Nav />
@@ -17,7 +20,14 @@ function App() {
 
         <ProtectedRoute exact path="/home" component={Home} />
 
-        <ProtectedRoute exact path="/company" component={CompanyPage} />
+        {currentSymbol && (
+          <ProtectedRoute
+            exact
+            path="/company"
+            currentSymbol={currentSymbol}
+            component={CompanyPage}
+          />
+        )}
 
         <ProtectedRoute exact path="/generate" component={BusinessPage} />
 
