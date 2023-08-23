@@ -51,8 +51,8 @@ function PriceChange({ realTimeStockInfo }) {
 
   return (
     <>
-      <div className="row d-flex ps-5">
-        <div className="d-inline-flex gap-3">
+      <div className="row d-flex ps-5 pt-2">
+        <div className="d-inline-flex gap-2">
           <div className="col-lg-auto col-md-auto col-sm-auto d-flex align-items-end">
             <h1 className="mb-0">
               {customNumberFormatter(realTimeStockInfo?.currentPrice)}
@@ -62,7 +62,7 @@ function PriceChange({ realTimeStockInfo }) {
             {priceChangeDiv()}
           </div>
         </div>
-        <p>Last updated at {realTimeStockInfo?.currentTime}</p>
+        <p id="small-para">Last updated at {realTimeStockInfo?.currentTime}</p>
       </div>
     </>
   );

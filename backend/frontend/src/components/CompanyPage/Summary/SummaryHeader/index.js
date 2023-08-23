@@ -5,18 +5,23 @@ function SummaryHeader({ realTimeStockInfo, constantStockData }) {
 
   return (
     <>
-      <div className="container-fluid px-0">
+      <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-8 col-md-8 col-sm-8 bg-success px-5 py-4">
+          <div className="col-lg-8 col-md-8 col-sm-8 px-5 pt-4">
             <h4 className="mb-0">
-              {constantStockData?.longName} ({constantStockData?.underlyingSymbol})
+              {constantStockData?.longName} (
+              {constantStockData?.underlyingSymbol})
             </h4>
-            <p className="mb-0">
-              {constantStockData?.exchange} | Currency: {constantStockData?.currency}
+            <p className="mb-0" id="small-para">
+              {constantStockData?.exchange} | Currency:{" "}
+              {constantStockData?.currency}
             </p>
           </div>
         </div>
         <PriceChange realTimeStockInfo={realTimeStockInfo} />
+        <div className="row bg-success mx-4">
+          <p className="my-1"></p>
+        </div>
       </div>
     </>
   );
