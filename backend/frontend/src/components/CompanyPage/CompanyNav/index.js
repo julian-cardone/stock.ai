@@ -5,7 +5,7 @@ function CompanyNav() {
   return (
     <>
       <div className="container-sm mt-3">
-        <nav className="navbar navbar-expand-md navbar-light">
+        <nav className="navbar navbar-expand-md navbar-light pt-0">
           <button
             className="navbar-toggler"
             type="button"
@@ -20,7 +20,7 @@ function CompanyNav() {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul
-              className="navbar-nav d-flex justify-content-around w-100"
+              className="navbar-nav d-flex justify-content-around w-100 align-items-end"
               id="company-nav"
             >
               <CompanyNavLink to={"/company/overview"} innerText={"Overview"} />

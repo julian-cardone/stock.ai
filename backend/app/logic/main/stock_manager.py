@@ -60,7 +60,7 @@ class StockManager:
             'exchange': exchange, 
             'currency': currency
             }
-        return stock_info
+        return combined_dict
 
     def get_real_time_data(self):
         try:

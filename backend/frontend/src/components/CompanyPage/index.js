@@ -17,6 +17,8 @@ function CompanyPage({ currentSymbol }) {
   const constantStockData = stockData?.stock_info;
   const { path } = useRouteMatch(); // Get the current path
 
+  console.log(stockData)
+
   useEffect(() => {
     fetchStockData(currentSymbol);
     fetchRealTimeData(currentSymbol);
