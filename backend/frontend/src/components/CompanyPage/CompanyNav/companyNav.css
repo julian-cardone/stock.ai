@@ -1,0 +1,7 @@
+#company-nav{
+    border-bottom: 2px solid rgb(180, 180, 180);
+}
+
+.company-nav-active{
+    border-bottom: 2px solid rgb(21, 0, 206);
+}
