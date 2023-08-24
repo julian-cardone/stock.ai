@@ -14,10 +14,7 @@ function App() {
 
   return (
     <>
-      <div
-        className="container-fluid px-0 position-relative"
-        id="main-container"
-      >
+      <div className="container-fluid px-0 position-relative">
         <Nav />
         <Switch>
           <AuthRoute exact path="/" component={SessionPage} />

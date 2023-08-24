@@ -1,32 +1,12 @@
+import { numberFormatter } from "../../../utils/numberFormatter";
+
 function PriceChange({ realTimeHeaderData }) {
-  const customNumberFormatter = (number) => {
-    let formattedNumber = number;
-    if (number >= 1 || number <= -1) {
-      formattedNumber = number?.toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      });
-    } else if (number >= 0.1 || number <= -0.1) {
-      formattedNumber = number?.toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 3,
-      });
-    } else {
-      formattedNumber = number?.toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 5,
-      });
-    }
-
-    return formattedNumber;
-  };
-
   const priceChangeDiv = () => {
-    const number = customNumberFormatter(
+    const number = numberFormatter(
       realTimeHeaderData.currentPrice - realTimeHeaderData.previousClose
     );
 
-    const percent = customNumberFormatter(
+    const percent = numberFormatter(
       (number / (realTimeHeaderData.currentPrice - number)) * 100
     );
 
@@ -55,7 +35,7 @@ function PriceChange({ realTimeHeaderData }) {
         <div className="d-inline-flex gap-2">
           <div className="col-lg-auto col-md-auto col-sm-auto d-flex align-items-end">
             <h1 className="mb-0">
-              {customNumberFormatter(realTimeHeaderData.currentPrice)}
+              {numberFormatter(realTimeHeaderData.currentPrice)}
             </h1>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-4 d-flex align-items-end">
