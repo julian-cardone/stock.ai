@@ -5,7 +5,7 @@ function CompanyNav() {
   return (
     <>
       <div className="container-sm mt-3">
-        <nav className="navbar navbar-expand-lg navbar-light">
+        <nav className="navbar navbar-expand-md navbar-light">
           <button
             className="navbar-toggler"
             type="button"
