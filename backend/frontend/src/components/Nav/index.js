@@ -21,7 +21,7 @@ function Nav() {
     e.preventDefault();
     const valid = await validateSymbol(value);
     if (valid) {
-      history.push("/company");
+      history.push("/company/overview");
     }
   };
 

@@ -23,7 +23,7 @@ function CompanyNav() {
               className="navbar-nav d-flex justify-content-around w-100"
               id="company-nav"
             >
-              <CompanyNavLink to={"/home"} innerText={"Home"} />
+              <CompanyNavLink to={"/company/overview"} innerText={"Overview"} />
               <CompanyNavLink to={"/home"} innerText={"Home"} />
               <CompanyNavLink to={"/home"} innerText={"Home"} />
               <CompanyNavLink to={"/home"} innerText={"Home"} />

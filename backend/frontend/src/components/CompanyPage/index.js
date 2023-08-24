@@ -1,14 +1,21 @@
 import { useEffect } from "react";
 import { useRealTimeData } from "../../hooks/useRealTimeData";
-import Summary from "./Summary";
 import { useStockData } from "../../hooks/useStockData";
 import CompanyNav from "./CompanyNav";
+import {
+  Switch,
+  useRouteMatch,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { ProtectedRoute } from "../Routes";
+import SummaryHeader from "./SummaryHeader";
+import Overview from "./Pages/Overview";
 
 function CompanyPage({ currentSymbol }) {
   const { data: realTimeData, fetchRealTimeData } = useRealTimeData();
   const { data: stockData, fetchStockData } = useStockData();
   const realTimeStockInfo = realTimeData?.stock_info;
   const constantStockData = stockData?.stock_info;
+  const { path } = useRouteMatch(); // Get the current path
 
   useEffect(() => {
     fetchStockData(currentSymbol);
@@ -37,11 +44,21 @@ function CompanyPage({ currentSymbol }) {
   return (
     <>
       {/* <MarketsCarousel /> */}
-      <Summary
+      <SummaryHeader
         realTimeStockInfo={realTimeStockInfo}
         constantStockData={constantStockData}
       />
       <CompanyNav />
+      <Switch>
+        <ProtectedRoute
+          exact
+          path={`${path}/overview`}
+          currentSymbol={currentSymbol}
+          component={CompanyPage}
+        >
+          <Overview />
+        </ProtectedRoute>
+      </Switch>
     </>
   );
 }

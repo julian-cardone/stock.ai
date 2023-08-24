@@ -22,7 +22,6 @@ function App() {
 
         {currentSymbol && (
           <ProtectedRoute
-            exact
             path="/company"
             currentSymbol={currentSymbol}
             component={CompanyPage}

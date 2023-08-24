@@ -9,9 +9,9 @@ export const CompanyNavLink = ({ to, innerText }) => {
   const location = useLocation();
 
   return (
-    <li className="nav-item px-2">
+    <li className={`nav-item px-2 ${location.pathname === to ? "company-nav-active" : ""}`}>
       <Link
-        className={`nav-link ${location.pathname === to ? "active company-nav-active" : ""}`}
+        className={`nav-link ${location.pathname === to ? "active" : ""}`}
         to={to}
         aria-current={location.pathname === to ? "page" : undefined}
       >
