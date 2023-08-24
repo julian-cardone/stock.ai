@@ -1,9 +1,9 @@
 import Metrics from "./Metrics";
 
-function Overview({ constantStockData }) {
+function Overview({ overviewData }) {
   return (
     <>
-    <Metrics constantStockData={ constantStockData }/>
+    <Metrics overviewData={ overviewData }/>
     </>
   );
 }

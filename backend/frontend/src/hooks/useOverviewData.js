@@ -1,24 +1,24 @@
 import { useCallback, useState } from "react";
 import { useCustomFetch } from "./useCustomFetch";
 
-export function useStockData() {
+export function useOverviewData() {
   const { loading, sessionFetchWithCache } = useCustomFetch();
-  const [stockData, setStockData] = useState({});
+  const [overviewData, setOverviewData] = useState({});
 
-  const fetchStockData = useCallback(
+  const fetchOverviewData = useCallback(
     async (value) => {
       const result = await sessionFetchWithCache(
-        "/stock/get_stock_info",
+        "/stock/get_overview_info",
         {
           method: "POST",
           body: JSON.stringify({ inputValue: value }),
         },
         value
       );
-      setStockData(result);
+      setOverviewData(result.stock_info);
     },
     [sessionFetchWithCache]
   );
 
-  return { data: stockData, loading, fetchStockData };
+  return { overviewData, loading, fetchOverviewData };
 }

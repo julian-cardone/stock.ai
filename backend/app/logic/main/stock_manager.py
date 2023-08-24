@@ -48,7 +48,43 @@ class StockManager:
         combined_dict.update(self.yf_stock_info)
         return combined_dict
 
-    def get_stock_info(self):
+
+    def get_real_time_summary_data(self):
+        try:
+            yq_stock = Ticker(self.symbol)
+            yf_stock = yf.Ticker(self.symbol)
+            
+            yq_stock_info = yq_stock.asset_profile[self.symbol]
+            yf_stock_info = yf_stock.info
+            combined_dict = yq_stock_info.copy()
+            combined_dict.update(yf_stock_info)
+
+            current_time = datetime.datetime.now()
+            formatted_time = current_time.strftime("%I:%M%p %Z")
+
+            real_time_info = {
+                "currentPrice": combined_dict['currentPrice'], 
+                "previousClose": combined_dict['previousClose'], 
+                'currentTime': formatted_time
+                }
+
+            return real_time_info
+        except Exception as e:
+            print(f"An error occurred while fetching real-time data: {e}")
+            return None
+
+    def get_static_summary_data(self):
+        combined_dict = self.combined_info
+
+        stock_info = {
+                'longName': combined_dict['longName'],
+                'underlyingSymbol': combined_dict['underlyingSymbol'],
+                'exchange': combined_dict['exchange'],
+                'currency': combined_dict['currency'],
+        }
+        return stock_info
+        
+    def get_overview_info(self):
         combined_dict = self.combined_info
 
         stock_info = {
@@ -79,35 +115,6 @@ class StockManager:
             'debtToEquity': combined_dict['debtToEquity'],
         }
         return stock_info
-
-    def get_real_time_data(self):
-        try:
-            yq_stock = Ticker(self.symbol)
-            yf_stock = yf.Ticker(self.symbol)
-            
-            yq_stock_info = yq_stock.asset_profile[self.symbol]
-            yf_stock_info = yf_stock.info
-            combined_dict = yq_stock_info.copy()
-            combined_dict.update(yf_stock_info)
-
-            current_time = datetime.datetime.now()
-            formatted_time = current_time.strftime("%I:%M%p %Z")
-
-            real_time_info = {
-                'longName': combined_dict['longName'],
-                'underlyingSymbol': combined_dict['underlyingSymbol'],
-                'exchange': combined_dict['exchange'],
-                'currency': combined_dict['currency'],
-                "currentPrice": combined_dict['currentPrice'], 
-                "previousClose": combined_dict['previousClose'], 
-                'currentTime': formatted_time
-                }
-
-            return real_time_info
-        except Exception as e:
-            print(f"An error occurred while fetching real-time data: {e}")
-            return None
-        
         
     # def create_model(self):
         # self.model = Sheet(self)

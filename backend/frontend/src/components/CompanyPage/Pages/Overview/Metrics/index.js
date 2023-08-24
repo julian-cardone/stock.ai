@@ -1,22 +1,22 @@
 import { useMemo } from "react";
 import MetricsListItemKey from "./MetricsListItemKey";
 
-function Metrics({ constantStockData }) {
+function Metrics({ overviewData }) {
   const keys = useMemo(() => {
     try {
-      return Object.keys(constantStockData);
+      return Object.keys(overviewData);
     } catch (error) {
       return [];
     }
-  }, [constantStockData]);
+  }, [overviewData]);
 
   const values = useMemo(() => {
     try {
-      return Object.values(constantStockData);
+      return Object.values(overviewData);
     } catch (error) {
       return [];
     }
-  }, [constantStockData]);
+  }, [overviewData]);
   console.log(keys);
 
   return (

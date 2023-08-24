@@ -15,28 +15,41 @@ def validate_stock():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-@stock_bp.route('/get_real_time_data', methods=["POST"])
-def get_stock_price():
+@stock_bp.route('/get_real_time_summary_data', methods=["POST"])
+def get_real_time_summary_data():
     try:
         json_data = request.get_json()
         inputValue = json_data.get('inputValue', '') #symbol
 
         stock = StockManager(inputValue)
-        stock_info = stock.get_real_time_data()
+        stock_info = stock.get_real_time_summary_data()
+
+        return jsonify({"stock_info": stock_info})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@stock_bp.route('/get_static_summary_data', methods=["POST"])
+def get_static_summary_data():
+    try:
+        json_data = request.get_json()
+        inputValue = json_data.get('inputValue', '') #symbol
+
+        stock = StockManager(inputValue)
+        stock_info = stock.get_static_summary_data()
 
         return jsonify({"stock_info": stock_info})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
 
-@stock_bp.route('/get_stock_info', methods=["POST"])
-def get_stock_info():
+@stock_bp.route('/get_overview_info', methods=["POST"])
+def get_overview_info():
     try:
         json_data = request.get_json()
         inputValue = json_data.get('inputValue', '') #symbol
 
         stock = StockManager(inputValue)
-        stock_info = stock.get_stock_info()
+        stock_info = stock.get_overview_info()
 
         return jsonify({"stock_info": stock_info})
     except Exception as e:

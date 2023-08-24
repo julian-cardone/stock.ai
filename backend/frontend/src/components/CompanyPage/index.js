@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useHeaderData } from "../../hooks/useHeaderData";
-import { useStockData } from "../../hooks/useStockData";
+import { useOverviewData } from "../../hooks/useOverviewData";
 import CompanyNav from "./CompanyNav";
 import {
   Switch,
@@ -17,13 +17,13 @@ function CompanyPage({ currentSymbol }) {
     fetchRealTimeHeaderData,
     fetchStaticHeaderData,
   } = useHeaderData();
-  const { data: stockData, fetchStockData } = useStockData();
+  const { overviewData, fetchOverviewData } = useOverviewData();
   const { path } = useRouteMatch(); // Get the current path
 
   useEffect(() => {
-    fetchStockData(currentSymbol);
-    fetchRealTimeHeaderData(currentSymbol);
     fetchStaticHeaderData(currentSymbol);
+    fetchRealTimeHeaderData(currentSymbol);
+    fetchOverviewData(currentSymbol);
 
     const currentTime = new Date();
     const isMarketOpen =
@@ -33,8 +33,6 @@ function CompanyPage({ currentSymbol }) {
       currentTime.getHours() < 16; // 9:00am to 3:59pm
 
     if (isMarketOpen) {
-      fetchRealTimeHeaderData(currentSymbol);
-
       const searchInfoInterval = setInterval(() => {
         fetchRealTimeHeaderData(currentSymbol);
       }, 5000);
@@ -45,7 +43,7 @@ function CompanyPage({ currentSymbol }) {
     }
   }, [
     currentSymbol,
-    fetchStockData,
+    fetchOverviewData,
     fetchRealTimeHeaderData,
     fetchStaticHeaderData,
   ]);
@@ -65,7 +63,7 @@ function CompanyPage({ currentSymbol }) {
           currentSymbol={currentSymbol}
           component={CompanyPage}
         >
-          <Overview constantStockData={constantStockData} />
+          <Overview overviewData={overviewData} />
         </ProtectedRoute>
       </Switch>
     </>
