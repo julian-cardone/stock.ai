@@ -1,4 +1,4 @@
-function PriceChange({ realTimeStockInfo }) {
+function PriceChange({ realTimeHeaderData }) {
   const customNumberFormatter = (number) => {
     let formattedNumber = number;
     if (number >= 1 || number <= -1) {
@@ -23,11 +23,11 @@ function PriceChange({ realTimeStockInfo }) {
 
   const priceChangeDiv = () => {
     const number = customNumberFormatter(
-      realTimeStockInfo?.currentPrice - realTimeStockInfo?.previousClose
+      realTimeHeaderData.currentPrice - realTimeHeaderData.previousClose
     );
 
     const percent = customNumberFormatter(
-      (number / (realTimeStockInfo?.currentPrice - number)) * 100
+      (number / (realTimeHeaderData.currentPrice - number)) * 100
     );
 
     if (number < 0) {
@@ -55,14 +55,14 @@ function PriceChange({ realTimeStockInfo }) {
         <div className="d-inline-flex gap-2">
           <div className="col-lg-auto col-md-auto col-sm-auto d-flex align-items-end">
             <h1 className="mb-0">
-              {customNumberFormatter(realTimeStockInfo?.currentPrice)}
+              {customNumberFormatter(realTimeHeaderData.currentPrice)}
             </h1>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-4 d-flex align-items-end">
             {priceChangeDiv()}
           </div>
         </div>
-        <p id="small-para">Last updated at {realTimeStockInfo?.currentTime}</p>
+        <p id="small-para">Last updated at {realTimeHeaderData.currentTime}</p>
       </div>
     </>
   );

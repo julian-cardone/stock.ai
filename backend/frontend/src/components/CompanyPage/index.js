@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRealTimeData } from "../../hooks/useRealTimeData";
+import { useHeaderData } from "../../hooks/useHeaderData";
 import { useStockData } from "../../hooks/useStockData";
 import CompanyNav from "./CompanyNav";
 import {
@@ -7,19 +7,23 @@ import {
   useRouteMatch,
 } from "react-router-dom/cjs/react-router-dom.min";
 import { ProtectedRoute } from "../Routes";
-import SummaryHeader from "./SummaryHeader";
 import Overview from "./Pages/Overview";
+import Header from "./Header";
 
 function CompanyPage({ currentSymbol }) {
-  const { data: realTimeData, fetchRealTimeData } = useRealTimeData();
+  const {
+    realTimeHeaderData,
+    staticHeaderData,
+    fetchRealTimeHeaderData,
+    fetchStaticHeaderData,
+  } = useHeaderData();
   const { data: stockData, fetchStockData } = useStockData();
-  const realTimeStockInfo = realTimeData?.stock_info;
-  const constantStockData = stockData?.stock_info;
   const { path } = useRouteMatch(); // Get the current path
 
   useEffect(() => {
     fetchStockData(currentSymbol);
-    fetchRealTimeData(currentSymbol);
+    fetchRealTimeHeaderData(currentSymbol);
+    fetchStaticHeaderData(currentSymbol);
 
     const currentTime = new Date();
     const isMarketOpen =
@@ -29,23 +33,29 @@ function CompanyPage({ currentSymbol }) {
       currentTime.getHours() < 16; // 9:00am to 3:59pm
 
     if (isMarketOpen) {
-      fetchRealTimeData(currentSymbol);
+      fetchRealTimeHeaderData(currentSymbol);
 
       const searchInfoInterval = setInterval(() => {
-        fetchRealTimeData(currentSymbol);
+        fetchRealTimeHeaderData(currentSymbol);
       }, 5000);
 
       return () => {
         clearInterval(searchInfoInterval);
       };
     }
-  }, [currentSymbol, fetchRealTimeData, fetchStockData]);
+  }, [
+    currentSymbol,
+    fetchStockData,
+    fetchRealTimeHeaderData,
+    fetchStaticHeaderData,
+  ]);
 
   return (
     <>
       {/* <MarketsCarousel /> */}
-      <SummaryHeader
-        realTimeStockInfo={realTimeStockInfo}
+      <Header
+        realTimeHeaderData={realTimeHeaderData}
+        staticHeaderData={staticHeaderData}
       />
       <CompanyNav />
       <Switch>
@@ -55,7 +65,7 @@ function CompanyPage({ currentSymbol }) {
           currentSymbol={currentSymbol}
           component={CompanyPage}
         >
-          <Overview constantStockData={constantStockData}/>
+          <Overview constantStockData={constantStockData} />
         </ProtectedRoute>
       </Switch>
     </>
