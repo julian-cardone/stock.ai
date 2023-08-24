@@ -17,7 +17,7 @@ function Metrics({ constantStockData }) {
       return [];
     }
   }, [constantStockData]);
-  console.log(values);
+  console.log(keys);
 
   return (
     <>

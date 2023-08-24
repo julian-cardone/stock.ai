@@ -1,7 +1,7 @@
 import PriceChange from "./PriceChange";
 import "./summary.css"
 
-function SummaryHeader({ realTimeStockInfo, constantStockData }) {
+function SummaryHeader({ realTimeStockInfo }) {
 
   return (
     <>
@@ -9,12 +9,12 @@ function SummaryHeader({ realTimeStockInfo, constantStockData }) {
         <div className="row">
           <div className="col-lg-8 col-md-8 col-sm-8 px-5 pt-4">
             <h4 className="mb-0">
-              {constantStockData?.longName} (
-              {constantStockData?.underlyingSymbol})
+              {realTimeStockInfo?.longName} (
+              {realTimeStockInfo?.underlyingSymbol})
             </h4>
             <p className="mb-0" id="small-para">
-              {constantStockData?.exchange} | Currency:{" "}
-              {constantStockData?.currency}
+              {realTimeStockInfo?.exchange} | Currency:{" "}
+              {realTimeStockInfo?.currency}
             </p>
           </div>
         </div>

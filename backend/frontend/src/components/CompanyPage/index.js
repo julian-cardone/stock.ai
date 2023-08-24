@@ -46,7 +46,6 @@ function CompanyPage({ currentSymbol }) {
       {/* <MarketsCarousel /> */}
       <SummaryHeader
         realTimeStockInfo={realTimeStockInfo}
-        constantStockData={constantStockData}
       />
       <CompanyNav />
       <Switch>

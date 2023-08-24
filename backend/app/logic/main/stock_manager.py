@@ -50,19 +50,35 @@ class StockManager:
 
     def get_stock_info(self):
         combined_dict = self.combined_info
-        long_name = combined_dict['longName']
-        underlying_symbol = combined_dict['underlyingSymbol']
-        exchange = combined_dict['exchange']
-        currency = combined_dict['currency']
+
         stock_info = {
-            'longName': long_name, 
-            'underlyingSymbol': underlying_symbol, 
-            'exchange': exchange, 
-            'currency': currency
-            }
-        del combined_dict["companyOfficers"]
-        del combined_dict["longBusinessSummary"]
-        return combined_dict
+            'previousClose': combined_dict['previousClose'],
+            'open': combined_dict['open'],
+            'bid': combined_dict['bid'],
+            'ask': combined_dict['ask'],
+            'dayLow': combined_dict['dayLow'],
+            'dayHigh': combined_dict['dayHigh'],
+            'fiftyTwoWeekLow': combined_dict['fiftyTwoWeekLow'],
+            'fiftyTwoWeekHigh': combined_dict['fiftyTwoWeekHigh'],
+            'volume': combined_dict['volume'],
+            'averageVolume': combined_dict['averageVolume'],
+            'marketCap': combined_dict['marketCap'],
+            'beta': combined_dict['beta'],
+            'trailingPE': combined_dict['trailingPE'],
+            'trailingEps': combined_dict['trailingEps'],
+            'trailingAnnualDividendYield': combined_dict['trailingAnnualDividendYield'],
+            'trailingAnnualDividendRate': combined_dict['trailingAnnualDividendRate'],
+            'exDividendDate': combined_dict['exDividendDate'],
+            'targetMeanPrice': combined_dict['targetMeanPrice'],
+            'currentPrice': combined_dict['currentPrice'],
+            'currentRatio': combined_dict['currentRatio'],
+            'quickRatio': combined_dict['quickRatio'],
+            'returnOnEquity': combined_dict['returnOnEquity'],
+            'returnOnAssets': combined_dict['returnOnAssets'],
+            'grossMargins': combined_dict['grossMargins'],
+            'debtToEquity': combined_dict['debtToEquity'],
+        }
+        return stock_info
 
     def get_real_time_data(self):
         try:
@@ -74,15 +90,16 @@ class StockManager:
             combined_dict = yq_stock_info.copy()
             combined_dict.update(yf_stock_info)
 
-            current_price = combined_dict['currentPrice']
-            previous_close = combined_dict['previousClose']
-
             current_time = datetime.datetime.now()
             formatted_time = current_time.strftime("%I:%M%p %Z")
 
             real_time_info = {
-                "currentPrice": current_price, 
-                "previousClose": previous_close, 
+                'longName': combined_dict['longName'],
+                'underlyingSymbol': combined_dict['underlyingSymbol'],
+                'exchange': combined_dict['exchange'],
+                'currency': combined_dict['currency'],
+                "currentPrice": combined_dict['currentPrice'], 
+                "previousClose": combined_dict['previousClose'], 
                 'currentTime': formatted_time
                 }
 
