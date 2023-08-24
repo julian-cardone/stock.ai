@@ -14,24 +14,28 @@ function App() {
 
   return (
     <>
-      <Nav />
-      <Switch>
-        <AuthRoute exact path="/" component={SessionPage} />
+      <div
+        className="container-fluid px-0 position-relative"
+        id="main-container"
+      >
+        <Nav />
+        <Switch>
+          <AuthRoute exact path="/" component={SessionPage} />
+          <ProtectedRoute exact path="/home" component={Home} />
 
-        <ProtectedRoute exact path="/home" component={Home} />
+          {currentSymbol && (
+            <ProtectedRoute
+              path="/company"
+              currentSymbol={currentSymbol}
+              component={CompanyPage}
+            />
+          )}
 
-        {currentSymbol && (
-          <ProtectedRoute
-            path="/company"
-            currentSymbol={currentSymbol}
-            component={CompanyPage}
-          />
-        )}
+          <ProtectedRoute exact path="/generate" component={BusinessPage} />
 
-        <ProtectedRoute exact path="/generate" component={BusinessPage} />
-
-        <Redirect to="/home" />
-      </Switch>
+          <Redirect to="/home" />
+        </Switch>
+      </div>
     </>
   );
 }

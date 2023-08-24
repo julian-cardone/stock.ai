@@ -9,6 +9,7 @@ import {
 import { ProtectedRoute } from "../Routes";
 import Overview from "./Pages/Overview";
 import Header from "./Header";
+import { isMarketOpen } from "../../utils/isMarketOpen";
 
 function CompanyPage({ currentSymbol }) {
   const {
@@ -25,14 +26,7 @@ function CompanyPage({ currentSymbol }) {
     fetchRealTimeHeaderData(currentSymbol);
     fetchOverviewData(currentSymbol);
 
-    const currentTime = new Date();
-    const isMarketOpen =
-      currentTime.getDay() >= 1 &&
-      currentTime.getDay() <= 5 && // Monday to Friday
-      currentTime.getHours() >= 9 &&
-      currentTime.getHours() < 16; // 9:00am to 3:59pm
-
-    if (isMarketOpen) {
+    if (isMarketOpen()) {
       const searchInfoInterval = setInterval(() => {
         fetchRealTimeHeaderData(currentSymbol);
       }, 5000);
@@ -50,22 +44,23 @@ function CompanyPage({ currentSymbol }) {
 
   return (
     <>
-      {/* <MarketsCarousel /> */}
-      <Header
-        realTimeHeaderData={realTimeHeaderData}
-        staticHeaderData={staticHeaderData}
-      />
-      <CompanyNav />
-      <Switch>
-        <ProtectedRoute
-          exact
-          path={`${path}/overview`}
-          currentSymbol={currentSymbol}
-          component={CompanyPage}
-        >
-          <Overview overviewData={overviewData} />
-        </ProtectedRoute>
-      </Switch>
+      <div className="container-fluid px-0 container-spacing">
+        <Header
+          realTimeHeaderData={realTimeHeaderData}
+          staticHeaderData={staticHeaderData}
+        />
+        <CompanyNav />
+        <Switch>
+          <ProtectedRoute
+            exact
+            path={`${path}/overview`}
+            currentSymbol={currentSymbol}
+            component={CompanyPage}
+          >
+            <Overview overviewData={overviewData} />
+          </ProtectedRoute>
+        </Switch>
+      </div>
     </>
   );
 }
