@@ -60,6 +60,8 @@ class StockManager:
             'exchange': exchange, 
             'currency': currency
             }
+        del combined_dict["companyOfficers"]
+        del combined_dict["longBusinessSummary"]
         return combined_dict
 
     def get_real_time_data(self):

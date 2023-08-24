@@ -2,7 +2,6 @@ import PriceChange from "./PriceChange";
 import "./summary.css"
 
 function SummaryHeader({ realTimeStockInfo, constantStockData }) {
-  console.log(realTimeStockInfo);
 
   return (
     <>
