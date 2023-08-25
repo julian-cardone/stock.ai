@@ -86,76 +86,31 @@ class StockManager:
         
     def get_overview_info(self):
         combined_dict = self.combined_info
+        print(combined_dict)
 
-        stock_info = {
-            'previousClose': combined_dict.get('previousClose'),
-            'open': combined_dict.get('open'),
-            'bid': combined_dict.get('bid'),
-            'ask': combined_dict.get('ask'),
-            'dayLow': combined_dict.get('dayLow'),
-            'dayHigh': combined_dict.get('dayHigh'),
-            'fiftyTwoWeekLow': combined_dict.get('fiftyTwoWeekLow'),
-            'fiftyTwoWeekHigh': combined_dict.get('fiftyTwoWeekHigh'),
-            'volume': combined_dict.get('volume'),
-            'averageVolume': combined_dict.get('averageVolume'),
-            'marketCap': combined_dict.get('marketCap'),
-            'beta': combined_dict.get('beta'),
-            'trailingPE': combined_dict.get('trailingPE'),
-            'trailingEps': combined_dict.get('trailingEps'),
-            'trailingAnnualDividendYield': combined_dict.get('trailingAnnualDividendYield'),
-            'trailingAnnualDividendRate': combined_dict.get('trailingAnnualDividendRate'),
-            'exDividendDate': combined_dict.get('exDividendDate'),
-            'targetMeanPrice': combined_dict.get('targetMeanPrice'),
-            'currentPrice': combined_dict.get('currentPrice'),
-            'currentRatio': combined_dict.get('currentRatio'),
-            'quickRatio': combined_dict.get('quickRatio'),
-            'returnOnEquity': combined_dict.get('returnOnEquity'),
-            'returnOnAssets': combined_dict.get('returnOnAssets'),
-            'grossMargins': combined_dict.get('grossMargins'),
-            'debtToEquity': combined_dict.get('debtToEquity'),
-        }
+        stock_info = [
+            {'key': 'Previous Close', 'value': combined_dict.get('previousClose')},
+            {'key': 'Open', 'value': combined_dict.get('open')},
+            {'key': 'Bid', 'value': combined_dict.get('bid')},
+            {'key': 'Ask', 'value': combined_dict.get('ask')},
+            {'key': "Day's Range", 'value': f"{combined_dict.get('dayLow')} - {combined_dict.get('dayHigh')}"},
+            {'key': "Year's Range", 'value': f"{combined_dict.get('fiftyTwoWeekLow')} - {combined_dict.get('fiftyTwoWeekHigh')}"},
+            {'key': 'Volume', 'value': combined_dict.get('volume')},
+            {'key': 'Average Volume', 'value': combined_dict.get('averageVolume')},
+            {'key': 'Market Cap', 'value': combined_dict.get('marketCap')},
+            {'key': 'Beta', 'value': combined_dict.get('beta')},
+            {'key': 'PE Ratio (TTM)', 'value': combined_dict.get('trailingPE')},
+            {'key': 'EPS (TTM)', 'value': combined_dict.get('trailingEps')},
+            {'key': 'Forward Dividend & Yield', 'value': f"{combined_dict.get('trailingAnnualDividendRate')} ({combined_dict.get('trailingAnnualDividendYield')*100}%)"},
+            {'key': 'Ex-Dividend Date', 'value': combined_dict.get('exDividendDate')},
+            {'key': '1-Year Target Estimate', 'value': combined_dict.get('targetMeanPrice')},
+            {'key': 'Current Ratio', 'value': combined_dict.get('currentRatio')},
+            {'key': 'Quick Ratio', 'value': combined_dict.get('quickRatio')},
+            {'key': 'Return on Equity', 'value': combined_dict.get('returnOnEquity')},
+            {'key': 'Return on Assets', 'value': combined_dict.get('returnOnAssets')},
+            {'key': 'Debt-to-Equity Ratio', 'value': combined_dict.get('debtToEquity')}
+        ]
         return stock_info
-
-        # stock_info = [
-        #     {'previousClose': combined_dict.get('previousClose')},
-        #     {'open': combined_dict.get('open')},
-        #     {'bid': combined_dict.get('bid')},
-        #     {'ask': combined_dict.get('ask')},
-        #     {'dayLow': combined_dict.get('dayLow')},
-        #     {'dayHigh': combined_dict.get('dayHigh')},
-        #     {'fiftyTwoWeekLow': combined_dict.get('fiftyTwoWeekLow')},
-        #     {'fiftyTwoWeekHigh': combined_dict.get('fiftyTwoWeekHigh')},
-        #     {'volume': combined_dict.get('volume')},
-        #     {'averageVolume': combined_dict.get('averageVolume')},
-        #     {'marketCap': combined_dict.get('marketCap')},
-        #     {'beta': combined_dict.get('beta')},
-        #     {'trailingPE': combined_dict.get('trailingPE')},
-        #     {'trailingEps': combined_dict.get('trailingEps')},
-        #     {'trailingAnnualDividendYield': combined_dict.get('trailingAnnualDividendYield')},
-        #     {'trailingAnnualDividendRate': combined_dict.get('trailingAnnualDividendRate')},
-        #     {'exDividendDate': combined_dict.get('exDividendDate')},
-        #     {'targetMeanPrice': combined_dict.get('targetMeanPrice')},
-        #     {'currentPrice': combined_dict.get('currentPrice')},
-        #     {'currentRatio': combined_dict.get('currentRatio')},
-        #     {'quickRatio': combined_dict.get('quickRatio')},
-        #     {'returnOnEquity': combined_dict.get('returnOnEquity')},
-        #     {'returnOnAssets': combined_dict.get('returnOnAssets')},
-        #     {'grossMargins': combined_dict.get('grossMargins')},
-        #     {'debtToEquity': combined_dict.get('debtToEquity')}
-        # ]
-
-        # stock_info = [
-        #     {'longName': combined_dict.get('longName')},
-        #     {'underlyingSymbol': combined_dict.get('underlyingSymbol')},
-        #     {'exchange': combined_dict.get('exchange')},
-        #     {'currency': combined_dict.get('currency')}
-        # ]
-
-            # real_time_info = [
-            #     {"currentPrice": combined_dict.get('currentPrice')}, 
-            #     {"previousClose": combined_dict.get('previousClose')}, 
-            #     {'currentTime': formatted_time}
-            # ]
         
     # def create_model(self):
         # self.model = Sheet(self)

@@ -3,7 +3,7 @@ import { useCustomFetch } from "./useCustomFetch";
 
 export function useOverviewData() {
   const { loading, sessionFetchWithCache } = useCustomFetch();
-  const [overviewData, setOverviewData] = useState({});
+  const [overviewData, setOverviewData] = useState([]);
 
   const fetchOverviewData = useCallback(
     async (value) => {
@@ -15,6 +15,7 @@ export function useOverviewData() {
         },
         value
       );
+      console.log(result)
       setOverviewData(result?.stock_info);
     },
     [sessionFetchWithCache]

@@ -1,40 +1,27 @@
-import { useMemo } from "react";
-import MetricsListItemKey from "./MetricsListItem";
+import MetricsListItem from "./MetricsListItem";
 
 function Metrics({ overviewData }) {
-  const keys = useMemo(() => {
-    try {
-      return Object.keys(overviewData);
-    } catch (error) {
-      return [];
-    }
-  }, [overviewData]);
-
-  const values = useMemo(() => {
-    try {
-      return Object.values(overviewData);
-    } catch (error) {
-      return [];
-    }
-  }, [overviewData]);
-
   return (
     <>
       <div className="container-fluid px-5">
-        <div className="row">
-          <div className="col-3">
-            {keys.map((item, index) => {
-              return <MetricsListItemKey key={index} item={item} />;
-            })}
-          </div>
-          <div className="col-3">
-            {values.map((item, index) => {
-              if (item === null) {
-                item = "n/a";
-              }
-              return <MetricsListItemKey key={index} item={item} />;
-            })}
-          </div>
+        <div className="col-6">
+          {overviewData.map((item, index) => {
+            if (item.value === null) {
+              item.value = "n/a";
+            }
+            return (
+              <>
+                <div className="row d-flex-inline">
+                  <div className="col-lg-6 col-md-6 col-sm-6">
+                    <MetricsListItem key={index} item={item.key} />
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6">
+                    <MetricsListItem key={index} item={item.value} />
+                  </div>
+                </div>
+              </>
+            );
+          })}
         </div>
       </div>
     </>
