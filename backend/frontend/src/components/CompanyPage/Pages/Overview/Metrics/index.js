@@ -17,7 +17,6 @@ function Metrics({ overviewData }) {
       return [];
     }
   }, [overviewData]);
-  console.log(overviewData);
 
   return (
     <>
@@ -30,6 +29,9 @@ function Metrics({ overviewData }) {
           </div>
           <div className="col-3">
             {values.map((item, index) => {
+              if (item === null) {
+                item = "n/a";
+              }
               return <MetricsListItemKey key={index} item={item} />;
             })}
           </div>

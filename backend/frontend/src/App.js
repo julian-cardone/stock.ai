@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <div className="container-fluid px-0 position-relative">
-        <Nav />
+        <Nav currentSymbol={currentSymbol}/>
         <Switch>
           <AuthRoute exact path="/" component={SessionPage} />
           <ProtectedRoute exact path="/home" component={Home} />

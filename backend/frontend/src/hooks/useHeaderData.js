@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useCustomFetch } from "./useCustomFetch";
 
 export function useHeaderData() {
-  const { loading, sessionFetchWithoutCache } = useCustomFetch();
+  const { loading, sessionFetchWithCache, sessionFetchWithoutCache } = useCustomFetch();
   const [realTimeHeaderData, setRealTimeHeaderData] = useState({});
   const [staticHeaderData, setStaticHeaderData] = useState({});
 
@@ -16,14 +16,14 @@ export function useHeaderData() {
         },
         value
       );
-      setRealTimeHeaderData(result.stock_info);
+      setRealTimeHeaderData(result?.stock_info);
     },
     [sessionFetchWithoutCache]
   );
 
   const fetchStaticHeaderData = useCallback(
     async (value) => {
-      const result = await sessionFetchWithoutCache(
+      const result = await sessionFetchWithCache(
         "/stock/get_static_summary_data",
         {
           method: "POST",
@@ -31,9 +31,9 @@ export function useHeaderData() {
         },
         value
       );
-      setStaticHeaderData(result.stock_info);
+      setStaticHeaderData(result?.stock_info);
     },
-    [sessionFetchWithoutCache]
+    [sessionFetchWithCache]
   );
 
   return {

@@ -66,7 +66,7 @@ class StockManager:
                 "currentPrice": combined_dict['currentPrice'], 
                 "previousClose": combined_dict['previousClose'], 
                 'currentTime': formatted_time
-                }
+            }
 
             return real_time_info
         except Exception as e:
@@ -77,10 +77,10 @@ class StockManager:
         combined_dict = self.combined_info
 
         stock_info = {
-                'longName': combined_dict['longName'],
-                'underlyingSymbol': combined_dict['underlyingSymbol'],
-                'exchange': combined_dict['exchange'],
-                'currency': combined_dict['currency'],
+            'longName': combined_dict['longName'],
+            'underlyingSymbol': combined_dict['underlyingSymbol'],
+            'exchange': combined_dict['exchange'],
+            'currency': combined_dict['currency'],
         }
         return stock_info
         
@@ -88,33 +88,74 @@ class StockManager:
         combined_dict = self.combined_info
 
         stock_info = {
-            'previousClose': combined_dict['previousClose'],
-            'open': combined_dict['open'],
-            'bid': combined_dict['bid'],
-            'ask': combined_dict['ask'],
-            'dayLow': combined_dict['dayLow'],
-            'dayHigh': combined_dict['dayHigh'],
-            'fiftyTwoWeekLow': combined_dict['fiftyTwoWeekLow'],
-            'fiftyTwoWeekHigh': combined_dict['fiftyTwoWeekHigh'],
-            'volume': combined_dict['volume'],
-            'averageVolume': combined_dict['averageVolume'],
-            'marketCap': combined_dict['marketCap'],
-            'beta': combined_dict['beta'],
-            'trailingPE': combined_dict['trailingPE'],
-            'trailingEps': combined_dict['trailingEps'],
-            'trailingAnnualDividendYield': combined_dict['trailingAnnualDividendYield'],
-            'trailingAnnualDividendRate': combined_dict['trailingAnnualDividendRate'],
-            'exDividendDate': combined_dict['exDividendDate'],
-            'targetMeanPrice': combined_dict['targetMeanPrice'],
-            'currentPrice': combined_dict['currentPrice'],
-            'currentRatio': combined_dict['currentRatio'],
-            'quickRatio': combined_dict['quickRatio'],
-            'returnOnEquity': combined_dict['returnOnEquity'],
-            'returnOnAssets': combined_dict['returnOnAssets'],
-            'grossMargins': combined_dict['grossMargins'],
-            'debtToEquity': combined_dict['debtToEquity'],
+            'previousClose': combined_dict.get('previousClose'),
+            'open': combined_dict.get('open'),
+            'bid': combined_dict.get('bid'),
+            'ask': combined_dict.get('ask'),
+            'dayLow': combined_dict.get('dayLow'),
+            'dayHigh': combined_dict.get('dayHigh'),
+            'fiftyTwoWeekLow': combined_dict.get('fiftyTwoWeekLow'),
+            'fiftyTwoWeekHigh': combined_dict.get('fiftyTwoWeekHigh'),
+            'volume': combined_dict.get('volume'),
+            'averageVolume': combined_dict.get('averageVolume'),
+            'marketCap': combined_dict.get('marketCap'),
+            'beta': combined_dict.get('beta'),
+            'trailingPE': combined_dict.get('trailingPE'),
+            'trailingEps': combined_dict.get('trailingEps'),
+            'trailingAnnualDividendYield': combined_dict.get('trailingAnnualDividendYield'),
+            'trailingAnnualDividendRate': combined_dict.get('trailingAnnualDividendRate'),
+            'exDividendDate': combined_dict.get('exDividendDate'),
+            'targetMeanPrice': combined_dict.get('targetMeanPrice'),
+            'currentPrice': combined_dict.get('currentPrice'),
+            'currentRatio': combined_dict.get('currentRatio'),
+            'quickRatio': combined_dict.get('quickRatio'),
+            'returnOnEquity': combined_dict.get('returnOnEquity'),
+            'returnOnAssets': combined_dict.get('returnOnAssets'),
+            'grossMargins': combined_dict.get('grossMargins'),
+            'debtToEquity': combined_dict.get('debtToEquity'),
         }
         return stock_info
+
+        # stock_info = [
+        #     {'previousClose': combined_dict.get('previousClose')},
+        #     {'open': combined_dict.get('open')},
+        #     {'bid': combined_dict.get('bid')},
+        #     {'ask': combined_dict.get('ask')},
+        #     {'dayLow': combined_dict.get('dayLow')},
+        #     {'dayHigh': combined_dict.get('dayHigh')},
+        #     {'fiftyTwoWeekLow': combined_dict.get('fiftyTwoWeekLow')},
+        #     {'fiftyTwoWeekHigh': combined_dict.get('fiftyTwoWeekHigh')},
+        #     {'volume': combined_dict.get('volume')},
+        #     {'averageVolume': combined_dict.get('averageVolume')},
+        #     {'marketCap': combined_dict.get('marketCap')},
+        #     {'beta': combined_dict.get('beta')},
+        #     {'trailingPE': combined_dict.get('trailingPE')},
+        #     {'trailingEps': combined_dict.get('trailingEps')},
+        #     {'trailingAnnualDividendYield': combined_dict.get('trailingAnnualDividendYield')},
+        #     {'trailingAnnualDividendRate': combined_dict.get('trailingAnnualDividendRate')},
+        #     {'exDividendDate': combined_dict.get('exDividendDate')},
+        #     {'targetMeanPrice': combined_dict.get('targetMeanPrice')},
+        #     {'currentPrice': combined_dict.get('currentPrice')},
+        #     {'currentRatio': combined_dict.get('currentRatio')},
+        #     {'quickRatio': combined_dict.get('quickRatio')},
+        #     {'returnOnEquity': combined_dict.get('returnOnEquity')},
+        #     {'returnOnAssets': combined_dict.get('returnOnAssets')},
+        #     {'grossMargins': combined_dict.get('grossMargins')},
+        #     {'debtToEquity': combined_dict.get('debtToEquity')}
+        # ]
+
+        # stock_info = [
+        #     {'longName': combined_dict.get('longName')},
+        #     {'underlyingSymbol': combined_dict.get('underlyingSymbol')},
+        #     {'exchange': combined_dict.get('exchange')},
+        #     {'currency': combined_dict.get('currency')}
+        # ]
+
+            # real_time_info = [
+            #     {"currentPrice": combined_dict.get('currentPrice')}, 
+            #     {"previousClose": combined_dict.get('previousClose')}, 
+            #     {'currentTime': formatted_time}
+            # ]
         
     # def create_model(self):
         # self.model = Sheet(self)

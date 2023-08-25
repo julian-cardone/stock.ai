@@ -7,7 +7,7 @@ import "./navbar.css";
 import { useState } from "react";
 import useSearchValidation from "../../hooks/useSearchValidation";
 
-function Nav() {
+function Nav({ currentSymbol }) {
   const location = useLocation();
   const [value, setValue] = useState();
   const { loading, validateSymbol } = useSearchValidation();
@@ -42,7 +42,7 @@ function Nav() {
                 value={value}
                 onChange={handleInputChange}
                 type="search"
-                placeholder="Enter a stock symbol"
+                placeholder={currentSymbol || "Enter a stock symbol"}
                 aria-label="Search"
               />
               <button
