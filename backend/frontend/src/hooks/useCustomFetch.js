@@ -44,7 +44,6 @@ export function useCustomFetch() {
           setCurrentSymbol(symbol);
           localStorage.setItem("stock-ai-current-symbol", symbol)
           const data = await res.json();
-          console.log(data)
           cache.current.set(key, data);
           return data;
         } catch (error) {

@@ -1,7 +1,7 @@
 function MetricsListItem({ item }) {
   return (
     <>
-      <div className="row">{item}</div>
+      <div>{item}</div>
     </>
   );
 }

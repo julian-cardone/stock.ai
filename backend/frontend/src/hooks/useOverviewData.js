@@ -15,7 +15,6 @@ export function useOverviewData() {
         },
         value
       );
-      console.log(result)
       setOverviewData(result?.stock_info);
     },
     [sessionFetchWithCache]
