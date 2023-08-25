@@ -10,6 +10,7 @@ import { ProtectedRoute } from "../Routes";
 import Overview from "./Pages/Overview";
 import Header from "./Header";
 import { isMarketOpen } from "../../utils/isMarketOpen";
+import useSearchValidation from "../../hooks/useSearchValidation";
 
 function CompanyPage({ currentSymbol }) {
   const {
@@ -19,9 +20,11 @@ function CompanyPage({ currentSymbol }) {
     fetchStaticHeaderData,
   } = useHeaderData();
   const { overviewData, fetchOverviewData } = useOverviewData();
+  const { validateSymbol } = useSearchValidation();
   const { path } = useRouteMatch(); // Get the current path
 
   useEffect(() => {
+    validateSymbol(currentSymbol);
     fetchStaticHeaderData(currentSymbol);
     fetchRealTimeHeaderData(currentSymbol);
     fetchOverviewData(currentSymbol);

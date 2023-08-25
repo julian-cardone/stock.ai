@@ -13,6 +13,7 @@ export function useCustomFetch() {
 
         if (cache.current.has(key)) {
           setCurrentSymbol(symbol);
+          localStorage.setItem("stock-ai-current-symbol", symbol)
           return cache.current.get(key);
         }
 
@@ -41,6 +42,7 @@ export function useCustomFetch() {
           }
 
           setCurrentSymbol(symbol);
+          localStorage.setItem("stock-ai-current-symbol", symbol)
           const data = await res.json();
           console.log(data)
           cache.current.set(key, data);

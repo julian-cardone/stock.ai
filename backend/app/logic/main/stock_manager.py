@@ -48,6 +48,44 @@ class StockManager:
         combined_dict.update(self.yf_stock_info)
         return combined_dict
 
+    def number_formatter(self, number):
+        if number == 0 or not isinstance(number, (int, float)):
+            return number
+
+        if abs(number) >= 1e12:
+            formatted_number = self.format_large_number(number, 'T')
+        elif abs(number) >= 1e9:
+            formatted_number = self.format_large_number(number, 'B')
+        else:
+            abs_number = abs(number)
+            if abs_number >= 1:
+                if abs_number >= 1000:
+                    formatted_number = format(number, ',.0f')
+                else:
+                    formatted_number = format(number, '.2f')
+            elif abs_number >= 0.1:
+                formatted_number = format(number, '.3f')
+            else:
+                formatted_number = format(number, '.5f')
+
+        return formatted_number
+
+    def format_large_number(self, number, suffix):
+        magnitude = 0
+        while abs(number) >= 1000:
+            number /= 1000.0
+            magnitude += 1
+
+        formatted_number = f"{number:.3f}{suffix}"
+        return formatted_number
+
+    def format_date(self, timestamp):
+        if timestamp is not isinstance(timestamp, (int, float)):
+            return timestamp
+        datetime_obj = datetime.datetime.utcfromtimestamp(timestamp)
+        formatted_date = datetime_obj.strftime('%b %d, %Y')
+        return formatted_date
+
 
     def get_real_time_summary_data(self):
         try:
@@ -86,29 +124,28 @@ class StockManager:
         
     def get_overview_info(self):
         combined_dict = self.combined_info
-        print(combined_dict)
 
         stock_info = [
-            {'key': 'Previous Close', 'value': combined_dict.get('previousClose')},
-            {'key': 'Open', 'value': combined_dict.get('open')},
-            {'key': 'Bid', 'value': combined_dict.get('bid')},
-            {'key': 'Ask', 'value': combined_dict.get('ask')},
-            {'key': "Day's Range", 'value': f"{combined_dict.get('dayLow')} - {combined_dict.get('dayHigh')}"},
-            {'key': "Year's Range", 'value': f"{combined_dict.get('fiftyTwoWeekLow')} - {combined_dict.get('fiftyTwoWeekHigh')}"},
-            {'key': 'Volume', 'value': combined_dict.get('volume')},
-            {'key': 'Average Volume', 'value': combined_dict.get('averageVolume')},
-            {'key': 'Market Cap', 'value': combined_dict.get('marketCap')},
-            {'key': 'Beta', 'value': combined_dict.get('beta')},
-            {'key': 'PE Ratio (TTM)', 'value': combined_dict.get('trailingPE')},
-            {'key': 'EPS (TTM)', 'value': combined_dict.get('trailingEps')},
-            {'key': 'Forward Dividend & Yield', 'value': f"{combined_dict.get('trailingAnnualDividendRate')} ({combined_dict.get('trailingAnnualDividendYield')*100}%)"},
-            {'key': 'Ex-Dividend Date', 'value': combined_dict.get('exDividendDate')},
-            {'key': '1-Year Target Estimate', 'value': combined_dict.get('targetMeanPrice')},
-            {'key': 'Current Ratio', 'value': combined_dict.get('currentRatio')},
-            {'key': 'Quick Ratio', 'value': combined_dict.get('quickRatio')},
-            {'key': 'Return on Equity', 'value': combined_dict.get('returnOnEquity')},
-            {'key': 'Return on Assets', 'value': combined_dict.get('returnOnAssets')},
-            {'key': 'Debt-to-Equity Ratio', 'value': combined_dict.get('debtToEquity')}
+            {'key': 'Previous Close', 'value': self.number_formatter(combined_dict.get('previousClose'))},
+            {'key': 'Open', 'value': self.number_formatter(combined_dict.get('open'))},
+            {'key': 'Bid', 'value': self.number_formatter(combined_dict.get('bid'))},
+            {'key': 'Ask', 'value': self.number_formatter(combined_dict.get('ask'))},
+            {'key': "Day's Range", 'value': f"{self.number_formatter(combined_dict.get('dayLow'))} - {self.number_formatter(combined_dict.get('dayHigh'))}"},
+            {'key': "Year's Range", 'value': f"{self.number_formatter(combined_dict.get('fiftyTwoWeekLow'))} - {self.number_formatter(combined_dict.get('fiftyTwoWeekHigh'))}"},
+            {'key': 'Volume', 'value': self.number_formatter(combined_dict.get('volume'))},
+            {'key': 'Average Volume', 'value': self.number_formatter(combined_dict.get('averageVolume'))},
+            {'key': 'Market Cap', 'value': self.number_formatter(combined_dict.get('marketCap'))},
+            {'key': 'Beta', 'value': self.number_formatter(combined_dict.get('beta'))},
+            {'key': 'PE Ratio (TTM)', 'value': self.number_formatter(combined_dict.get('trailingPE'))},
+            {'key': 'EPS (TTM)', 'value': self.number_formatter(combined_dict.get('trailingEps'))},
+            {'key': 'Forward Dividend & Yield', 'value': f"{self.number_formatter(combined_dict.get('trailingAnnualDividendRate'))} ({self.number_formatter(combined_dict.get('trailingAnnualDividendYield')*100)}%)"},
+            {'key': 'Ex-Dividend Date', 'value': self.format_date(combined_dict.get('exDividendDate'))},
+            {'key': '1-Year Target Estimate', 'value': self.number_formatter(combined_dict.get('targetMeanPrice'))},
+            {'key': 'Current Ratio', 'value': self.number_formatter(combined_dict.get('currentRatio'))},
+            {'key': 'Quick Ratio', 'value': self.number_formatter(combined_dict.get('quickRatio'))},
+            {'key': 'Return on Equity', 'value': f"{self.number_formatter(combined_dict.get('returnOnEquity')*100)}%"},
+            {'key': 'Return on Assets', 'value': f"{self.number_formatter(combined_dict.get('returnOnAssets')*100)}%"},
+            {'key': 'Debt-to-Equity Ratio', 'value': self.number_formatter(combined_dict.get('debtToEquity'))}
         ]
         return stock_info
         
