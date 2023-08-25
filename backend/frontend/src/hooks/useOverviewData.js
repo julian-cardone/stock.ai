@@ -15,7 +15,7 @@ export function useOverviewData() {
         },
         value
       );
-      setOverviewData(result.stock_info);
+      setOverviewData(result?.stock_info);
     },
     [sessionFetchWithCache]
   );
