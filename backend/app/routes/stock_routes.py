@@ -55,6 +55,19 @@ def get_overview_info():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+@stock_bp.route('/get_historical_prices', methods=["POST"])
+def get_historical_prices():
+    try:
+        json_data = request.get_json()
+        inputValue = json_data.get('inputValue', '') #symbol
+
+        stock = StockManager(inputValue)
+        stock_info = stock.get_historical_prices()
+
+        return jsonify({"stock_info": stock_info})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
 # !!! DO NOT DELETE THESE, THESE ARE THE LOGICS FOR THE MODEL CREATION AND DOWNOADING, AND THE GPT LOGIC !!!
 # @app.route('/operating_assumptions', methods=["POST"])
 # def create_hoa_model():

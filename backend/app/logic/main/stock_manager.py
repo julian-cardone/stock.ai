@@ -3,6 +3,7 @@ from yahooquery import search
 import yfinance as yf
 from backend.app.logic.main.sheet_class import Sheet
 import datetime
+import pandas as pd
 # import openai
 # import os
 '''
@@ -148,6 +149,16 @@ class StockManager:
             {'key': 'Debt-to-Equity Ratio', 'value': self.number_formatter(combined_dict.get('debtToEquity'))}
         ]
         return stock_info
+
+    def get_historical_prices(self):
+        end_date = datetime.datetime.today().strftime('%Y-%m-%d')
+        start_date = (datetime.datetime.today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+
+        data = yf.download(self.symbol, start=start_date, end=end_date, interval="5m")
+        processed_data = data[['Open', 'High', 'Low', 'Close', 'Volume']].reset_index()
+        json_data = processed_data.to_json(orient='records')
+
+        return json_data
         
     # def create_model(self):
         # self.model = Sheet(self)

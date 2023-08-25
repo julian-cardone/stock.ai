@@ -11,8 +11,10 @@ import Overview from "./Pages/Overview";
 import Header from "./Header";
 import { isMarketOpen } from "../../utils/isMarketOpen";
 import useSearchValidation from "../../hooks/useSearchValidation";
+import { useHistoricalPrices } from "../../hooks/useHistoricalPrices";
 
 function CompanyPage({ currentSymbol }) {
+  const { validateSymbol } = useSearchValidation();
   const {
     realTimeHeaderData,
     staticHeaderData,
@@ -20,7 +22,7 @@ function CompanyPage({ currentSymbol }) {
     fetchStaticHeaderData,
   } = useHeaderData();
   const { overviewData, fetchOverviewData } = useOverviewData();
-  const { validateSymbol } = useSearchValidation();
+  const { historicalPrices, fetchHistoricalPrices } = useHistoricalPrices();
   const { path } = useRouteMatch(); // Get the current path
 
   useEffect(() => {
@@ -28,6 +30,7 @@ function CompanyPage({ currentSymbol }) {
     fetchStaticHeaderData(currentSymbol);
     fetchRealTimeHeaderData(currentSymbol);
     fetchOverviewData(currentSymbol);
+    fetchHistoricalPrices(currentSymbol);
 
     if (isMarketOpen()) {
       const searchInfoInterval = setInterval(() => {
@@ -40,9 +43,11 @@ function CompanyPage({ currentSymbol }) {
     }
   }, [
     currentSymbol,
-    fetchOverviewData,
-    fetchRealTimeHeaderData,
+    validateSymbol,
     fetchStaticHeaderData,
+    fetchRealTimeHeaderData,
+    fetchOverviewData,
+    fetchHistoricalPrices,
   ]);
 
   return (
@@ -60,7 +65,7 @@ function CompanyPage({ currentSymbol }) {
             currentSymbol={currentSymbol}
             component={CompanyPage}
           >
-            <Overview overviewData={overviewData} />
+            <Overview overviewData={overviewData} historicalPrices={historicalPrices}/>
           </ProtectedRoute>
         </Switch>
       </div>
