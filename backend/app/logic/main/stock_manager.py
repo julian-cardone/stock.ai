@@ -80,7 +80,7 @@ class StockManager:
         return formatted_number
 
     def format_date(self, timestamp):
-        if timestamp is not isinstance(timestamp, (int, float)):
+        if timestamp == None:
             return timestamp
         datetime_obj = datetime.datetime.utcfromtimestamp(timestamp)
         formatted_date = datetime_obj.strftime('%b %d, %Y')
