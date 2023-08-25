@@ -33,12 +33,12 @@ function PriceChange({ realTimeHeaderData }) {
     <>
       <div className="row d-flex ps-5 pt-2">
         <div className="d-inline-flex gap-2">
-          <div className="col-lg-auto col-md-auto col-sm-auto d-flex align-items-end">
+          <div className="col-auto d-flex align-items-end">
             <h1 className="mb-0">
               {numberFormatter(realTimeHeaderData.currentPrice)}
             </h1>
           </div>
-          <div className="col-lg-4 col-md-4 col-sm-4 d-flex align-items-end">
+          <div className="col-auto d-flex align-items-end">
             {priceChangeDiv()}
           </div>
         </div>

@@ -30,11 +30,11 @@ function Nav() {
       <div className="container-fluid position-fixed px-0">
         <nav className="navbar navbar-expand-lg navbar-light bg-light ps-lg-5 ps-md-3 ps-sm-1 navbar-custom-css">
           <div className="container-fluid">
-            <Link className="logo-text" to="/home">
+            <Link className="logo-text d-none d-md-flex d-lg-flex" to="/home">
               stock.ai
             </Link>
             <form
-              className="d-flex col-lg-5 col-md-5 col-sm-3 ms-5"
+              className="d-flex col-lg-5 col-md-5 col-sm-5 ms-5"
               onSubmit={handleSubmit}
             >
               <input
@@ -53,9 +53,9 @@ function Nav() {
                 Search
               </button>
             </form>
-            <div className="ms-auto px-5">
+            <div className="ms-auto px-1">
               <button
-                className="navbar-toggler"
+                className="navbar-toggler col-auto"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"

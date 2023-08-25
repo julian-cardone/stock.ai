@@ -1,5 +1,8 @@
-#company-nav{
-    /* border-bottom: 2px solid rgb(180, 180, 180); */
+.company-nav-container{
+    position: sticky;
+    z-index: 1;
+    top: 70px;
+    background-color: white;
 }
 
 .company-nav-active{

@@ -7,7 +7,7 @@ function Header({ realTimeHeaderData, staticHeaderData }) {
     <>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-8 col-md-8 col-sm-8 px-5 pt-4">
+          <div className="col-lg-12 col-md-12 col-sm-12 px-5 pt-4">
             <h4 className="mb-0">
               {staticHeaderData.longName} (
               {staticHeaderData.underlyingSymbol})
