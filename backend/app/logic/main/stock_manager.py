@@ -39,15 +39,12 @@ class StockManager:
             self.yf_stock = yf.Ticker(symbol)
             self.yq_stock_info = self.yq_stock.asset_profile[symbol]
             self.yf_stock_info = self.yf_stock.info
-            self.combined_info = self._combine_stock_info()
+            combined_dict = self.yq_stock_info.copy()
+            combined_dict.update(self.yf_stock_info)
+            self.combined_info = combined_dict
         except Exception as e:
             print(f"An error occurred during initialization: {e}")
             raise RuntimeError("Instance initialization failed.")
-
-    def _combine_stock_info(self):
-        combined_dict = self.yq_stock_info.copy()
-        combined_dict.update(self.yf_stock_info)
-        return combined_dict
 
     def number_formatter(self, number):
         if number == 0 or not isinstance(number, (int, float)):
@@ -156,9 +153,8 @@ class StockManager:
 
         data = yf.download(self.symbol, start=start_date, end=end_date, interval="5m")
         processed_data = data[['Open', 'High', 'Low', 'Close', 'Volume']].reset_index()
-        json_data = processed_data.to_json(orient='records')
 
-        return json_data
+        return [processed_data.to_dict(orient='records')]
         
     # def create_model(self):
         # self.model = Sheet(self)

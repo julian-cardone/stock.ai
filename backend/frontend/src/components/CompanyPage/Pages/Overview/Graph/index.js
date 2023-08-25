@@ -4,7 +4,7 @@ function Graph({ historicalPrices }) {
   return (
     <>
       <div className="container-fluid">
-        <div className="row bg-success">
+        <div className="row bg-light">
           <div className="col-12 d-flex justify-content-around">
             <div>1D</div>
             <div>1WK</div>

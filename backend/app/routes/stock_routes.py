@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request
+from flask import Blueprint, render_template, jsonify, request, Response
 from backend.app.logic.main.stock_manager import StockManager
 
 stock_bp = Blueprint('stock', __name__)

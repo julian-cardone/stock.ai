@@ -23,7 +23,6 @@ ChartJS.register(
 
 const StockGraph = ({ historicalPrices }) => {
   // Process data for chart
-  console.log(historicalPrices)
   const chartData = {
     labels: historicalPrices?.map(entry => new Date(entry?.Datetime)),
     datasets: [
@@ -45,11 +44,11 @@ const StockGraph = ({ historicalPrices }) => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
       title: {
         display: true,
-        text: 'Chart.js Line Chart',
+        text: "Chart.js Line Chart",
       },
     },
   };
