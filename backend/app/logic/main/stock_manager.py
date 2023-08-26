@@ -153,6 +153,36 @@ class StockManager:
                 'end_date': datetime.datetime.today().strftime('%Y-%m-%d'),
                 'start_date': (datetime.datetime.today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d'),
                 'timeline': "5m"
+            },
+            '1WK': {
+                'end_date': datetime.datetime.today().strftime('%Y-%m-%d'),
+                'start_date': (datetime.datetime.today() - datetime.timedelta(weeks=1)).strftime('%Y-%m-%d'),
+                'timeline': "1h"
+            },
+            '1M': {
+                'end_date': datetime.datetime.today().strftime('%Y-%m-%d'),
+                'start_date': (datetime.datetime.today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d'),
+                'timeline': "1d"
+            },
+            '3M': {
+                'end_date': datetime.datetime.today().strftime('%Y-%m-%d'),
+                'start_date': (datetime.datetime.today() - datetime.timedelta(days=90)).strftime('%Y-%m-%d'),
+                'timeline': "1d"
+            },
+            '6M': {
+                'end_date': datetime.datetime.today().strftime('%Y-%m-%d'),
+                'start_date': (datetime.datetime.today() - datetime.timedelta(days=180)).strftime('%Y-%m-%d'),
+                'timeline': "1w"
+            },
+            '1YR': {
+                'end_date': datetime.datetime.today().strftime('%Y-%m-%d'),
+                'start_date': (datetime.datetime.today() - datetime.timedelta(days=365)).strftime('%Y-%m-%d'),
+                'timeline': "1w"
+            },
+            '5YRS': {
+                'end_date': datetime.datetime.today().strftime('%Y-%m-%d'),
+                'start_date': (datetime.datetime.today() - datetime.timedelta(days=5 * 365)).strftime('%Y-%m-%d'),
+                'timeline': "1mo"
             }
         }
 

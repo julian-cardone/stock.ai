@@ -16,8 +16,8 @@ export function useHistoricalPrices() {
         value,
         timeline
       );
-
-      setHistoricalPrices(result?.stock_info);
+        console.log(result?.stock_info)
+      setHistoricalPrices(...(result?.stock_info));
     },
     [sessionFetchWithCache]
   );
