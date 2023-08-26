@@ -1,18 +1,41 @@
+import { useHistoricalPrices } from "../../../../../hooks/useHistoricalPrices";
 import StockGraph from "./StockGraph";
+import "./graph.css";
 
-function Graph({ historicalPrices }) {
+function Graph({ historicalPrices, currentSymbol }) {
+  const { fetchHistoricalPrices } = useHistoricalPrices();
+  const handleClick = (e) => {
+    fetchHistoricalPrices(currentSymbol, e.target.innerHTML);
+  };
+
+  console.log(historicalPrices);
+
   return (
     <>
       <div className="container-fluid">
         <div className="row bg-light">
           <div className="col-12 d-flex justify-content-around">
-            <div>1D</div>
-            <div>1WK</div>
-            <div>1M</div>
-            <div>3M</div>
-            <div>6M</div>
-            <div>1YR</div>
-            <div>5YRS</div>
+            <div onClick={handleClick} className="graph-interval-link">
+              1D
+            </div>
+            <div onClick={handleClick} className="graph-interval-link">
+              1WK
+            </div>
+            <div onClick={handleClick} className="graph-interval-link">
+              1M
+            </div>
+            <div onClick={handleClick} className="graph-interval-link">
+              3M
+            </div>
+            <div onClick={handleClick} className="graph-interval-link">
+              6M
+            </div>
+            <div onClick={handleClick} className="graph-interval-link">
+              1YR
+            </div>
+            <div onClick={handleClick} className="graph-interval-link">
+              5YRS
+            </div>
           </div>
           <StockGraph historicalPrices={historicalPrices} />
         </div>

@@ -6,16 +6,16 @@ export function useHistoricalPrices() {
   const [historicalPrices, setHistoricalPrices] = useState([]);
 
   const fetchHistoricalPrices = useCallback(
-    async (value) => {
+    async (value, timeline) => {
       const result = await sessionFetchWithCache(
         "/stock/get_historical_prices",
         {
           method: "POST",
-          body: JSON.stringify({ inputValue: value }),
+          body: JSON.stringify({ inputValue: value, timeline: timeline }),
         },
-        value
+        value,
+        timeline
       );
-      console.log(typeof result);
 
       setHistoricalPrices(result?.stock_info);
     },

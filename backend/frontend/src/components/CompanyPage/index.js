@@ -30,7 +30,7 @@ function CompanyPage({ currentSymbol }) {
     fetchStaticHeaderData(currentSymbol);
     fetchRealTimeHeaderData(currentSymbol);
     fetchOverviewData(currentSymbol);
-    fetchHistoricalPrices(currentSymbol);
+    fetchHistoricalPrices(currentSymbol, "1D");
 
     if (isMarketOpen()) {
       const searchInfoInterval = setInterval(() => {
@@ -65,7 +65,11 @@ function CompanyPage({ currentSymbol }) {
             currentSymbol={currentSymbol}
             component={CompanyPage}
           >
-            <Overview overviewData={overviewData} historicalPrices={historicalPrices}/>
+            <Overview
+              overviewData={overviewData}
+              historicalPrices={historicalPrices}
+              currentSymbol={currentSymbol}
+            />
           </ProtectedRoute>
         </Switch>
       </div>

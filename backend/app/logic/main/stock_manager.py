@@ -147,11 +147,16 @@ class StockManager:
         ]
         return stock_info
 
-    def get_historical_prices(self):
-        end_date = datetime.datetime.today().strftime('%Y-%m-%d')
-        start_date = (datetime.datetime.today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+    def get_historical_prices(self, timeline):
+        timeline_switch = {
+            '1D': {
+                'end_date': datetime.datetime.today().strftime('%Y-%m-%d'),
+                'start_date': (datetime.datetime.today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d'),
+                'timeline': "5m"
+            }
+        }
 
-        data = yf.download(self.symbol, start=start_date, end=end_date, interval="5m")
+        data = yf.download(self.symbol, start=timeline_switch[timeline]['start_date'], end=timeline_switch[timeline]['end_date'], interval=timeline_switch[timeline]['timeline'])
         processed_data = data[['Open', 'High', 'Low', 'Close', 'Volume']].reset_index()
 
         return [processed_data.to_dict(orient='records')]

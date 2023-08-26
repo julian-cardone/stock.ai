@@ -1,7 +1,7 @@
 import Graph from "./Graph";
 import Metrics from "./Metrics";
 
-function Overview({ overviewData, historicalPrices }) {
+function Overview({ overviewData, historicalPrices, currentSymbol }) {
   return (
     <>
       <div className="container-fluid px-5">
@@ -10,7 +10,7 @@ function Overview({ overviewData, historicalPrices }) {
             <Metrics overviewData={overviewData} />
           </div>
           <div className="mt-1 px-1 col-xxl-9 col-xl-8 col-lg-8 col-md-7 col-12">
-            <Graph historicalPrices={historicalPrices}/>
+            <Graph historicalPrices={historicalPrices} currentSymbol={currentSymbol}/>
           </div>
         </div>
       </div>

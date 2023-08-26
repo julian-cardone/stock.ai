@@ -7,9 +7,10 @@ export function useCustomFetch() {
   const { cache, setCurrentSymbol } = useContext(AppContext);
 
   const sessionFetchWithCache = useCallback(
-    async (url, options = {}, symbol) =>
+    async (url, options = {}, symbol, ...rest) =>
       wrappedRequest(async () => {
-        const key = createCacheKey(url, symbol);
+        const key = createCacheKey(url, symbol, rest);
+        console.log(key)
 
         if (cache.current.has(key)) {
           setCurrentSymbol(symbol);
@@ -89,8 +90,8 @@ export function useCustomFetch() {
     [wrappedRequest]
   );
 
-  const createCacheKey = (url, symbol) => {
-    return `${url}-${symbol}`;
+  const createCacheKey = (url, symbol, rest="") => {
+    return `${url}-${symbol}-${rest}`;
   };
 
   return { loading, sessionFetchWithCache, sessionFetchWithoutCache };

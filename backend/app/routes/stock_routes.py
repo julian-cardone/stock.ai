@@ -60,9 +60,10 @@ def get_historical_prices():
     try:
         json_data = request.get_json()
         inputValue = json_data.get('inputValue', '') #symbol
+        timeline = json_data.get('timeline', '')
 
         stock = StockManager(inputValue)
-        stock_info = stock.get_historical_prices()
+        stock_info = stock.get_historical_prices(timeline)
 
         return jsonify({"stock_info": stock_info})
     except Exception as e:

@@ -42,6 +42,7 @@ const StockGraph = ({ historicalPrices }) => {
   // Chart options
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: true,
     plugins: {
       legend: {
         position: "top",
@@ -54,7 +55,7 @@ const StockGraph = ({ historicalPrices }) => {
   };
 
   return (
-    <div>
+    <div className="container-fluid">
       <Line data={chartData} options={chartOptions} />
     </div>
   );
