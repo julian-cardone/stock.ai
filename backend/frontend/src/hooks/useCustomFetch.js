@@ -10,7 +10,6 @@ export function useCustomFetch() {
     async (url, options = {}, symbol, ...rest) =>
       wrappedRequest(async () => {
         const key = createCacheKey(url, symbol, rest);
-        console.log(key)
 
         if (cache.current.has(key)) {
           setCurrentSymbol(symbol);

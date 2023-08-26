@@ -7,7 +7,6 @@ function Graph({ historicalPrices, currentSymbol }) {
   const handleClick = (e) => {
     fetchHistoricalPrices(currentSymbol, e.target.innerHTML);
   };
-console.log(historicalPrices)
   return (
     <>
       <div className="container-fluid">
