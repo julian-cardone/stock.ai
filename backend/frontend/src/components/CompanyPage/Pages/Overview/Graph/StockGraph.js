@@ -24,15 +24,15 @@ ChartJS.register(
 const StockGraph = ({ historicalPrices }) => {
   // Process data for chart
   const chartData = {
-    labels: historicalPrices?.map(entry => new Date(entry?.Datetime)),
+    labels: historicalPrices?.map((entry) => new Date(entry?.Datetime)),
     datasets: [
       {
-        label: 'Open Price',
-        data: historicalPrices?.map(entry => ({
+        label: "Open Price",
+        data: historicalPrices?.map((entry) => ({
           x: new Date(entry?.Datetime),
           y: entry?.Open,
         })),
-        borderColor: 'blue',
+        borderColor: "blue",
         fill: false,
       },
       // Add similar datasets for other data points (High, Low, Close, Volume)

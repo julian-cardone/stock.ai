@@ -10,7 +10,10 @@ function Overview({ overviewData, historicalPrices, currentSymbol }) {
             <Metrics overviewData={overviewData} />
           </div>
           <div className="mt-1 px-1 col-xxl-9 col-xl-8 col-lg-8 col-md-7 col-12">
-            <Graph historicalPrices={historicalPrices} currentSymbol={currentSymbol}/>
+            <Graph
+              historicalPrices={historicalPrices}
+              currentSymbol={currentSymbol}
+            />
           </div>
         </div>
       </div>
