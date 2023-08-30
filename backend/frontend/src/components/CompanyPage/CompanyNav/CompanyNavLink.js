@@ -9,7 +9,11 @@ export const CompanyNavLink = ({ to, innerText }) => {
   const location = useLocation();
 
   return (
-    <li className={`nav-item px-2 ${location.pathname === to ? "company-nav-active" : ""}`}>
+    <li
+      className={`nav-item px-2 ${
+        location.pathname === to ? "company-nav-active" : ""
+      }`}
+    >
       <Link
         className={`nav-link ${location.pathname === to ? "active" : ""}`}
         to={to}
