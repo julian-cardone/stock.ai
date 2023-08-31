@@ -6,7 +6,9 @@ export const AppContextProvider = ({ children }) => {
   // intialize cache
   const cache = useRef(new Map());
   const [error, setError] = useState("");
-  const [currentSymbol, setCurrentSymbol] = useState(localStorage.getItem("stock-ai-current-symbol") || null);
+  const [currentSymbol, setCurrentSymbol] = useState(
+    localStorage.getItem("stock-ai-current-symbol") || null
+  );
 
   return (
     <AppContext.Provider
