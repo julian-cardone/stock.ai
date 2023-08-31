@@ -32,7 +32,10 @@ function CompanyNav() {
                     to={"/company/overview"}
                     innerText={"Overview"}
                   />
-                  <CompanyNavLink to={"/home"} innerText={"Home"} />
+                  <CompanyNavLink
+                    to={"/company/financials"}
+                    innerText={"Financial Statements"}
+                  />
                   <CompanyNavLink to={"/home"} innerText={"Home"} />
                   <CompanyNavLink to={"/home"} innerText={"Home"} />
                   <CompanyNavLink to={"/home"} innerText={"Home"} />

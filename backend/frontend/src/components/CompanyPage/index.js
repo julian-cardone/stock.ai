@@ -12,6 +12,7 @@ import Header from "./Header";
 import { isMarketOpen } from "../../utils/isMarketOpen";
 import useSearchValidation from "../../hooks/useSearchValidation";
 import { useHistoricalPrices } from "../../hooks/useHistoricalPrices";
+import FinancialStatements from "./Pages/FinancialStatements";
 
 function CompanyPage({ currentSymbol }) {
   const { validateSymbol } = useSearchValidation();
@@ -70,6 +71,14 @@ function CompanyPage({ currentSymbol }) {
               historicalPrices={historicalPrices}
               currentSymbol={currentSymbol}
             />
+          </ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path={`${path}/financials`}
+            currentSymbol={currentSymbol}
+            component={CompanyPage}
+          >
+            <FinancialStatements />
           </ProtectedRoute>
         </Switch>
       </div>
