@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import "./financialsNav.css";
 
 function FinancialsNavLink({ to, innerText }) {
   const location = useLocation();

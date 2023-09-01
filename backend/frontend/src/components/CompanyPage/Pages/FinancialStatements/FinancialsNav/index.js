@@ -1,4 +1,5 @@
 import FinancialsNavLink from "./FinancialsNavLink";
+import "./financialsNav.css";
 
 function FinancialsNav() {
   return (

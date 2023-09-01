@@ -7,22 +7,15 @@ export const CompanyNavLink = ({ to, innerText, acceptedRoutes = null }) => {
   Returns: Custom Link for the company nav bar
   */
   const location = useLocation();
+  const active =
+    location.pathname === to || acceptedRoutes?.includes(location.pathname);
 
   return (
-    <li
-      className={`nav-item px-2 ${
-        location.pathname === to ? "company-nav-active" : ""
-      }`}
-    >
+    <li className={`nav-item px-2 ${active ? "company-nav-active" : ""}`}>
       <Link
-        className={`nav-link ${
-          location.pathname === to ||
-          acceptedRoutes?.includes(location.pathname)
-            ? "active"
-            : ""
-        }`}
+        className={`nav-link ${active ? "active" : ""}`}
         to={to}
-        aria-current={location.pathname === to ? "page" : undefined}
+        aria-current={active ? "page" : undefined}
       >
         {innerText}
       </Link>
