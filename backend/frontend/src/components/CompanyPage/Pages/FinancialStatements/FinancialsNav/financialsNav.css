@@ -2,3 +2,7 @@
     cursor: pointer;
     font-weight: 500;
 }
+
+.financials-nav-link-active{
+    font-weight: 500;
+}

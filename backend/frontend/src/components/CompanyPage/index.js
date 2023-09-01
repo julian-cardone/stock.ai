@@ -74,11 +74,27 @@ function CompanyPage({ currentSymbol }) {
           </ProtectedRoute>
           <ProtectedRoute
             exact
-            path={`${path}/financials`}
+            path={`${path}/financials/income_statement`}
             currentSymbol={currentSymbol}
             component={CompanyPage}
           >
-            <FinancialStatements />
+            <FinancialStatements statement="income_statement" />
+          </ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path={`${path}/financials/balance_sheet`}
+            currentSymbol={currentSymbol}
+            component={CompanyPage}
+          >
+            <FinancialStatements statement="balance_sheet" />
+          </ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path={`${path}/financials/cash_flow_statement`}
+            currentSymbol={currentSymbol}
+            component={CompanyPage}
+          >
+            <FinancialStatements statement="cash_flow_statement" />
           </ProtectedRoute>
         </Switch>
       </div>

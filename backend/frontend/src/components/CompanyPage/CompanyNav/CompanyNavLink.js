@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
-export const CompanyNavLink = ({ to, innerText }) => {
+export const CompanyNavLink = ({ to, innerText, acceptedRoutes = null }) => {
   /*
   Parameters: current location (ex: "/home"), target location (ex: "/generate"), innerText (ex: "Generate")
   
@@ -15,7 +15,12 @@ export const CompanyNavLink = ({ to, innerText }) => {
       }`}
     >
       <Link
-        className={`nav-link ${location.pathname === to ? "active" : ""}`}
+        className={`nav-link ${
+          location.pathname === to ||
+          acceptedRoutes?.includes(location.pathname)
+            ? "active"
+            : ""
+        }`}
         to={to}
         aria-current={location.pathname === to ? "page" : undefined}
       >

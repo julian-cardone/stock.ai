@@ -33,8 +33,13 @@ function CompanyNav() {
                     innerText={"Overview"}
                   />
                   <CompanyNavLink
-                    to={"/company/financials"}
+                    to={"/company/financials/income_statement"}
                     innerText={"Financial Statements"}
+                    acceptedRoutes={[
+                      "/company/financials/income_statement",
+                      "/company/financials/balance_sheet",
+                      "/company/financials/cash_flow_statement",
+                    ]}
                   />
                   <CompanyNavLink to={"/home"} innerText={"Home"} />
                   <CompanyNavLink to={"/home"} innerText={"Home"} />
