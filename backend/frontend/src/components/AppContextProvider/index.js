@@ -3,7 +3,6 @@ import { AppContext } from "../../utils/context";
 import React from "react";
 
 export const AppContextProvider = ({ children }) => {
-  // intialize cache
   const cache = useRef(new Map());
   const [error, setError] = useState("");
   const [currentSymbol, setCurrentSymbol] = useState(
