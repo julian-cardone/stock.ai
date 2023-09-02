@@ -187,6 +187,9 @@ class StockManager:
         }
 
         data = yf.download(self.symbol, start=timeline_switch[timeline]['start_date'], end=timeline_switch[timeline]['end_date'], interval=timeline_switch[timeline]['timeline'])
+        # if timeline == "1D":
+        #     data['Datetime'] = data.index.strftime('%I-%p-%a-%b-%d')
+
         processed_data = data[['Open', 'High', 'Low', 'Close', 'Volume']].reset_index()
 
         return [processed_data.to_dict(orient='records')]
