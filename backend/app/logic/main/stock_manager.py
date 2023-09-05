@@ -8,7 +8,7 @@ import pandas as pd
 # import os
 '''
 Singleton pattern:
-Override the __new__ method of the StockManager 
+Overrides the __new__ method of the StockManager 
 Checks to see if the instance of the symbol has already been created 
 If not, then uses the __new__ method of the superclass (Object)
 Have to do this because since we are ovveriding the __new__ method in the current class, and cannot use it. Would result in infnite recursion
