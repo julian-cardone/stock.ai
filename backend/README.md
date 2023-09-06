@@ -25,7 +25,6 @@ Models currently working:
 ![Model Picture 2](backend/app/static/images/model-2.png)
 
 ## Future plans for the project
-* As I am using a free API for fundamental data, there are limitations. When I find a solution, I will be able to populate the entire pro
-forma financial model with reliable data. 
+* As I am using a free API for fundamental data, there are limitations. When I find a solution, I will be able to populate the entire pro forma financial model with reliable data. 
 * I am working on further analysis on the companies using python libraries such as pandas, plotly, and dash.
 * Deploy a live version of the application.
