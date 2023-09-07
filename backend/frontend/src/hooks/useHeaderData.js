@@ -2,7 +2,8 @@ import { useCallback, useState } from "react";
 import { useCustomFetch } from "./useCustomFetch";
 
 export function useHeaderData() {
-  const { loading, sessionFetchWithCache, sessionFetchWithoutCache } = useCustomFetch();
+  const { loading, sessionFetchWithCache, sessionFetchWithoutCache } =
+    useCustomFetch();
   const [realTimeHeaderData, setRealTimeHeaderData] = useState({});
   const [staticHeaderData, setStaticHeaderData] = useState({});
 
