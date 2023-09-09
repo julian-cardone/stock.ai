@@ -84,7 +84,6 @@ class StockManager:
         formatted_date = datetime_obj.strftime('%b %d, %Y')
         return formatted_date
 
-
     def get_real_time_summary_data(self):
         try:
             yq_stock = Ticker(self.symbol)
