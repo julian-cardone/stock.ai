@@ -1,0 +1,9 @@
+.social-svg{
+    fill: white;
+}
+
+.social-svg:hover{
+    fill: white;
+    transition: transform 0.3s ease;
+    transform: scale(1.05); 
+}

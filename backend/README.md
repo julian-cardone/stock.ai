@@ -1,5 +1,5 @@
 # Welcome to Stock.ai
-This project is a full-stack financial data analysis application enabling users to input stock symbols and receive financial data reports, statistical analyses, and personalized financial models from a pro forma financial statement.
+This project is a full-stack financial analysis application enabling users to input stock symbols and receive financial data reports, statistical analyses, and personalized financial models from a pro forma financial statement.
 
 ## Technologies used in this project
 * PostgreSQL
