@@ -15,6 +15,7 @@ Have to do this because since we are ovveriding the __new__ method in the curren
 then we call the initialize method to perform any initializaiton logic on the new instance
 '''
 
+## Note: refactor the stock manager class and the financial data class
 class StockManager:
     _instances = {} # underscore is convention to indicate that the variable is intended for internal use within a class or module
 
