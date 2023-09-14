@@ -9,10 +9,10 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <h1 className="fadeInLeft animated">
+                <h1 className="fadeInLeft animated-short">
                   Welcome to our Financial Analysis Hub
                 </h1>
-                <p className="fadeInRight animated">
+                <p className="fadeInRight animated-long">
                   Our mission is to make financial data accessible and
                   understandable for everyone. With our full-stack financial
                   analysis application, you can effortlessly input a stock
@@ -23,7 +23,7 @@ function Home() {
                 </p>
               </div>
               <div className="col-md-6">
-                <h2>PUT PICTURE HERE</h2>
+                <h2 className="">CAROUSEL - with loading </h2>
                 {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
               </div>
             </div>
@@ -37,8 +37,8 @@ function Home() {
               {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
             </div>
             <div className="col-md-6">
-              <h2>Explore Our Features</h2>
-              <p>
+              <h2 className="fadeInRight animated-short">Explore Our Features</h2>
+              <p className="fadeInLeft animated-long">
                 Our platform simplifies financial analysis. Start by choosing a
                 company to get an easy-to-understand overview with interactive
                 historical data graphs. Delve into Financial Statements for
