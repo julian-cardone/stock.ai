@@ -1,5 +1,6 @@
 import "./home.css";
 import "../../animate.css";
+import FeaturesDisplay from "./FeaturesDisplay";
 
 function Home() {
   return (
@@ -32,12 +33,14 @@ function Home() {
 
         <div className="container my-5">
           <div className="row">
-            <div className="col-md-6">
-              <h2>PUT PICTURE HERE</h2>
+            <div className="col-md-6 d-flex justify-content-around align-items-center pb-5 pd-xxl-0 pb-xl-0 pb-lg-0 pb-md-0 px-4">
+              <FeaturesDisplay />
               {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
             </div>
             <div className="col-md-6">
-              <h2 className="fadeInRight animated-short">Explore Our Features</h2>
+              <h2 className="fadeInRight animated-short">
+                Explore Our Features
+              </h2>
               <p className="fadeInLeft animated-long">
                 Our platform simplifies financial analysis. Start by choosing a
                 company to get an easy-to-understand overview with interactive
