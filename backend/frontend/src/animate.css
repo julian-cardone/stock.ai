@@ -50,6 +50,100 @@ Copyright (c) 2015 Daniel Eden
   animation-duration: .75s;
 }
 
+
+@keyframes scaleAnimationOne {
+  0% {
+    transform: scale(1);
+  }
+  
+  16.66% {
+    transform: scale(1.1);
+  }
+  
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes scaleAnimationTwo {
+  0% {
+    transform: scale(1);
+  }
+  
+  33.32% {
+    transform: scale(1.1);
+  }
+  
+ 100% {
+    transform: scale(1);
+  }
+}
+@keyframes scaleAnimationThree {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  
+ 100% {
+    transform: scale(1);
+  }
+}
+@keyframes scaleAnimationFour {
+  0% {
+    transform: scale(1);
+  }
+  66.64% {
+    transform: scale(1.1);
+  }
+  
+ 100% {
+    transform: scale(1);
+  }
+}
+@keyframes scaleAnimationFive {
+  0% {
+    transform: scale(1);
+  }
+  83.3% {
+    transform: scale(1.1);
+  }
+  
+ 100% {
+    transform: scale(1);
+  }
+}
+
+.scaleAnimationOne {
+  -webkit-animation-name: scaleAnimationOne;
+  animation-name: scaleAnimationOne;
+  animation-iteration-count: infinite;
+}
+
+.scaleAnimationTwo {
+  -webkit-animation-name: scaleAnimationTwo;
+  animation-name: scaleAnimationTwo;
+  animation-iteration-count: infinite;
+}
+
+.scaleAnimationThree {
+  -webkit-animation-name: scaleAnimationThree;
+  animation-name: scaleAnimationThree;
+  animation-iteration-count: infinite;
+}
+
+.scaleAnimationFour {
+  -webkit-animation-name: scaleAnimationFour;
+  animation-name: scaleAnimationFour;
+  animation-iteration-count: infinite;
+}
+
+.scaleAnimationFive {
+  -webkit-animation-name: scaleAnimationFive;
+  animation-name: scaleAnimationFive;
+  animation-iteration-count: infinite;
+}
+
 @-webkit-keyframes bounce {
   from, 20%, 53%, 80%, to {
     -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);

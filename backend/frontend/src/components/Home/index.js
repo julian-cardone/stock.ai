@@ -33,7 +33,7 @@ function Home() {
 
         <div className="container my-5">
           <div className="row">
-            <div className="col-md-6 d-flex justify-content-around align-items-center pb-5 pd-xxl-0 pb-xl-0 pb-lg-0 pb-md-0 px-4">
+            <div className="col-md-6 d-flex justify-content-around align-items-center pb-5 pd-xxl-0 pb-xl-0 pb-lg-0 pb-md-0 px-4 bounceIn animated">
               <FeaturesDisplay />
               {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
             </div>
