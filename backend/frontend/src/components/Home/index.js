@@ -1,4 +1,5 @@
 import "./home.css";
+import "../../animate.css";
 
 function Home() {
   return (
@@ -8,8 +9,10 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <h1>Welcome to our Financial Analysis Hub</h1>
-                <p>
+                <h1 className="fadeInLeft animated">
+                  Welcome to our Financial Analysis Hub
+                </h1>
+                <p className="fadeInRight animated">
                   Our mission is to make financial data accessible and
                   understandable for everyone. With our full-stack financial
                   analysis application, you can effortlessly input a stock

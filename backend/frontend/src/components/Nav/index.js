@@ -27,7 +27,7 @@ function Nav() {
 
   return (
     <>
-      <div className="container-fluid position-fixed px-0">
+      <div className="container-fluid px-0 navbar-positioning">
         <nav className="navbar navbar-expand-lg navbar-light bg-light ps-lg-5 ps-md-3 ps-sm-1 navbar-custom-css">
           <div className="container-fluid">
             <Link className="logo-text d-none d-md-flex d-lg-flex" to="/home">
