@@ -8,12 +8,23 @@
     transform: scale(1.05); 
 }
 
-.animated-long:hover{
+.feature-svg:hover{
     cursor: pointer;
     fill: green;
 }
 
-.footer-div{
-    position: relative;
-    bottom: 0;
+.home-header{
+    font-size: 60px;
+}
+
+.explore-features {
+    min-height: 288px;
+}
+
+.active {
+    display: block;
+}
+
+.inactive {
+    display: none;
 }
