@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useCustomFetch } from "../../hooks/useCustomFetch";
 import { useGPTFetch } from "../../hooks/useGPTFetch";
-import "./index.css";
 import UserNote from "./UserNote";
 
 function BusinessPage() {

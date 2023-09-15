@@ -24,8 +24,6 @@ function Home() {
     // }
   }, [fetchRealTimeHeaderData]);
 
-  console.log(realTimeHomePageData);
-
   return (
     <>
       <div className="container-fluid px-0 container-spacing">

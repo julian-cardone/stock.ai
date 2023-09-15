@@ -15,5 +15,11 @@
     min-height: 80px;
     top: 0 !important;
     z-index: 1000;
-    
+}
+
+.nav-logo{
+position: relative;
+font-size: 33px;
+top: 7px;
+font-weight: bold;
 }

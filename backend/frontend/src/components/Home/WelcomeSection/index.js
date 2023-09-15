@@ -3,7 +3,7 @@ import ExchangesDisplay from "./ExchangeDisplay";
 function WelcomeDiv({ loading, realTimeHomePageData }) {
   return (
     <>
-      <div className="container-fluid bg-primary text-white py-5">
+      <div className="container-fluid welcome-div text-white py-5">
         <div className="container py-3">
           <div className="row">
             <div className="col-md-6">

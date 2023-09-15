@@ -6,6 +6,7 @@ import {
 import "./navbar.css";
 import { useState } from "react";
 import useSearchValidation from "../../hooks/useSearchValidation";
+import NavLogo from "./NavLogo";
 
 function Nav() {
   const location = useLocation();
@@ -30,9 +31,12 @@ function Nav() {
       <div className="container-fluid px-0 navbar-positioning">
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-lg-5 px-md-3 px-sm-1 navbar-custom-css">
           <div className="container-fluid">
-            <Link className="logo-text d-none d-md-flex d-lg-flex" to="/home">
-              stock.ai
-            </Link>
+            <div>
+              <Link className="logo-text d-none d-md-flex d-lg-flex" to="/home">
+                <div className="nav-logo">stock.a</div>
+                <NavLogo />
+              </Link>
+            </div>
             <form
               className="d-flex col-lg-5 col-md-5 col-sm-5 ms-5"
               onSubmit={handleSubmit}
