@@ -1,10 +1,10 @@
 import "./home.css";
 import "../../animate.css";
 import FeaturesDisplay from "./FeaturesDisplay";
-import ExchangesDisplay from "./ExchangesDisplay";
 import { useEffect } from "react";
 import { useHomePageData } from "../../hooks/useHomePageData";
 import { isMarketOpen } from "../../utils/isMarketOpen";
+import ExchangesDisplay from "./ExchangeDisplay";
 
 function Home() {
   const { loading, realTimeHomePageData, fetchRealTimeHeaderData } =
@@ -12,15 +12,15 @@ function Home() {
 
   useEffect(() => {
     fetchRealTimeHeaderData();
-    if (isMarketOpen()) {
-      const searchInfoInterval = setInterval(() => {
-        fetchRealTimeHeaderData();
-      }, 5000);
+    // if (isMarketOpen()) {
+    //   const searchInfoInterval = setInterval(() => {
+    //     fetchRealTimeHeaderData();
+    //   }, 5000);
 
-      return () => {
-        clearInterval(searchInfoInterval);
-      };
-    }
+    //   return () => {
+    //     clearInterval(searchInfoInterval);
+    //   };
+    // }
   }, [fetchRealTimeHeaderData]);
 
   console.log(realTimeHomePageData);
@@ -45,8 +45,8 @@ function Home() {
                   financial health, our platform is your go-to resource.
                 </p>
               </div>
-              <div className="col-md-6">
-                <ExchangesDisplay />
+              <div className="col-md-6 d-flex align-items-center">
+                <ExchangesDisplay realTimeHomePageData={realTimeHomePageData} />
               </div>
             </div>
           </div>

@@ -203,33 +203,33 @@ class StockManager:
             '^FTSE',  # FTSE 100 (UK)
             '^N225',  # Nikkei 225 (Japan)
             '^HSI',   # Hang Seng Index (Hong Kong)
-            '^SSE',   # Shanghai Composite Index (China)
             '^GDAXI', # DAX 30 (Germany)
             '^CAC40', # CAC 40 (France)
-            '^IBEX',  # IBEX 35 (Spain)
             '^BSESN', # BSE SENSEX (India)
             '^AXJO',  # S&P/ASX 200 (Australia)
-            '^TWII',  # TAIEX (Taiwan)
-            '^KOSPI', # KOSPI Composite Index (South Korea)
-            '^BVLG',  # IGBVL (Peru)
-            '^MXX',   # IPC (Mexico)
         ]
 
-        index_data = {}
-        for index_symbol in major_indices:
-            index_ticker = yf.Ticker(index_symbol)
-            index_info = index_ticker.info
-            print(index_info)
+        index_data = []
+        try:
+            for index_symbol in major_indices:
+                index_ticker = yf.Ticker(index_symbol)
+                index_info = index_ticker.info
+                print(index_info)
 
-            current_price = index_info['last_price']
-            previous_close = index_info['regularMarketPreviousClose']
+                if 'shortName' in index_info:
+                    short_name = index_info['shortName']
+                else:
+                    continue                   
 
-            index_data[index_symbol] = {
-                'Index': index_info['shortName'],
-                'CurrentPrice': current_price,
-                'PreviousClose': previous_close,
-            }
-
+                index_data.append({
+                    'Index': short_name,
+                    # 'CurrentPrice': current_price,
+                    # 'PreviousClose': previous_close,
+                })
+        except Exception as e:
+            # Handle the exception if needed
+            pass
+        
         return index_data
         
     # def create_model(self):
