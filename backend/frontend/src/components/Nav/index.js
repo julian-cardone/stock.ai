@@ -33,7 +33,7 @@ function Nav() {
           <div className="container-fluid">
             <div>
               <Link className="logo-text d-none d-md-flex d-lg-flex" to="/home">
-                <div className="nav-logo">stock.a</div>
+                <div className="nav-logo">STOCK.a</div>
                 <NavLogo />
               </Link>
             </div>

@@ -135,7 +135,7 @@ function FeaturesDisplay() {
               <p
                 id="paragraph-1"
                 className={
-                  activeParagraph === "paragraph-1" ? "active" : "inactive"
+                  activeParagraph === "paragraph-1" ? "active " : "inactive "
                 }
               >
                 stock.ai simplifies financial analysis. Start by choosing a
@@ -148,41 +148,46 @@ function FeaturesDisplay() {
               </p>
               <p
                 id="paragraph-2"
-                className={
-                  activeParagraph === "paragraph-2" ? "active" : "inactive"
+                className={`${
+                  activeParagraph === "paragraph-2" ? "active " : "inactive "
                 }
+                `}
               >
                 access real-time capital markets data and live price updates
               </p>
               <p
                 id="paragraph-3"
-                className={
-                  activeParagraph === "paragraph-3" ? "active" : "inactive"
+                className={`${
+                  activeParagraph === "paragraph-3" ? "active " : "inactive "
                 }
+                `}
               >
                 view interactive historical pricing graphs and data analyses
               </p>
               <p
                 id="paragraph-4"
-                className={
-                  activeParagraph === "paragraph-4" ? "active" : "inactive"
+                className={`${
+                  activeParagraph === "paragraph-4" ? "active " : "inactive "
                 }
+                `}
               >
                 financial ratios and metrics at your fingertips
               </p>
               <p
                 id="paragraph-5"
-                className={
-                  activeParagraph === "paragraph-5" ? "active" : "inactive"
+                className={`${
+                  activeParagraph === "paragraph-5" ? "active " : "inactive "
                 }
+                `}
               >
                 financial statements in a digestible format
               </p>
               <p
                 id="paragraph-6"
-                className={
-                  activeParagraph === "paragraph-6" ? "active" : "inactive"
+                className={`${
+                  activeParagraph === "paragraph-6" ? "active " : "inactive "
                 }
+                `}
               >
                 generate pro-forma financial statements with the click of a
                 button

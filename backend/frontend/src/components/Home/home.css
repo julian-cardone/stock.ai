@@ -21,11 +21,16 @@
     min-height: 288px;
 }
 
+.paragraphs-home{
+    position: relative;
+}
+
 .active {
-    display: block;
+    position: relative;
 }
 
 .inactive {
+    position: relative;
     display: none;
 }
 
