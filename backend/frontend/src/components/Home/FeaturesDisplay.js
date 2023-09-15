@@ -136,13 +136,12 @@ function FeaturesDisplay() {
               activeParagraph === "paragraph-1" ? "active" : "inactive"
             }
           >
-            Our platform simplifies financial analysis. Start by choosing a
-            company to get an easy-to-understand overview with interactive
-            historical data graphs. Delve into Financial Statements for
-            digestible income, balance sheet, and cash flow data. Plus, create
-            and download personalized financial models, like the Operating
-            Assumptions report. Unlock financial insights effortlessly on our
-            platform. More features coming soon!
+            stock.ai simplifies financial analysis. Start by choosing a company
+            to get an easy-to-understand overview with interactive historical
+            data graphs. Delve into Financial Statements for digestible income,
+            balance sheet, and cash flow data. Plus, create and download
+            personalized pro-forma financial models. Unlock financial insights
+            effortlessly. More features coming soon!
           </p>
           <p
             id="paragraph-2"
@@ -150,7 +149,7 @@ function FeaturesDisplay() {
               activeParagraph === "paragraph-2" ? "active" : "inactive"
             }
           >
-            This is the content for Icon 2.
+            access real-time capital markets data and live price updates
           </p>
           <p
             id="paragraph-3"
@@ -158,7 +157,7 @@ function FeaturesDisplay() {
               activeParagraph === "paragraph-3" ? "active" : "inactive"
             }
           >
-            This is the content for Icon 3.
+            view interactive historical pricing graphs and data analyses
           </p>
           <p
             id="paragraph-4"
@@ -166,7 +165,7 @@ function FeaturesDisplay() {
               activeParagraph === "paragraph-4" ? "active" : "inactive"
             }
           >
-            This is the content for Icon 4.
+            financial ratios and metrics at your fingertips
           </p>
           <p
             id="paragraph-5"
@@ -174,7 +173,7 @@ function FeaturesDisplay() {
               activeParagraph === "paragraph-5" ? "active" : "inactive"
             }
           >
-            This is the content for Icon 5.
+            financial statements in a digestible format
           </p>
           <p
             id="paragraph-6"
@@ -182,7 +181,7 @@ function FeaturesDisplay() {
               activeParagraph === "paragraph-6" ? "active" : "inactive"
             }
           >
-            This is the content for Icon 6.
+            generate pro-forma financial statements with the click of a button
           </p>
         </div>
       </div>

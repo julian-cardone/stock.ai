@@ -53,7 +53,7 @@ function Nav() {
                 Search
               </button>
             </form>
-            <div className="ms-auto px-1">
+            <div className="px-1">
               <button
                 className="navbar-toggler col-auto"
                 type="button"

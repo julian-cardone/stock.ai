@@ -14,7 +14,7 @@
 }
 
 .home-header{
-    font-size: 60px;
+    font-size: 50px;
 }
 
 .explore-features {
@@ -28,3 +28,7 @@
 .inactive {
     display: none;
 }
+
+/* .welcome-div{
+    background-color: rgb(0, 132, 31);
+} */

@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <div className="container-fluid px-0 container-spacing">
-        <div className="container-fluid bg-primary text-white py-5">
+        <div className="container-fluid bg-success text-white py-5">
           <div className="container py-3">
             <div className="row">
               <div className="col-md-6">
@@ -14,7 +14,7 @@ function Home() {
                   welcome to your market analysis hub
                 </h1>
                 <p className="fadeInRight animated-long">
-                  Our mission is to make financial data accessible and
+                  My mission is to make financial data accessible and
                   understandable for everyone. With our full-stack financial
                   analysis application, you can effortlessly input a stock
                   symbol of a public company and gain access to a treasure trove
