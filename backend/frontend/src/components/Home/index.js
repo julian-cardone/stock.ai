@@ -1,12 +1,34 @@
 import "./home.css";
 import "../../animate.css";
 import FeaturesDisplay from "./FeaturesDisplay";
+import ExchangesDisplay from "./ExchangesDisplay";
+import { useEffect } from "react";
+import { useHomePageData } from "../../hooks/useHomePageData";
+import { isMarketOpen } from "../../utils/isMarketOpen";
 
 function Home() {
+  const { loading, realTimeHomePageData, fetchRealTimeHeaderData } =
+    useHomePageData();
+
+  useEffect(() => {
+    fetchRealTimeHeaderData();
+    if (isMarketOpen()) {
+      const searchInfoInterval = setInterval(() => {
+        fetchRealTimeHeaderData();
+      }, 5000);
+
+      return () => {
+        clearInterval(searchInfoInterval);
+      };
+    }
+  }, [fetchRealTimeHeaderData]);
+
+  console.log(realTimeHomePageData);
+
   return (
     <>
       <div className="container-fluid px-0 container-spacing">
-        <div className="container-fluid bg-success text-white py-5">
+        <div className="container-fluid bg-primary text-white py-5">
           <div className="container py-3">
             <div className="row">
               <div className="col-md-6">
@@ -24,7 +46,7 @@ function Home() {
                 </p>
               </div>
               <div className="col-md-6">
-                <h2 className="">CAROUSEL - with loading </h2>
+                <ExchangesDisplay />
               </div>
             </div>
           </div>

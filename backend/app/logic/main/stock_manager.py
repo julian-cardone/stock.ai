@@ -193,6 +193,44 @@ class StockManager:
         processed_data = data[['Open', 'High', 'Low', 'Close', 'Volume']].reset_index()
 
         return [processed_data.to_dict(orient='records')]
+
+    @classmethod
+    def get_major_exchanges_information(cls):
+        major_indices = [
+            '^GSPC',  # S&P 500 (US)
+            '^DJI',   # Dow Jones Industrial Average (US)
+            '^IXIC',  # NASDAQ Composite (US)
+            '^FTSE',  # FTSE 100 (UK)
+            '^N225',  # Nikkei 225 (Japan)
+            '^HSI',   # Hang Seng Index (Hong Kong)
+            '^SSE',   # Shanghai Composite Index (China)
+            '^GDAXI', # DAX 30 (Germany)
+            '^CAC40', # CAC 40 (France)
+            '^IBEX',  # IBEX 35 (Spain)
+            '^BSESN', # BSE SENSEX (India)
+            '^AXJO',  # S&P/ASX 200 (Australia)
+            '^TWII',  # TAIEX (Taiwan)
+            '^KOSPI', # KOSPI Composite Index (South Korea)
+            '^BVLG',  # IGBVL (Peru)
+            '^MXX',   # IPC (Mexico)
+        ]
+
+        index_data = {}
+        for index_symbol in major_indices:
+            index_ticker = yf.Ticker(index_symbol)
+            index_info = index_ticker.info
+            print(index_info)
+
+            current_price = index_info['last_price']
+            previous_close = index_info['regularMarketPreviousClose']
+
+            index_data[index_symbol] = {
+                'Index': index_info['shortName'],
+                'CurrentPrice': current_price,
+                'PreviousClose': previous_close,
+            }
+
+        return index_data
         
     # def create_model(self):
         # self.model = Sheet(self)
