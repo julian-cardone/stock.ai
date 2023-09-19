@@ -5,6 +5,8 @@ export function useWrappedRequest() {
   const [loading, setLoading] = useState(false);
   const { setError } = useContext(AppContext);
 
+  console.log(loading);
+
   const wrappedRequest = useCallback(
     async (promise) => {
       try {

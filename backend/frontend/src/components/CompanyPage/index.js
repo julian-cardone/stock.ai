@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHeaderData } from "../../hooks/useHeaderData";
 import { useOverviewData } from "../../hooks/useOverviewData";
 import CompanyNav from "./CompanyNav";
@@ -24,24 +24,32 @@ function CompanyPage({ currentSymbol }) {
   } = useHeaderData();
   const { overviewData, fetchOverviewData } = useOverviewData();
   const { historicalPrices, fetchHistoricalPrices } = useHistoricalPrices();
-  const { path } = useRouteMatch(); // Get the current path
+  const { path } = useRouteMatch();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    validateSymbol(currentSymbol);
-    fetchStaticHeaderData(currentSymbol);
-    fetchRealTimeHeaderData(currentSymbol);
-    fetchOverviewData(currentSymbol);
-    fetchHistoricalPrices(currentSymbol, "1D");
+    const fetchAll = async () => {
+      await Promise.all([
+        validateSymbol(currentSymbol),
+        fetchStaticHeaderData(currentSymbol),
+        fetchRealTimeHeaderData(currentSymbol),
+        fetchOverviewData(currentSymbol),
+        fetchHistoricalPrices(currentSymbol, "1D"),
+      ]);
+      setLoading(false);
 
-    if (isMarketOpen()) {
-      const searchInfoInterval = setInterval(() => {
-        fetchRealTimeHeaderData(currentSymbol);
-      }, 5000);
+      if (isMarketOpen()) {
+        const searchInfoInterval = setInterval(() => {
+          fetchRealTimeHeaderData(currentSymbol);
+        }, 5000);
 
-      return () => {
-        clearInterval(searchInfoInterval);
-      };
-    }
+        return () => {
+          clearInterval(searchInfoInterval);
+        };
+      }
+    };
+
+    fetchAll();
   }, [
     currentSymbol,
     validateSymbol,
@@ -53,51 +61,54 @@ function CompanyPage({ currentSymbol }) {
 
   return (
     <>
-      <div className="container-fluid px-0 container-spacing">
-        <Header
-          realTimeHeaderData={realTimeHeaderData}
-          staticHeaderData={staticHeaderData}
-        />
-        <CompanyNav />
-        <Switch>
-          <ProtectedRoute
-            exact
-            path={`${path}/overview`}
-            currentSymbol={currentSymbol}
-            component={CompanyPage}
-          >
-            <Overview
-              overviewData={overviewData}
-              historicalPrices={historicalPrices}
+      {loading && <div>loading...</div>}
+      {!loading && (
+        <div className="container-fluid px-0 container-spacing">
+          <Header
+            realTimeHeaderData={realTimeHeaderData}
+            staticHeaderData={staticHeaderData}
+          />
+          <CompanyNav />
+          <Switch>
+            <ProtectedRoute
+              exact
+              path={`${path}/overview`}
               currentSymbol={currentSymbol}
-            />
-          </ProtectedRoute>
-          <ProtectedRoute
-            exact
-            path={`${path}/financials/income_statement`}
-            currentSymbol={currentSymbol}
-            component={CompanyPage}
-          >
-            <FinancialStatements statement="income_statement" />
-          </ProtectedRoute>
-          <ProtectedRoute
-            exact
-            path={`${path}/financials/balance_sheet`}
-            currentSymbol={currentSymbol}
-            component={CompanyPage}
-          >
-            <FinancialStatements statement="balance_sheet" />
-          </ProtectedRoute>
-          <ProtectedRoute
-            exact
-            path={`${path}/financials/cash_flow_statement`}
-            currentSymbol={currentSymbol}
-            component={CompanyPage}
-          >
-            <FinancialStatements statement="cash_flow_statement" />
-          </ProtectedRoute>
-        </Switch>
-      </div>
+              component={CompanyPage}
+            >
+              <Overview
+                overviewData={overviewData}
+                historicalPrices={historicalPrices}
+                currentSymbol={currentSymbol}
+              />
+            </ProtectedRoute>
+            <ProtectedRoute
+              exact
+              path={`${path}/financials/income_statement`}
+              currentSymbol={currentSymbol}
+              component={CompanyPage}
+            >
+              <FinancialStatements statement="income_statement" />
+            </ProtectedRoute>
+            <ProtectedRoute
+              exact
+              path={`${path}/financials/balance_sheet`}
+              currentSymbol={currentSymbol}
+              component={CompanyPage}
+            >
+              <FinancialStatements statement="balance_sheet" />
+            </ProtectedRoute>
+            <ProtectedRoute
+              exact
+              path={`${path}/financials/cash_flow_statement`}
+              currentSymbol={currentSymbol}
+              component={CompanyPage}
+            >
+              <FinancialStatements statement="cash_flow_statement" />
+            </ProtectedRoute>
+          </Switch>
+        </div>
+      )}
     </>
   );
 }
