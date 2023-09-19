@@ -18,7 +18,7 @@
 }
 
 .explore-features {
-    min-height: 288px;
+    min-height: 325px;
 }
 
 .paragraphs-home{
@@ -40,4 +40,13 @@
 
 .welcome-div{
     background-color: #126bc5
+}
+
+p{
+    /* font-family: Arial, Helvetica, sans-serif,sans-serif;     */
+    /* font-family: Rubik; */
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    letter-spacing: .06em;
 }
