@@ -13,6 +13,7 @@ import { isMarketOpen } from "../../utils/isMarketOpen";
 import useSearchValidation from "../../hooks/useSearchValidation";
 import { useHistoricalPrices } from "../../hooks/useHistoricalPrices";
 import FinancialStatements from "./Pages/FinancialStatements";
+import LoadingPage from "./LoadingPage";
 
 function CompanyPage({ currentSymbol }) {
   const { validateSymbol } = useSearchValidation();
@@ -25,7 +26,7 @@ function CompanyPage({ currentSymbol }) {
   const { overviewData, fetchOverviewData } = useOverviewData();
   const { historicalPrices, fetchHistoricalPrices } = useHistoricalPrices();
   const { path } = useRouteMatch();
-  const [loading, setLoading] = useState(true);
+  const [companyPageloading, companyPageSetLoading] = useState(true);
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -36,7 +37,7 @@ function CompanyPage({ currentSymbol }) {
         fetchOverviewData(currentSymbol),
         fetchHistoricalPrices(currentSymbol, "1D"),
       ]);
-      setLoading(false);
+      companyPageSetLoading(false);
 
       if (isMarketOpen()) {
         const searchInfoInterval = setInterval(() => {
@@ -61,8 +62,10 @@ function CompanyPage({ currentSymbol }) {
 
   return (
     <>
-      {loading && <div>loading...</div>}
-      {!loading && (
+      {companyPageloading && (
+        <LoadingPage companyPageloading={companyPageloading} />
+      )}
+      {!companyPageloading && (
         <div className="container-fluid px-0 container-spacing">
           <Header
             realTimeHeaderData={realTimeHeaderData}
