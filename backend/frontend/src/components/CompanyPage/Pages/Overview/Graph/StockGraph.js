@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { format } from "date-fns";
 
 ChartJS.register(
   CategoryScale,
@@ -24,7 +25,9 @@ ChartJS.register(
 const StockGraph = ({ historicalPrices }) => {
   // Process data for chart
   const chartData = {
-    labels: historicalPrices?.map((entry) => new Date(entry?.Datetime)),
+    labels: historicalPrices?.map((entry) =>
+      format(new Date(entry?.Datetime), "MMM d yyyy h:mm a")
+    ),
     datasets: [
       {
         label: "Open Price",
